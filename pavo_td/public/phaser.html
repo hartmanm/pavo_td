@@ -15,7 +15,7 @@
         //  Although it will work fine with this tutorial, it's almost certainly not the most current version.
         //  Be sure to replace it with an updated version before you start experimenting with adding your own code.
 
-        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
+        var game = new Phaser.Game(1200, 1200, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 // var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-example', { preload: preload, create: create, update: update, render: render });
 
 function preload() {
@@ -51,14 +51,14 @@ function create() {
 
     //  Creates a new blank layer and sets the map dimensions.
     //  In this case the map is 40x30 tiles in size and the tiles are 32x32 pixels in size.
-    layer1 = map.create('level1', 40, 30, 32, 32);
+    layer1 = map.create('level1', 40, 40, 32, 32);
     layer1.scrollFactorX = 0.5;
     layer1.scrollFactorY = 0.5;
 
     //  Resize the world
     layer1.resizeWorld();
 
-    layer2 = map.createBlankLayer('level2', 40, 30, 32, 32);
+    layer2 = map.createBlankLayer('level2', 40, 40, 32, 32);
     layer2.scrollFactorX = 0.8;
     layer2.scrollFactorY = 0.8;
 
