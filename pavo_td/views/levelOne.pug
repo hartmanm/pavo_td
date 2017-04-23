@@ -1,7 +1,10 @@
 extends ../node_modules/pug-bootstrap/_bootstrap
+
+
 append styles
-  link(href="scripts/pug-bootstrap/css/carousel.css", rel="stylesheet")
   link(href="scripts/pug-bootstrap/css/navbar", rel="stylesheet")
+append scripts
+  script(src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js")
 
 block body
   .navbar-wrapper
@@ -36,9 +39,8 @@ block body
                   li
                     a(href='#') Create User
 
-  +carousel("levelsCarousel", [
-    {image: "images/leveloneBasic.jpg", p: "Level One", button: {caption: "Launch", url: "levelOne"}},
-    {image: "images/leveltwoIntermediate.jpg", p: "Level Two", button: {caption: "Launch", url: "levelTwo"}},
-    {image: "images/levelthreeAdvanced.jpg", p: "Level Three", button: {caption: "Launch", url: "levelThree"}}
-    ])
+
+  .container.marketing
+    iframe(src="levelOneGame" width='800' height='600' frameborder=0 scrolling='no')
+
 
