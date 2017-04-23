@@ -40,18 +40,18 @@ function create() {
 
     //  Creates a new blank layer and sets the map dimensions.
     //  In this case the map is 40x30 tiles in size and the tiles are 32x32 pixels in size.
-    layer1 = map.create('level1', 40, 30, 32, 32);
+    layer1 = map.create('level1', 60, 60, 32, 32);
     layer1.scrollFactorX = 0.5;
     layer1.scrollFactorY = 0.5;
 
     //  Resize the world
     layer1.resizeWorld();
 
-    layer2 = map.createBlankLayer('level2', 40, 30, 32, 32);
+    layer2 = map.createBlankLayer('level2', 60, 60, 32, 32);
     layer2.scrollFactorX = 0.8;
     layer2.scrollFactorY = 0.8;
 
-    layer3 = map.createBlankLayer('level3', 40, 30, 32, 32);
+    layer3 = map.createBlankLayer('level3', 60, 60, 32, 32);
 
     currentLayer = layer3;
 
