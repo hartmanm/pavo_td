@@ -9,8 +9,9 @@
 
 function preload() {
 
-    game.load.image('ground_1x1', 'assets/tilemaps/tiles/ground_1x1.png');
-
+    game.load.image('levelOne', 'assets/tilemaps/tiles/levelOne.png');
+    
+//assets/tilemaps/tmx/levelOne.tmx
 }
 
 var map;
@@ -39,14 +40,14 @@ function create() {
    // map = game.add.tilemap('map', 16, 16);
 
     //  Creates a blank tilemap
-    map = game.add.tilemap();
+  layer1 = map = game.add.tilemap('assets/tilemaps/tmx/levelOne.tmx');
 
     //  Add a Tileset image to the map
-    map.addTilesetImage('ground_1x1');
+    map.addTilesetImage('levelOne');
 
     //  Creates a new blank layer and sets the map dimensions.
     //  In this case the map is 40x30 tiles in size and the tiles are 32x32 pixels in size.
-    layer1 = map.create('level1', 60, 60, 32, 32);
+//    layer1 = map.create('level1', 60, 60, 32, 32);
     
    //  var layer1 = window._layer = map.createLayer('Bottom', 1800, 1800);
   //  layer1.scrollFactorX = 0.5;
