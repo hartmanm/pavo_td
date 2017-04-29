@@ -1,7 +1,7 @@
 extends ../node_modules/pug-bootstrap/_bootstrap
 append styles
   link(href="scripts/pug-bootstrap/css/carousel.css", rel="stylesheet")
-  link(href="scripts/pug-bootstrap/css/navbar", rel="stylesheet")
+  link(href="scripts/pug-bootstrap/css/navbar.css", rel="stylesheet")
 
 block body
   .navbar-wrapper
@@ -28,13 +28,15 @@ block body
                   span.caret
                 ul.dropdown-menu(role='menu')
                   li
-                    a(href='#') Login/Logout
+                    a(href='login') Login/Logout
                   li
                     a(href='#') Leaderboards
                   li.divider
                   li.dropdown-header New Users
                   li
-                    a(href='#') Create User
+                    a(href='createUser') Create User
+              li
+                a #{welcome}
 
   +carousel("levelsCarousel", [
     {image: "images/leveloneBasic.jpg", p: "Level One", button: {caption: "Launch", url: "levelOne"}},

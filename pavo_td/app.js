@@ -5,12 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var pug = require('pug')
-var mongo = require('mongodb')
-var mongojs = require('mongojs')
-var db = mongojs('localhost:27017/Pavo_TD', ['pavo_users', 'towers', 'creeps'])
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/pavo_td');
+var sessions = require('client-sessions');
+var validator = require('express-validator');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -23,14 +24,28 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(validator());
 app.use(cookieParser());
+
+//sessions to store user info
+app.use(sessions({
+  cookieName: 'session',
+  secret: 'my_super_secret_string',
+  duration: 5 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000
+}));
+
+//Make our db accessible to router
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules'))
 app.use('/images', express.static(__dirname + '/public/images'))
 app.use('/game', express.static(__dirname + '/public/game'))
-
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

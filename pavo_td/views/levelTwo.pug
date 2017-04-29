@@ -2,7 +2,7 @@ extends ../node_modules/pug-bootstrap/_bootstrap
 
 
 append styles
-  link(href="scripts/pug-bootstrap/css/navbar", rel="stylesheet")
+  link(href="scripts/pug-bootstrap/css/navbar.css", rel="stylesheet")
 append scripts
   script(src="//cdn.jsdelivr.net/phaser/2.5.0/phaser.min.js")
 
@@ -31,13 +31,15 @@ block body
                   span.caret
                 ul.dropdown-menu(role='menu')
                   li
-                    a(href='#') Login/Logout
+                    a(href='login') Login/Logout
                   li
                     a(href='#') Leaderboards
                   li.divider
                   li.dropdown-header New Users
                   li
-                    a(href='#') Create User
+                    a(href='createUser') Create User
+              li
+                a #{welcome}
 
 
   .container.marketing
