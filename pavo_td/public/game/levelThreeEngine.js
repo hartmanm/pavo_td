@@ -1,7 +1,7 @@
-   
+
 window.onload = function(){
-    
-Creep = function (index, game, player, projectile) 
+
+Creep = function (index, game, player, projectile)
 {
   var x = 550;
   var y = 0;
@@ -18,7 +18,7 @@ Creep = function (index, game, player, projectile)
   this.creep.body.collideWorldBounds = true;
 };
 
-Creep.prototype.damage = function() 
+Creep.prototype.damage = function()
 {
   this.health -= 1;
 
@@ -32,34 +32,34 @@ Creep.prototype.damage = function()
   return false;
 }
 
-Creep.prototype.update = function() 
+Creep.prototype.update = function()
 {
   if(this.creep.y < 550)
     this.creep.y += 1;
-  
+
   if(this.creep.y == 550)
     this.creep.x -= 1;
-  
+
   if(this.creep.x < 450)
     this.creep.y -= 2;
-  
+
   if(this.creep.y < 50)
     this.creep.x = 550;
 };
 
 var game = new Phaser.Game(1200, 1200, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
-function preload () 
+function preload ()
 {
-  game.load.image('sheep', 'game/one/sheep.png');
-  game.load.image('logo', 'game/one/logo3.png');
-  game.load.image('projectiles', 'game/one/fire.png');
-  game.load.image('path', 'game/one/path.png');
-  game.load.image('nonPath', 'game/one/nonPath.png');
-  game.load.image('arrow', 'game/one/arrow2.png');
-  game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
+  game.load.image('sheep', 'game/three/sheep.png');
+  game.load.image('logo', 'game/three/logo3.png');
+  game.load.image('projectiles', 'game/three/fire.png');
+  game.load.image('path', 'game/three/path.png');
+  game.load.image('nonPath', 'game/three/nonPath.png');
+  game.load.image('arrow', 'game/three/arrow2.png');
+  game.load.spritesheet('boom', 'game/three/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
   // game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('one', 'game/one/levelOne.png'); 
+  game.load.image('one', 'game/three/levelThree.png'); 
 }
 
 var path;
@@ -78,7 +78,7 @@ var projectile;
 var fireRate = 150;
 var nextFire = 0;
 
-function create () 
+function create ()
 {
   one = game.add.tileSprite(0, 0, 1200, 1200, 'one');
 
@@ -130,23 +130,23 @@ function create ()
   cursors = game.input.keyboard.createCursorKeys();
 }
 
-function removeLogo () 
+function removeLogo ()
 {
   game.input.onDown.remove(removeLogo, this);
   logo.kill();
 }
 
-function projectilesHitPlayer (creep, projectiles) 
+function projectilesHitPlayer (creep, projectiles)
 {
   projectiles.kill();
 }
 
-function pickTile(sprite, pointer) 
+function pickTile(sprite, pointer)
 {
   currentTile = game.math.snapToFloor(pointer.x, 32) / 32;
 }
 
-function updateMarker() 
+function updateMarker()
 {
   marker.x = currentLayer.getTileX(game.input.activePointer.worldX) * 32;
   marker.y = currentLayer.getTileY(game.input.activePointer.worldY) * 32;
@@ -158,7 +158,7 @@ function updateMarker()
   }
 }
 
-function update () 
+function update ()
 {
   game.physics.arcade.overlap(creepProjectile, creep, projectilesHitPlayer, null, this);
 
@@ -185,7 +185,7 @@ function update ()
   }
 }
 
-function projectilesHitEnemy (creep, projectiles) 
+function projectilesHitEnemy (creep, projectiles)
 {
   projectiles.kill();
 
@@ -199,7 +199,7 @@ function projectilesHitEnemy (creep, projectiles)
   }
 }
 
-function fire () 
+function fire ()
 {
   if (game.time.now > nextFire && projectile.countDead() > 0)
   {
@@ -210,19 +210,19 @@ function fire ()
   }
 }
 
-function render () 
+function render ()
 {
   if( aliveCreeps > 0)
   {
     game.debug.text('Creeps: ' + aliveCreeps + ' / ' + totalCreeps, 32, 32);
   }
-  
+
   game.debug.text('still learning / testing phaser: more to come', 150, 450);
-  
+
   if( aliveCreeps == 0)
   {
     game.debug.text('LEVEL COMPLETE! ', 32, 32);
   }
-} 
-    
+}
+
 };
