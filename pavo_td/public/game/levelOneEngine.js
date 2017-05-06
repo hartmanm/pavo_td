@@ -1,14 +1,16 @@
-   
+
 window.onload = function(){
-    
-Creep = function (index, game, player, projectile) 
+
+Creep = function (index, game, player, projectile)
 {
   var x = 550;
+//  var y = (0 + (50 * this.index));
   var y = 0;
   this.game = game;
   this.health = 2;
   this.player = player;
   this.projectile = projectile;
+  this.kill_reward = 5;
   this.alive = true;
   this.creep = game.add.sprite(x, y, 'sheep', 'sheep');
   this.creep.anchor.set(0.5);
@@ -18,7 +20,7 @@ Creep = function (index, game, player, projectile)
   this.creep.body.collideWorldBounds = true;
 };
 
-Creep.prototype.damage = function() 
+Creep.prototype.damage = function()
 {
   this.health -= 1;
 
@@ -26,30 +28,31 @@ Creep.prototype.damage = function()
   {
     this.alive = false;
     this.creep.kill();
+    credits += this.kill_reward;
     return true;
   }
 
   return false;
 }
 
-Creep.prototype.update = function() 
+Creep.prototype.update = function()
 {
   if(this.creep.y < 550)
     this.creep.y += 1;
-  
+
   if(this.creep.y == 550)
     this.creep.x -= 1;
-  
+
   if(this.creep.x < 450)
     this.creep.y -= 2;
-  
+
   if(this.creep.y < 50)
     this.creep.x = 550;
 };
 
 var game = new Phaser.Game(1200, 1200, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
-function preload () 
+function preload ()
 {
   game.load.image('sheep', 'game/one/sheep.png');
   game.load.image('logo', 'game/one/logo3.png');
@@ -59,9 +62,23 @@ function preload ()
   game.load.image('arrow', 'game/one/arrow2.png');
   game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
   // game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('one', 'game/one/levelOne.png'); 
+  game.load.image('one', 'game/one/levelOne.png');
 }
 
+
+var flag1 = 1;
+var flag2 = 1;
+var flag3 = 1;
+var flag4 = 1;
+var flag5 = 1;
+var flag6 = 1;
+var flag7 = 1;
+var flag8 = 1;
+var flag9 = 1;
+var start = 1;
+var totalWave = 10;
+var currentWave = 0;
+var credits = 0;
 var path;
 var nonPath;
 var one;
@@ -78,7 +95,7 @@ var projectile;
 var fireRate = 150;
 var nextFire = 0;
 
-function create () 
+function create ()
 {
   one = game.add.tileSprite(0, 0, 1200, 1200, 'one');
 
@@ -93,14 +110,9 @@ function create ()
   turret = game.add.sprite(500, 500, 'arrow', 'turret');
   turret.anchor.setTo(0.5, 0.5);
 
-  theCreeps = [];
-  totalCreeps = 25;
-  aliveCreeps = 25;
 
-  for (var i = 0; i < totalCreeps; i++)
-  {
-    theCreeps.push(new Creep(i, game, creep, creepProjectile));
-  }
+
+
 
   projectile = game.add.group();
   projectile.enableBody = true;
@@ -123,30 +135,44 @@ function create ()
   creep.bringToTop();
   turret.bringToTop();
 
-  logo = game.add.sprite(74, 100, 'logo');
+  logo = game.add.sprite(155, 155, 'logo');
   logo.fixedToCamera = true;
   game.input.onDown.add(removeLogo, this);
   game.camera.focusOnXY(0, 0);
   cursors = game.input.keyboard.createCursorKeys();
 }
 
-function removeLogo () 
+
+function makeCreep(i)
+{
+    theCreeps.push(new Creep(i, game, creep, creepProjectile));
+}
+
+function moveCreep(i)
+{
+    if(theCreeps[0].y > 50)
+    {
+    	theCreeps[1].y = 0;
+    }
+}
+
+function removeLogo ()
 {
   game.input.onDown.remove(removeLogo, this);
   logo.kill();
 }
 
-function projectilesHitPlayer (creep, projectiles) 
+function projectilesHitPlayer (creep, projectiles)
 {
   projectiles.kill();
 }
 
-function pickTile(sprite, pointer) 
+function pickTile(sprite, pointer)
 {
   currentTile = game.math.snapToFloor(pointer.x, 32) / 32;
 }
 
-function updateMarker() 
+function updateMarker()
 {
   marker.x = currentLayer.getTileX(game.input.activePointer.worldX) * 32;
   marker.y = currentLayer.getTileY(game.input.activePointer.worldY) * 32;
@@ -158,8 +184,95 @@ function updateMarker()
   }
 }
 
-function update () 
+function update ()
 {
+
+if( (currentWave == 0) && (start == 1) )
+{
+  theCreeps = [];
+  totalCreeps = 10;
+  aliveCreeps = 10;
+
+  for (var i = 0; i < totalCreeps; i++)
+	{
+			makeCreep(i);
+	}
+
+	start = 0;
+}
+
+    if(theCreeps[0].creep.y > 100 && flag1 == 1)
+    {
+    	theCreeps[1].creep.y = 0;
+			flag1++;
+    }
+    if(theCreeps[1].creep.y > 100 && flag2 == 1)
+    {
+    	theCreeps[2].creep.y = 0;
+			flag2++;
+    }
+    if(theCreeps[1].creep.y > 150 && flag3 == 1)
+    {
+    	theCreeps[3].creep.y = 0;
+			flag3++;
+    }
+    if(theCreeps[1].creep.y > 200 && flag4 == 1)
+    {
+    	theCreeps[4].creep.y = 0;
+			flag4++;
+    }
+    if(theCreeps[1].creep.y > 250 && flag5 == 1)
+    {
+    	theCreeps[5].creep.y = 0;
+			flag5++;
+    }
+    if(theCreeps[1].creep.y > 300 && flag6 == 1)
+    {
+    	theCreeps[6].creep.y = 0;
+			flag6++;
+    }
+    if(theCreeps[1].creep.y > 350 && flag7 == 1)
+    {
+    	theCreeps[7].creep.y = 0;
+			flag7++;
+    }
+    if(theCreeps[1].creep.y > 400 && flag8 == 1)
+    {
+    	theCreeps[8].creep.y = 0;
+			flag8++;
+    }
+    if(theCreeps[1].creep.y > 450 && flag9 == 1)
+    {
+    	theCreeps[9].creep.y = 0;
+			flag9++;
+    }
+
+
+
+  if( (aliveCreeps == 0) && (currentWave < totalWave) )
+  {
+    theCreeps = [];
+    flag1 = 1;
+    flag2 = 1;
+    flag3 = 1;
+    flag4 = 1;
+    flag5 = 1;
+    flag6 = 1;
+    flag7 = 1;
+    flag8 = 1;
+    flag9 = 1;
+
+	  for (var i = 0; i < totalCreeps; i++)
+	  {
+		//	wait(1000);
+			makeCreep(i);
+	  }
+
+		currentWave++;
+  }
+
+
+
   game.physics.arcade.overlap(creepProjectile, creep, projectilesHitPlayer, null, this);
 
   aliveCreeps = 0;
@@ -185,7 +298,7 @@ function update ()
   }
 }
 
-function projectilesHitEnemy (creep, projectiles) 
+function projectilesHitEnemy (creep, projectiles)
 {
   projectiles.kill();
 
@@ -199,7 +312,7 @@ function projectilesHitEnemy (creep, projectiles)
   }
 }
 
-function fire () 
+function fire ()
 {
   if (game.time.now > nextFire && projectile.countDead() > 0)
   {
@@ -210,19 +323,21 @@ function fire ()
   }
 }
 
-function render () 
+function render ()
 {
   if( aliveCreeps > 0)
   {
     game.debug.text('Creeps: ' + aliveCreeps + ' / ' + totalCreeps, 32, 32);
+    game.debug.text('Credits: ' + credits, 225, 32);
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 375, 32);
   }
-  
-  game.debug.text('still learning / testing phaser: more to come', 150, 450);
-  
-  if( aliveCreeps == 0)
+
+  game.debug.text('still learning / testing phaser: more to come', 160, 455);
+
+  if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
     game.debug.text('LEVEL COMPLETE! ', 32, 32);
   }
-} 
-    
+}
+
 };
