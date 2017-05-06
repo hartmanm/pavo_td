@@ -110,8 +110,8 @@ function create ()
   turret = game.add.sprite(500, 500, 'arrow', 'turret');
   turret.anchor.setTo(0.5, 0.5);
 
-
-
+  totalCreeps = 10;
+  aliveCreeps = 10;
 
 
   projectile = game.add.group();
@@ -190,8 +190,7 @@ function update ()
 if( (currentWave == 0) && (start == 1) )
 {
   theCreeps = [];
-  totalCreeps = 10;
-  aliveCreeps = 10;
+
 
   for (var i = 0; i < totalCreeps; i++)
 	{
@@ -200,6 +199,28 @@ if( (currentWave == 0) && (start == 1) )
 
 	start = 0;
 }
+
+
+  if( (aliveCreeps == 0) && (currentWave < totalWave) )
+  {
+    theCreeps = [];
+    flag1 = 1;
+    flag2 = 1;
+    flag3 = 1;
+    flag4 = 1;
+    flag5 = 1;
+    flag6 = 1;
+    flag7 = 1;
+    flag8 = 1;
+    flag9 = 1;
+
+	  for (var i = 0; i < totalCreeps; i++)
+	  {
+			makeCreep(i);
+	  }
+		currentWave++;
+  }
+
 
     if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
@@ -249,27 +270,7 @@ if( (currentWave == 0) && (start == 1) )
 
 
 
-  if( (aliveCreeps == 0) && (currentWave < totalWave) )
-  {
-    theCreeps = [];
-    flag1 = 1;
-    flag2 = 1;
-    flag3 = 1;
-    flag4 = 1;
-    flag5 = 1;
-    flag6 = 1;
-    flag7 = 1;
-    flag8 = 1;
-    flag9 = 1;
 
-	  for (var i = 0; i < totalCreeps; i++)
-	  {
-		//	wait(1000);
-			makeCreep(i);
-	  }
-
-		currentWave++;
-  }
 
 
 
