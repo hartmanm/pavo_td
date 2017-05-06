@@ -61,11 +61,12 @@ function preload ()
   game.load.image('nonPath', 'game/one/nonPath.png');
   game.load.image('arrow', 'game/one/arrow2.png');
   game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
-  // game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
+  game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('one', 'game/one/levelOne.png');
 }
 
-
+var creepType = ['Sheep', 'TEST', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep'];
+var lives = 20;
 var flag1 = 1;
 var flag2 = 1;
 var flag3 = 1;
@@ -328,12 +329,14 @@ function render ()
 {
   if( aliveCreeps > 0)
   {
-    game.debug.text('Creeps: ' + aliveCreeps + ' / ' + totalCreeps, 32, 32);
-    game.debug.text('Credits: ' + credits, 225, 32);
-    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 375, 32);
+    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 25, 'magenta');
+    game.debug.text('Credits: ' + credits, 200, 25, 'magenta');
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 343, 25, 'magenta');
+    game.debug.text('Lives: ' + lives, 568, 25, 'magenta');
+    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 700, 25, 'magenta');
   }
 
-  game.debug.text('still learning / testing phaser: more to come', 160, 455);
+  game.debug.text('still learning / testing phaser: more to come', 160, 470);
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
