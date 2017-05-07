@@ -176,7 +176,7 @@ function createBomb(bomb) {
   if (bomb.x < 400) {
     bomb.destroy();
   } else {
-
+    credits -= Bomb.cost;
   }
 }
 
@@ -195,7 +195,7 @@ function createTurret(turret) {
   if (turret.x < 400) {
     turret.destroy();
   } else {
-
+    credits -= Turret.cost;
   }
 }
 
