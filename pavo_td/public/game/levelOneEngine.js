@@ -12,15 +12,16 @@ var Turret = {
 Creep = function (index, game, player, projectile)
 {
   var x = 550;
-//  var y = (0 + (50 * this.index));
   var y = 0;
+  //var currentTile = path[0] * 32;
+  //var nextTile = path[currentTile + 1] * 32;
   this.game = game;
   this.health = 2;
   this.player = player;
   this.projectile = projectile;
   this.kill_reward = 5;
   this.alive = true;
-  this.creep = game.add.sprite(x, y, 'sheep', 'sheep');
+  this.creep = game.add.sprite(x, y, 'sheep');
   this.creep.anchor.set(0.5);
   this.creep.name = index.toString();
   game.physics.enable(this.creep, Phaser.Physics.ARCADE);
@@ -45,6 +46,10 @@ Creep.prototype.damage = function()
 
 Creep.prototype.update = function()
 {
+//this.creep.currentTile = this.creep.nextTile;
+
+//this.creep.tile = path[1];
+
   if(this.creep.y < 550)
     this.creep.y += 1;
 
@@ -76,6 +81,8 @@ function preload ()
   game.load.image('one', 'game/one/levelOne.png');
 }
 
+var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
+var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
 var creepType = ['Sheep', 'TEST', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep'];
 var lives = 20;
 var flag1 = 1;
@@ -106,13 +113,19 @@ var cursors;
 var projectile;
 var fireRate = 150;
 var nextFire = 0;
+var tileMap;
+var pathLayer;
 
 function create ()
 {
 
   one = game.add.tileSprite(0, 0, 1200, 1200, 'one');
 
-  creep = game.add.sprite(500, 500, 'arrow', 'arrow');
+  tileMap = game.add.tilemap('lvlone');
+//  pathLayer = map.createLayer('traverse');
+  //layer.resizeWorld();
+
+  creep = game.add.sprite(500, 500, 'arrow');
   creep.anchor.setTo(0.5, 0.5);
 
   game.physics.enable(creep, Phaser.Physics.ARCADE);
@@ -120,7 +133,7 @@ function create ()
   creep.body.maxVelocity.setTo(400, 400);
   creep.body.collideWorldBounds = true;
 
-  turret = game.add.sprite(500, 500, 'arrow', 'turret');
+  turret = game.add.sprite(500, 500, 'arrow');
   turret.anchor.setTo(0.5, 0.5);
 
   totalCreeps = 10;
@@ -182,7 +195,7 @@ function createBomb(bomb) {
 
 function newBomb() {
   //code here to add a bomb to the game
-  //make sure bomb cost is 
+  //make sure bomb cost is
   if (credits >= Bomb.cost) {
     newBomb = game.add.sprite(buyBombSprite.x, buyBombSprite.y, 'bomb');
     newBomb.inputEnabled = true;
@@ -208,20 +221,9 @@ function newTurret() {
   }
 }
 
-
-
-
 function makeCreep(i)
 {
     theCreeps.push(new Creep(i, game, creep, creepProjectile));
-}
-
-function moveCreep(i)
-{
-    if(theCreeps[0].y > 50)
-    {
-    	theCreeps[1].y = 0;
-    }
 }
 
 function removeLogo ()
@@ -348,7 +350,45 @@ if( (currentWave == 0) && (start == 1) )
 			flag9++;
     }
 
-
+/*
+    if(theCreeps[1].creep.currentTile == path[3] && flag1 == 1)
+    {
+    	theCreeps[1].creep.currentTile = path[1];
+    	flag1++;
+    }
+    if(theCreeps[1].creep.currentTile == path[3])
+    {
+    	theCreeps[2].creep.currentTile = path[1];
+    }
+    if(theCreeps[2].creep.currentTile == path[3])
+    {
+    	theCreeps[3].creep.currentTile = path[1];
+    }
+    if(theCreeps[3].creep.currentTile == path[3])
+    {
+    	theCreeps[4].creep.currentTile = path[1];
+    }
+    if(theCreeps[4].creep.currentTile == path[3])
+    {
+    	theCreeps[5].creep.currentTile = path[1];
+    }
+    if(theCreeps[5].creep.currentTile == path[3])
+    {
+    	theCreeps[6].creep.currentTile = path[1];
+    }
+    if(theCreeps[6].creep.currentTile == path[3])
+    {
+    	theCreeps[7].creep.currentTile = path[1];
+    }
+    if(theCreeps[7].creep.currentTile == path[3])
+    {
+    	theCreeps[8].creep.currentTile = path[1];
+    }
+    if(theCreeps[8].creep.currentTile == path[3])
+    {
+    	theCreeps[9].creep.currentTile = path[1];
+    }
+*/
 
 
 
