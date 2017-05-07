@@ -5,17 +5,17 @@ var mongo = require('mongodb');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.session && req.session.email) {
-    res.render('index', {welcome: 'Welcome ' + req.session.email}, { title: 'PavoTD' })
+    res.render('index', {welcome: 'Welcome ' + req.session.email, title: 'PavoTD' })
   } else {
-    res.render('index', { welcome: 'Welcome Guest' }, { title: 'PavoTD' });
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD' });
   }
 });
 
 router.get('/home', function(req, res, next) {
   if (req.session && req.session.email) {
-    res.render('index', {welcome: 'Welcome ' + req.session.email}, { title: 'PavoTD' })
+    res.render('index', {welcome: 'Welcome ' + req.session.email, title: 'PavoTD' })
   } else {
-    res.render('index', { welcome: 'Welcome Guest' }, { title: 'PavoTD' });
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD' });
   }
 });
 

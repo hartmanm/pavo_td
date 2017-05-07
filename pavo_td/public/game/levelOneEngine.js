@@ -1,6 +1,14 @@
 
 window.onload = function(){
 
+var Bomb = {
+  cost: 100
+};
+
+var Turret = {
+  cost: 20
+};
+
 Creep = function (index, game, player, projectile)
 {
   var x = 550;
@@ -55,6 +63,9 @@ var game = new Phaser.Game(1200, 1200, Phaser.AUTO, 'lvl1', { preload: preload, 
 function preload ()
 {
   game.load.image('sheep', 'game/one/sheep.png');
+  game.load.image('buyTurret', 'game/one/arrow.png')
+  game.load.image('buyBomb', 'game/one/bomb_64p.png');
+  game.load.image('bomb', 'game/one/bomb_32p.png');
   game.load.image('logo', 'game/one/logo3.png');
   game.load.image('projectiles', 'game/one/fire.png');
   game.load.image('path', 'game/one/path.png');
@@ -98,6 +109,7 @@ var nextFire = 0;
 
 function create ()
 {
+
   one = game.add.tileSprite(0, 0, 1200, 1200, 'one');
 
   creep = game.add.sprite(500, 500, 'arrow', 'arrow');
@@ -133,8 +145,25 @@ function create ()
     explosionAnimation.animations.add('boom');
   }
 
+  //add sprites for purchasing bomb and arrow/turret
+  buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
+  console.log(game.width)
+  buyBombSprite.inputEnabled = true;
+  buyBombSprite.alpha = 0.2; //set to 1 if enough credits to buy
+  buyBombSprite.events.onInputDown.add(newBomb, this);
+  buyBombText = game.add.text(32, game.height - 128, '', {font: '16px Arial', align: 'center'});
+  buyBombText.text = 'Bomb: $100';
+
+  buyTurretSprite = game.add.sprite(32, game.height - 224, 'buyTurret');
+  buyTurretSprite.inputEnabled = true;
+  buyTurretSprite.alpha = 0.2;
+  buyTurretSprite.events.onInputDown.add(newTurret, this);
+  buyTurretText = game.add.text(32, game.height - 256, '', {font: '16px Arial', align: 'center'});
+  buyTurretText.text = 'Turret: $20';
+
   creep.bringToTop();
   turret.bringToTop();
+  buyBombSprite.bringToTop();
 
   logo = game.add.sprite(155, 155, 'logo');
   logo.fixedToCamera = true;
@@ -142,6 +171,44 @@ function create ()
   game.camera.focusOnXY(0, 0);
   cursors = game.input.keyboard.createCursorKeys();
 }
+
+function createBomb(bomb) {
+  if (bomb.x < 400) {
+    bomb.destroy();
+  } else {
+
+  }
+}
+
+function newBomb() {
+  //code here to add a bomb to the game
+  //make sure bomb cost is 
+  if (credits >= Bomb.cost) {
+    newBomb = game.add.sprite(buyBombSprite.x, buyBombSprite.y, 'bomb');
+    newBomb.inputEnabled = true;
+    newBomb.input.enableDrag();
+    newBomb.events.onDragStop.add(createBomb, this);
+  }
+}
+
+function createTurret(turret) {
+  if (turret.x < 400) {
+    turret.destroy();
+  } else {
+
+  }
+}
+
+function newTurret() {
+  if (credits >= Turret.cost) {
+    newTurret = game.add.sprite(buyTurretSprite.x, buyTurretSprite.y, 'arrow')
+    newTurret.inputEnabled = true;
+    newTurret.input.enableDrag();
+    newTurret.events.onDragStop.add(createTurret, this);
+  }
+}
+
+
 
 
 function makeCreep(i)
@@ -187,6 +254,18 @@ function updateMarker()
 
 function update ()
 {
+
+  //if not enough credits to buy a tower, then fade it out
+  if (credits >= Bomb.cost) {
+    buyBombSprite.alpha = 1;
+  } else {
+    buyBombSprite.alpha = 0.2;
+  }
+  if (credits >= Turret.cost) {
+    buyTurretSprite.alpha = 1;
+  } else {
+    buyTurretSprite.alpha = 0.2;
+  }
 
 if( (currentWave == 0) && (start == 1) )
 {
