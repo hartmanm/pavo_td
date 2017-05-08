@@ -16,6 +16,7 @@ Creep = function (index, game, player, projectile)
   var move_speed = 2000;
   //var currentTile = path[0] * 32;
   //var nextTile = path[currentTile + 1] * 32;
+  //var lifeFlag = 1;
   this.game = game;
   this.health = 2;
   this.player = player;
@@ -50,16 +51,21 @@ Creep.prototype.update = function()
 //this.creep.currentTile = this.creep.nextTile;
 //this.creep.tile = path[1];
 
-  if(this.creep.y < 550)
+  if(this.creep.y < 1080)
     this.creep.y += 1;
 
-  if(this.creep.y == 550)
+  if(this.creep.y == 1080)
+  {
     this.creep.x -= 1;
+//    this.health -= 1;
+//    var destroyed = this.creep.damage();
+  }
+
 
   if(this.creep.x < 450)
     this.creep.y -= 2;
 
-  if(this.creep.y < 50)
+  if(this.creep.y < 20)
     this.creep.x = 550;
 };
 
