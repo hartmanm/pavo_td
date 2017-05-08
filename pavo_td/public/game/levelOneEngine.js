@@ -187,7 +187,7 @@ function create ()
 }
 
 function createBomb(bomb) {
-  if (turret.x < 400 || turret.x > 579)
+  if (bomb.x < 400 || bomb.x > 579)
  {
     bomb.destroy();
   } else {
