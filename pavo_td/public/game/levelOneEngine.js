@@ -160,55 +160,7 @@ function create ()
   projectile.setAll('checkWorldBounds', true);
 
   explosions = game.add.group();
-
-  //store a recyclable list of entities for turrets and bombs 
-  //since they all have the same attributes and AI behaviors
-  turrets = game.add.group();
-  turrets.enableBody = true;
-  turrets.physicsBodyType = Phaser.Physics.ARCADE;
-
-
-  for (var i = 0; i < 10; i++) {
-    turretWeapon = game.add.weapon(20, 'projectiles')
-    turretWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-    turretWeapon.bulletKillDistance = Turret.range;
-    turretWeapon.bulletSpeed = 400;
-    turretWeapon.fireRate = Turret.fireRate;  //roughly onece every 120ms
-    turretWeapon.trackSprite(newTurret, 32, 16, true);
-    turretWeapons.push(turretWeapon)
-  }
-
-  for (var i = 0; i < 10; i++) {
-    var newTurret = turrets.create(0,64 * i,'arrow',0,false);
-    newTurret.name = 'turret' + i;
-    newTurret.inputEnabled = true;
-    newTurret.input.enableDrag();
-    newTurret.input.enableSnap(32,32,true,true, 16, 16);
-    newTurret.anchor.set(0.5);
-    newTurret.events.onDragStop.add(createTurret, this);
-    turretWeapons[i].trackSprite(newTurret, 0, 0, true);
-  }
-
-  bombs = game.add.group();
-  fireButton = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
-
-  //try a new approach for turret ammo
-  turretWeapon = game.add.weapon(50, 'projectiles')
-  turretWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-  turretWeapon.bulletKillDistance = 128;
-  turretWeapon.bulletSpeed = 400;
-  turretWeapon.fireRate = 50;  //roughly onece every 120ms
-  fireButton = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
-  turretWeapon.trackSprite(turret, 0, 0, true)
-
-
-  for (var i = 0; i < 10; i++)
-  {
-    var explosionAnimation = explosions.create(0, 0, 'boom', [0], false);
-    explosionAnimation.anchor.setTo(0.5, 0.5);
-    explosionAnimation.animations.add('boom');
-  }
-
+  
   //add sprites for purchasing bomb and arrow/turret
   buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
   console.log(game.width)
@@ -224,6 +176,57 @@ function create ()
   buyTurretSprite.events.onInputDown.add(addTurret, this);
   buyTurretText = game.add.text(32, game.height - 256, '', {font: '16px Arial', align: 'center'});
   buyTurretText.text = 'Turret: $20';
+  //instantiate an array of weapons to be attached to turrets
+  for (var i = 0; i < 10; i++) {
+    turretWeapon = game.add.weapon(20, 'projectiles')
+    turretWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+    turretWeapon.bulletKillDistance = Turret.range;
+    turretWeapon.bulletSpeed = 400;
+    turretWeapon.fireRate = Turret.fireRate;  //roughly onece every 120ms
+    turretWeapon.trackSprite(newTurret, 32, 16, true);
+    turretWeapons.push(turretWeapon)
+  }
+
+  //store a recyclable list of entities for turrets and bombs 
+  //since they all have the same attributes and AI behaviors
+  turrets = game.add.group();
+  turrets.enableBody = true;
+  turrets.physicsBodyType = Phaser.Physics.ARCADE;
+  for (var i = 0; i < 10; i++) {
+    var newTurret = turrets.create(0,0,'arrow',0,false);
+    newTurret.name = 'turret' + i;
+    newTurret.inputEnabled = true;
+    newTurret.input.enableDrag();
+    newTurret.input.enableSnap(32,32,true,true, 16, 16);
+    newTurret.anchor.set(0.5);
+    newTurret.events.onDragStop.add(createTurret, this);
+    turretWeapons[i].trackSprite(newTurret, 0, 0, true);
+  }
+
+  bombs = game.add.group();
+  bombs.enableBody = true;
+  bombs.physicsBodyType = Phaser.Physics.ARCADE;
+  for (var i = 0; i < 10; i++) {
+    var newBomb = bombs.create(0,0,'bomb',0,false);
+    newBomb.name = 'bomb' + i;
+    newBomb.inputEnabled = true;
+    newBomb.input.enableDrag();
+    newBomb.input.enableSnap(32,32,true,true, 16, 16);
+    newBomb.anchor.set(0.5);
+    newBomb.events.onDragStop.add(createBomb, this);
+    //TODO:  add actual weapon and effect
+  }
+
+  //placeholder for test firing turrets and bombs
+  //TODO:  replace with actual creep detection to trigger
+  fireButton = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
+
+  for (var i = 0; i < 10; i++)
+  {
+    var explosionAnimation = explosions.create(0, 0, 'boom', [0], false);
+    explosionAnimation.anchor.setTo(0.5, 0.5);
+    explosionAnimation.animations.add('boom');
+  }
 
   creep.bringToTop();
   turret.bringToTop();
@@ -238,31 +241,41 @@ function create ()
 function createBomb(bomb) {
   if (bomb.x < 400 || bomb.x > 579)
  {
-    bomb.destroy();
+    bomb.kill();
   } else {
+    //TODO:  check that placement won't block creeps
+    //TODO:  check that placement won't overlap existing tower
     credits -= Bomb.cost;
+    bomb.input.draggable = false;
   }
 }
 
 function addBomb() {
-  //code here to add a bomb to the game
-  //make sure bomb cost is
   if (credits >= Bomb.cost) {
-    newBomb = game.add.sprite(buyBombSprite.x, buyBombSprite.y, 'bomb');
-    newBomb.inputEnabled = true;
-    newBomb.input.enableDrag();
-    newBomb.events.onDragStop.add(createBomb, this);
+    var newBomb = bombs.getFirstExists(false);
+    if (newBomb) {     
+      newBomb.reset(game.input.x, game.input.y);
+      newBomb.bringToTop();
+      newBomb.events.onInputOver.add(function(sprite, pointer){
+        if(pointer.isDown){
+             sprite.input.startDrag(pointer);
+        } else {
+          createBomb(sprite);
+        }
+      }, this)
+    }
   }
 }
 
 function createTurret(turret) {
-  console.log('creating turret')
   if (turret.x < 400 || turret.x > 579)
   {
     turret.kill();
   }
 else
   {
+    //TODO:  check that placement won't block creeps
+    //TODO:  check that placement won't overlap existing tower
     credits -= Turret.cost;
     turret.input.draggable = false;
   }
@@ -270,14 +283,17 @@ else
 
 function addTurret() {
   if (credits >= Turret.cost) {
-    //newTurret = game.add.sprite(buyTurretSprite.x, buyTurretSprite.y, 'arrow')
     var newTurret = turrets.getFirstExists(false);
-    if (newTurret) {
-      console.log('adding new turret');      
-      newTurret.reset(buyTurretSprite.x + 80, buyTurretSprite.y + 48);
-      console.log(newTurret.name);
-      console.log(newTurret.x + ', ' + newTurret.y);
+    if (newTurret) {     
+      newTurret.reset(game.input.x, game.input.y);
       newTurret.bringToTop();
+      newTurret.events.onInputOver.add(function(sprite, pointer){
+        if(pointer.isDown){
+             sprite.input.startDrag(pointer);
+        } else {
+          createTurret(sprite);
+        }
+      }, this)
     }
   }
 }
