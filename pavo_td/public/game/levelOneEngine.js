@@ -1,4 +1,6 @@
 
+
+
 window.onload = function(){
 
 var Bomb = {
@@ -118,6 +120,8 @@ Creep.prototype.update = function()
 */
 };
 
+var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
+var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
 
 
 
@@ -169,7 +173,7 @@ var nonPath;
 var one;
 var creep;
 var turret;
-var theCreeps;
+var theCreeps = [];
 var creepProjectile;
 var totalCreeps = 0;
 var aliveCreeps = 0;
@@ -184,10 +188,29 @@ var tileMap;
 var pathLayer;
 var atTile;
 var turretWeapons = [];
+var newTurretClass;
+var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
+
+function preload ()
+{
+  game.load.image('sheep', 'game/one/sheep.png');
+  game.load.image('buyTurret', 'game/one/arrow.png')
+  game.load.image('buyBomb', 'game/one/bomb_64p.png');
+  game.load.image('bomb', 'game/one/bomb_32p.png');
+  game.load.image('logo', 'game/one/logo3.png');
+  game.load.image('projectiles', 'game/one/fire.png');
+  game.load.image('path', 'game/one/path.png');
+  game.load.image('nonPath', 'game/one/nonPath.png');
+  game.load.image('arrow', 'game/one/arrow3.png');
+  game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
+  game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
+  game.load.image('one', 'game/one/levelOne.png');
+}
+
 
 function create ()
 {
-
+  this.theCreeps = [];
   one = game.add.tileSprite(0, 0, 1100, 1100, 'one');
 
   tileMap = game.add.tilemap('lvlone');
@@ -273,6 +296,9 @@ function create ()
     newBomb.anchor.set(0.5);
     newBomb.events.onDragStop.add(createBomb, this);
     //TODO:  add actual weapon and effect
+
+    newTurretClass = new TurretClass(game, 'arrow', 500, 400)
+    newTurretClass.events.onDragStop.add(createTurret, this);
   }
 
   //placeholder for test firing turrets and bombs
@@ -349,7 +375,7 @@ function addTurret() {
         if(pointer.isDown){
              sprite.input.startDrag(pointer);
         } else {
-          createTurret(sprite);
+          createTurret(this);
         }
       }, this)
     }
@@ -574,9 +600,11 @@ if( (currentWave == 0) && (start == 1) )
       aliveCreeps++;
       game.physics.arcade.collide(creep, theCreeps[i].creep);
       game.physics.arcade.overlap(projectile, theCreeps[i].creep, projectilesHitEnemy, null, this);
+      //refactor to iterate through turrets
       for(var f = 0; f < turretWeapons.length; f++) {
         game.physics.arcade.overlap(turretWeapons[f].bullets, theCreeps[i].creep, projectilesHitEnemy, null, this);
       }
+      game.physics.arcade.overlap(newTurretClass.turretWeapon.bullets, theCreeps[i].creep, projectilesHitEnemy, null, this);
       theCreeps[i].update();
      }
   }
@@ -589,13 +617,14 @@ if( (currentWave == 0) && (start == 1) )
     fire();
     for (var f = 0; f < turretWeapons.length; f++) {
       currentTurret = turretWeapons[f].trackedSprite;
-      console.log(currentTurret.name);
-      console.log(currentTurret)
       if (currentTurret.visible) {
         turretWeapons[f].fire();
       }
     }
   }
+  console.log("ready to update turrets")
+  console.log(theCreeps)
+  newTurretClass.updateTurret(theCreeps);
 }
 
 function rotateTurret(turret) {
