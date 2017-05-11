@@ -1,6 +1,4 @@
 
-
-
 window.onload = function(){
 
 var Bomb = {
@@ -120,8 +118,6 @@ Creep.prototype.update = function()
 */
 };
 
-var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
-var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
 
 
 
@@ -173,7 +169,7 @@ var nonPath;
 var one;
 var creep;
 var turret;
-var theCreeps = [];
+var theCreeps;
 var creepProjectile;
 var totalCreeps = 0;
 var aliveCreeps = 0;
@@ -189,7 +185,6 @@ var pathLayer;
 var atTile;
 var turretWeapons = [];
 var newTurretClass;
-var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
 function preload ()
 {
