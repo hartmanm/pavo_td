@@ -13,14 +13,25 @@ var Turret = {
   fireRate: 500
 };
 
+
+
 Creep = function (index, game, player, projectile)
 {
-  var x = 550;
-  var y = 0;
-  var move_speed = 2000;
-  //var currentTile = path[0] * 32;
+  var currentTileX = 16.5;
+  var currentTileY = 0;
+  var nextTileX = 16.5;
+  var nextTileY = 1;
+  var tempTileX = 15.5;
+  var tempTileY = 0;
+  var x = currentTileX * 32;
+  var y = currentTileY * 32;
+  //var move_speed = 2000;
+  //var currentTile = [{x: 16, y: 0},{x: 16, y: 0}];
+  //var nextTile = [{x: 16, y: 1}, {x: 16, y: 1}];
+  //var tempTile = [{x: 15, y: 1}, {x: 15, y: 1}];
   //var nextTile = path[currentTile + 1] * 32;
   //var lifeFlag = 1;
+
   this.game = game;
   this.health = 2;
   this.player = player;
@@ -28,11 +39,13 @@ Creep = function (index, game, player, projectile)
   this.kill_reward = 5;
   this.alive = true;
   this.creep = game.add.sprite(x, y, 'sheep');
+  //this.creep = game.add.sprite(, , 'sheep');
   this.creep.anchor.set(0.5);
   this.creep.name = index.toString();
   game.physics.enable(this.creep, Phaser.Physics.ARCADE);
   this.creep.body.immovable = false;
   this.creep.body.collideWorldBounds = true;
+
 };
 
 Creep.prototype.damage = function()
@@ -55,6 +68,39 @@ Creep.prototype.update = function()
 //this.creep.currentTile = this.creep.nextTile;
 //this.creep.tile = path[1];
 
+
+/*
+	 // for (var i = 0; i < totalCreeps; i++)
+	// {
+  if(this.creep.currentTileX != 16 && this.creep.currentTileY != 31)
+  {
+    this.creep.currentTileY += 1;
+    this.creep.nextTileY += 1;
+    this.creep.tempTileY += 1;
+//    this.creep.x = this.creep.currentTileX * 32;
+  //  this.creep.y = this.creep.currentTileY * 32;
+
+  //  elseif(theCreeps[i].creep.tempTile.walkable = true )
+//    {
+  //      theCreeps[i].creep.currentTileX -= 1;
+  //      theCreeps[i].creep.nextTileX -= 1;
+  //      theCreeps[i].creep.tempTileX -= 1;
+  //      theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
+  //      theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
+  //  }
+  }
+//}
+
+*/
+
+//this.creep.currentTileY += 1;
+
+//  if(this.creep.currentTile != target && tileMap.nextTile.walkable = true)
+//start[0].x * 32, start[0].y * 32
+
+  if(this.creep.y < 1080)
+    this.creep.y += 1;
+/*
   if(this.creep.y < 1080)
     this.creep.y += 1;
 
@@ -71,10 +117,42 @@ Creep.prototype.update = function()
 
   if(this.creep.y < 20)
     this.creep.x = 550;
+*/
 };
 
 var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
 var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
+
+
+
+var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
+
+function preload ()
+{
+  game.load.image('sheep', 'game/one/sheep.png');
+  game.load.image('buyTurret', 'game/one/arrow.png')
+  game.load.image('buyBomb', 'game/one/bomb_64p.png');
+  game.load.image('bomb', 'game/one/bomb_32p.png');
+  game.load.image('logo', 'game/one/logo3.png');
+  game.load.image('projectiles', 'game/one/fire.png');
+  game.load.image('path', 'game/one/path.png');
+  game.load.image('nonPath', 'game/one/nonPath.png');
+  game.load.image('arrow', 'game/one/arrow3.png');
+  game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
+  game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
+  game.load.image('one', 'game/one/levelOne.png');
+}
+
+
+//var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
+//var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
+
+//var start = [{x: 16, y: 0}, {x: 16, y: 0}];
+var startX = 16;
+var startY = 1;
+//var targetX = 18;
+//var targetY = 31;
+var tileSize = 32;
 var creepType = ['Sheep', 'TEST', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep'];
 var lives = 20;
 var flag1 = 1;
@@ -163,7 +241,7 @@ function create ()
   projectile.setAll('checkWorldBounds', true);
 
   explosions = game.add.group();
-  
+
   //add sprites for purchasing bomb and arrow/turret
   buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
   console.log(game.width)
@@ -190,7 +268,7 @@ function create ()
     turretWeapons.push(turretWeapon)
   }
 
-  //store a recyclable list of entities for turrets and bombs 
+  //store a recyclable list of entities for turrets and bombs
   //since they all have the same attributes and AI behaviors
   turrets = game.add.group();
   turrets.enableBody = true;
@@ -259,7 +337,7 @@ function createBomb(bomb) {
 function addBomb() {
   if (credits >= Bomb.cost) {
     var newBomb = bombs.getFirstExists(false);
-    if (newBomb) {     
+    if (newBomb) {
       newBomb.reset(game.input.x, game.input.y);
       newBomb.bringToTop();
       newBomb.events.onInputOver.add(function(sprite, pointer){
@@ -290,7 +368,7 @@ else
 function addTurret() {
   if (credits >= Turret.cost) {
     var newTurret = turrets.getFirstExists(false);
-    if (newTurret) {     
+    if (newTurret) {
       newTurret.reset(game.input.x, game.input.y);
       newTurret.bringToTop();
       newTurret.events.onInputOver.add(function(sprite, pointer){
@@ -395,6 +473,33 @@ if( (currentWave == 0) && (start == 1) )
 		  }
 		}
 */
+
+
+
+
+	  for (var i = 0; i < totalCreeps; i++)
+	  {
+  if((theCreeps[i].creep.currentTileX != 18) && (theCreeps[i].creep.currentTileY != 17))
+  {
+    theCreeps[i].creep.currentTileY += 1;
+    theCreeps[i].creep.nextTileY += 1;
+    theCreeps[i].creep.tempTileY += 1;
+  //  theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
+  //  theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
+
+  //  elseif(theCreeps[i].creep.tempTile.walkable = true )
+//    {
+  //      theCreeps[i].creep.currentTileX -= 1;
+  //      theCreeps[i].creep.nextTileX -= 1;
+  //      theCreeps[i].creep.tempTileX -= 1;
+  //      theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
+  //      theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
+  //  }
+  }
+}
+
+
+
 
     if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
