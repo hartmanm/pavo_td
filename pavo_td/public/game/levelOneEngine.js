@@ -1,7 +1,7 @@
 
 window.onload = function(){
 
-var Bomb = {
+var Bomber = {
   cost: 100
 };
 
@@ -29,7 +29,7 @@ Creep = function (index, game, player, projectile)
   //var lifeFlag = 1;
 
   this.game = game;
-  this.health = 2;
+  this.health = 4;
   this.player = player;
   this.projectile = projectile;
   this.kill_reward = 5;
@@ -126,13 +126,15 @@ function preload ()
   game.load.image('sheep', 'game/one/sheep.png');
   game.load.image('buyTurret', 'game/one/arrow.png')
   game.load.image('buyBomb', 'game/one/bomb_64p.png');
-  game.load.image('bomb', 'game/one/bomb_32p.png');
+  game.load.image('bomb', 'game/one/bomb_bullet.png');
+  game.load.image('bomb_launcher', 'game/one/bomb_launcher.png');
   game.load.image('logo', 'game/one/logo3.png');
   game.load.image('projectiles', 'game/one/fire.png');
   game.load.image('path', 'game/one/path.png');
   game.load.image('nonPath', 'game/one/nonPath.png');
   game.load.image('arrow', 'game/one/arrow3.png');
   game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
+  game.load.spritesheet('bomb_explode', 'game/one/explosion_transparent.png', 64, 64, 25);
   game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('one', 'game/one/levelOne.png');
 }
@@ -178,22 +180,7 @@ var tileMap;
 var pathLayer;
 var atTile;
 var TurretList = [];
-
-function preload ()
-{
-  game.load.image('sheep', 'game/one/sheep.png');
-  game.load.image('buyTurret', 'game/one/arrow.png')
-  game.load.image('buyBomb', 'game/one/bomb_64p.png');
-  game.load.image('bomb', 'game/one/bomb_32p.png');
-  game.load.image('logo', 'game/one/logo3.png');
-  game.load.image('projectiles', 'game/one/fire.png');
-  game.load.image('path', 'game/one/path.png');
-  game.load.image('nonPath', 'game/one/nonPath.png');
-  game.load.image('arrow', 'game/one/arrow3.png');
-  game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
-  game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('one', 'game/one/levelOne.png');
-}
+var BomberList = []
 
 
 function create ()
@@ -209,12 +196,13 @@ function create ()
   aliveCreeps = 10;
 
   explosions = game.add.group();
+  bombExplosions = game.add.group();
 
   //add sprites for purchasing bomb and arrow/turret
   buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
   buyBombSprite.inputEnabled = true;
   buyBombSprite.alpha = 0.2; //set to 1 if enough credits to buy
-  buyBombSprite.events.onInputDown.add(addBomb, this);
+  buyBombSprite.events.onInputDown.add(addBomber, this);
   buyBombText = game.add.text(32, game.height - 128, '', {font: '16px Arial', align: 'center'});
   buyBombText.text = 'Bomb: $100';
 
@@ -225,25 +213,17 @@ function create ()
   buyTurretText = game.add.text(32, game.height - 256, '', {font: '16px Arial', align: 'center'});
   buyTurretText.text = 'Turret: $20';
 
-  bombs = game.add.group();
-  bombs.enableBody = true;
-  bombs.physicsBodyType = Phaser.Physics.ARCADE;
-  for (var i = 0; i < 10; i++) {
-    var newBomb = bombs.create(0,0,'bomb',0,false);
-    newBomb.name = 'bomb' + i;
-    newBomb.inputEnabled = true;
-    newBomb.input.enableDrag();
-    newBomb.input.enableSnap(32,32,true,true, 16, 16);
-    newBomb.anchor.set(0.5);
-    newBomb.events.onDragStop.add(createBomb, this);
-    //TODO:  add actual weapon and effect
-  }
 
   for (var i = 0; i < 10; i++)
   {
-    var explosionAnimation = explosions.create(0, 0, 'boom', [0], false);
+    var explosionAnimation = explosions.create(0, 0, 'boom', 23, false);
     explosionAnimation.anchor.setTo(0.5, 0.5);
     explosionAnimation.animations.add('boom');
+    var bombExplosionAnimation = bombExplosions.create(0,0,'bomb_explode', [0], false);
+    bombExplosionAnimation.anchor.setTo(0.5);
+    bombExplosionAnimation.animations.add('bomb_explode');
+    bombExplosionAnimation.enableBody = true;
+    bombExplosionAnimation.physicsBodyType = Phaser.Physics.ARCADE;
   }
 
   logo = game.add.sprite(155, 155, 'logo');
@@ -253,31 +233,32 @@ function create ()
   cursors = game.input.keyboard.createCursorKeys();
 }
 
-function createBomb(bomb) {
-  if (bomb.x < 400 || bomb.x > 579)
- {
-    bomb.kill();
+function createBomber(bomber) {
+  console.log('Attempting to create bomber');
+  console.log(bomber);
+  if (bomber.x < 400 || bomber.x > 579) {
+    bomber.destroy();
+  } else if (bomber.hasOwnProperty('fireRate')) {
+    credits -= Bomber.cost;
+    bomber.input.draggable = false;
+    BomberList.push(bomber);
   } else {
-    //TODO:  check that placement won't block creeps
-    //TODO:  check that placement won't overlap existing tower
-    credits -= Bomb.cost;
-    bomb.input.draggable = false;
+    bomber.destroy();
   }
+  console.log('New Bomber List: ');
+  console.log(BomberList);
 }
 
-function addBomb() {
-  if (credits >= Bomb.cost) {
-    var newBomb = bombs.getFirstExists(false);
-    if (newBomb) {
-      newBomb.reset(game.input.x, game.input.y);
-      newBomb.bringToTop();
-      newBomb.events.onInputOver.add(function(sprite, pointer){
-        if(pointer.isDown){
-             sprite.input.startDrag(pointer);
-        } else {
-          createBomb(sprite);
-        }
-      }, this)
+function addBomber() {
+  if (credits >= Bomber.cost) {
+    var newBomber = new BomberClass(game, 'bomb_launcher', 'bomb', 0, 0);
+    newBomber.events.onDragStop.add(createBomber, this);
+    if (newBomber) {
+      newBomber.reset(game.input.x, game.input.y);
+      newBomber.bringToTop();
+      if (game.input.activePointer.isDown) {
+        newBomber.input.startDrag(game.input.activePointer);
+      }
     }
   }
 }
@@ -361,7 +342,7 @@ function updateMarker()
 function update ()
 {
   //if not enough credits to buy a tower, then fade it out
-  if (credits >= Bomb.cost) {
+  if (credits >= Bomber.cost) {
     buyBombSprite.alpha = 1;
   } else {
     buyBombSprite.alpha = 0.2;
@@ -535,6 +516,9 @@ if( (currentWave == 0) && (start == 1) )
   for (var t = 0; t < TurretList.length; t++) {
     TurretList[t].updateTower(theCreeps);
   }
+  for (var b = 0; b < BomberList.length; b++) {
+    BomberList[b].updateTower(theCreeps);
+  }
 
   for (var i = 0; i < theCreeps.length; i++)
   {
@@ -543,7 +527,10 @@ if( (currentWave == 0) && (start == 1) )
       aliveCreeps++;
       //refactor to iterate through turrets
       for (var t = 0; t < TurretList.length; t++) {
-        game.physics.arcade.overlap(TurretList[t].turretWeapon.bullets, theCreeps[i].creep, projectilesHitEnemy, null, this);
+        game.physics.arcade.overlap(TurretList[t].turretWeapon.bullets, theCreeps[i].creep, turretsHitEnemy, null, this);
+      }
+      for (var b = 0; b < BomberList.length; b++) {
+        game.physics.arcade.overlap(BomberList[b].bomberWeapon.bullets, theCreeps[i].creep, bombsHitEnemy, null, this);
       }
       theCreeps[i].update();
      }
@@ -552,9 +539,32 @@ if( (currentWave == 0) && (start == 1) )
 
 }
 
-function projectilesHitEnemy (creep, projectiles)
+function explosionDamage(explosion)
 {
-  projectiles.kill();
+  var started = Date.now();
+  var interval = setInterval(function() {
+    if (Date.now() - started > 1000) {
+      clearInterval(interval);
+    } else {
+      for (var i = 0; i < theCreeps.length; i++) {
+        if (game.physics.arcade.distanceBetween(explosion, theCreeps[i].creep) < 64) {
+          var destroyed = theCreeps[i].damage();
+
+          if (destroyed)
+          {
+            var explosionAnimation = explosions.getFirstExists(false);
+            explosionAnimation.reset(theCreeps[i].creep.x, theCreeps[i].creep.y);
+            explosionAnimation.play('boom', 100, false, true);
+          }
+        }
+      }
+    }
+  }, 100);
+}
+
+function turretsHitEnemy (creep, bullets)
+{
+  bullets.kill();
 
   var destroyed = theCreeps[creep.name].damage();
 
@@ -564,6 +574,14 @@ function projectilesHitEnemy (creep, projectiles)
     explosionAnimation.reset(creep.x, creep.y);
     explosionAnimation.play('boom', 100, false, true);
   }
+}
+
+function bombsHitEnemy (creep, bombs) {
+  bombs.kill();
+  var bombAnimation = bombExplosions.getFirstExists(false);
+  bombAnimation.reset(creep.x, creep.y);
+  bombAnimation.play('bomb_explode', 25, false, true);
+  explosionDamage(bombAnimation);
 }
 
 function render ()

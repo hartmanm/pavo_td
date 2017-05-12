@@ -11,13 +11,13 @@ BomberClass = function (game, imageName, bombName, x, y) {
   this.physicsBodyType = Phaser.Physics.ARCADE;
   this.currentTarget = null;
   //this.body.immovable = true;
-  this.bombWeapon = game.add.weapon(20, bulletName);
-  this.bombWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
-  this.bombWeapon.bulletKillDistance = this.range;
-  this.bombWeapon.bulletSpeed = 250;
-  this.bombWeapon.fireRate = this.fireRate;  //roughly onece every 120ms
-  this.bombWeapon.bulletRotateToVelocity = true;
-  this.bombWeapon.trackSprite(this, 0, 0, true);
+  this.bomberWeapon = game.add.weapon(20, bombName);
+  this.bomberWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
+  this.bomberWeapon.bulletKillDistance = this.range;
+  this.bomberWeapon.bulletSpeed = 250;
+  this.bomberWeapon.fireRate = this.fireRate;  //roughly onece every 120ms
+  this.bomberWeapon.bulletRotateToVelocity = true;
+  this.bomberWeapon.trackSprite(this, 0, 0, true);
   this.inputEnabled = true;
   this.input.enableDrag();
   this.input.enableSnap(32,32,true,true, 16, 16);
@@ -63,15 +63,15 @@ BomberClass.prototype.targetCreep = function(theCreeps) {
     }
 }
 
-BombClass.prototype.rotateTower = function(nearestCreep) {
+BomberClass.prototype.rotateTower = function(nearestCreep) {
     this.rotation = this.game.physics.arcade.angleBetween(this, nearestCreep);
 };
 
-BombClass.prototype.updateTower = function(theCreeps) {
+BomberClass.prototype.updateTower = function(theCreeps) {
     this.targetCreep(theCreeps);
     //nearestCreep = this.findNearestCreep(theCreeps);
     if (this.currentTarget != null) {
       this.rotateTower(this.currentTarget);
-      this.bombWeapon.fire();
+      this.bomberWeapon.fire();
     }
 };
