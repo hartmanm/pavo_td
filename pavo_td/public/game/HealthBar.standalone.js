@@ -38,7 +38,7 @@ HealthBar.prototype.setupConfiguration = function (providedConfig) {
 
 HealthBar.prototype.mergeWithDefaultConfiguration = function(newConfig) {
     var defaultConfig= {
-        width: 250,
+        width: 200,
         height: 40,
         x: 0,
         y: 0,
@@ -46,7 +46,7 @@ HealthBar.prototype.mergeWithDefaultConfiguration = function(newConfig) {
             color: '#651828'
         },
         bar: {
-            color: '#FEFF03'
+            color: '#02ff63'//'#FEFF03'
         },
         animationDuration: 200,
         flipped: false,
@@ -130,7 +130,7 @@ HealthBar.prototype.setFixedToCamera = function(fixedToCamera) {
 
 HealthBar.prototype.setAnchor = function(xAnchor, yAnchor) {
     this.bgSprite.anchor.set(xAnchor, yAnchor);
-    this.barSprite.position.x = this.bgSprite.position.x - this.config.width * this.bgSprite.anchor.x;    
+    this.barSprite.position.x = this.bgSprite.position.x - this.config.width * this.bgSprite.anchor.x;
     this.barSprite.anchor.y = yAnchor;
     if (this.flipped){
       this.barSprite.anchor.x = 1;
@@ -142,4 +142,3 @@ HealthBar.prototype.kill = function() {
     this.bgSprite.kill();
     this.barSprite.kill();
 };
-

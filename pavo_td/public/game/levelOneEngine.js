@@ -86,8 +86,7 @@ Creep.prototype.update = function()
 {
 //this.creep.currentTile = this.creep.nextTile;
 //this.creep.tile = path[1];
-  this.healthBar.setPercent(this.health/this.maxHealth*100);
-  this.healthBar.setPosition(this.creep.x + 16, this.creep.y - 20);
+
 
 
 	 // for (var i = 0; i < totalCreeps; i++)
@@ -100,15 +99,18 @@ Creep.prototype.update = function()
   //  index = contains.call(towerSpace, this.creep.nextTileY);
 
 //this.creep.currentTileY += 1;
-  if(this.creep.y < 1080) {
-    this.creep.y += 1;
-  }
-  /*
+  //if(this.creep.y < 1080) {
+//    this.creep.y += 1;
+//  }
+
 if(this.creep.y < 1080)// && this.creep.x > 416 && this.creep.x < 576)
     //if((this.creep.currentTileX > 384) && (this.creep.currentTileX < 608) )  //&& this.creep.nextTileY != towerSpace[]
 		{
 for (var i = 0; i < wallCount; i++)
 {
+
+
+
   if(this.creep.x == 432)
   {
 //  this.creep.direction = 6;
@@ -118,6 +120,8 @@ for (var i = 0; i < wallCount; i++)
       if(wall[i].y < this.creep.y + 32)
       {
               this.creep.x += 32;
+							this.healthBar.setPercent(this.health/this.maxHealth*100);
+							this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
 
       }
 	}
@@ -130,6 +134,8 @@ for (var i = 0; i < wallCount; i++)
       if(wall[i].y < this.creep.y + 32)
       {
              this.creep.x -= 32;
+             this.healthBar.setPercent(this.health/this.maxHealth*100);
+            this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
       }
 
       }
@@ -141,6 +147,8 @@ else {
       if(wall[i].y < this.creep.y + 32)
       {
              this.creep.x -= 32;
+             this.healthBar.setPercent(this.health/this.maxHealth*100);
+             this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
       }
 
       }
@@ -151,6 +159,8 @@ else {
   //  if((this.creep.x > 384) && (this.creep.x < 608) )
   //  {
     this.creep.y += 1;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
   //  this.creep.currentTileY += 1;
 //    this.creep.nextTileY += 1;
   //  this.creep.rightTileY += 1;
@@ -516,48 +526,47 @@ if( (currentWave == 0) && (start == 1) )
 
 
 
-
-    if(theCreeps[0].creep.y > 50 && flag1 == 1)
+    if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
     	theCreeps[1].creep.y = 0;
 			flag1++;
     }
-    if(theCreeps[0].creep.y > 100 && flag2 == 1)
+    if(theCreeps[1].creep.y > 100 && flag2 == 1)
     {
     	theCreeps[2].creep.y = 0;
 			flag2++;
     }
-    if(theCreeps[0].creep.y > 150 && flag3 == 1)
+    if(theCreeps[1].creep.y > 150 && flag3 == 1)
     {
     	theCreeps[3].creep.y = 0;
 			flag3++;
     }
-    if(theCreeps[0].creep.y > 200 && flag4 == 1)
+    if(theCreeps[1].creep.y > 200 && flag4 == 1)
     {
     	theCreeps[4].creep.y = 0;
 			flag4++;
     }
-    if(theCreeps[0].creep.y > 250 && flag5 == 1)
+    if(theCreeps[1].creep.y > 250 && flag5 == 1)
     {
     	theCreeps[5].creep.y = 0;
 			flag5++;
     }
-    if(theCreeps[0].creep.y > 300 && flag6 == 1)
+    if(theCreeps[1].creep.y > 300 && flag6 == 1)
     {
     	theCreeps[6].creep.y = 0;
 			flag6++;
     }
-    if(theCreeps[0].creep.y > 350 && flag7 == 1)
+    if(theCreeps[1].creep.y > 350 && flag7 == 1)
     {
     	theCreeps[7].creep.y = 0;
 			flag7++;
     }
-    if(theCreeps[0].creep.y > 400 && flag8 == 1)
+    if(theCreeps[1].creep.y > 400 && flag8 == 1)
     {
     	theCreeps[8].creep.y = 0;
 			flag8++;
     }
-    if(theCreeps[0].creep.y > 450 && flag9 == 1)
+    if(theCreeps[1].creep.y > 450 && flag9 == 1)
     {
     	theCreeps[9].creep.y = 0;
 			flag9++;
