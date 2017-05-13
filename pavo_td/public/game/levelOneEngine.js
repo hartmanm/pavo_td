@@ -9,27 +9,34 @@ var Turret = {
   cost: 20
 };
 
-
+//wall = function (x,y)
 
 Creep = function (index, game, player, projectile)
 {
-  var currentTileX = 16.5;
+  var currentTileX = 528;
   var currentTileY = 0;
   var nextTileX = 16.5;
   var nextTileY = 1;
-  var tempTileX = 15.5;
-  var tempTileY = 0;
-  var x = currentTileX * 32;
-  var y = currentTileY * 32;
+  var rightTileX = 15.5;
+  var rightTileY = 0;
+  var leftTileX = 17.5;
+  var leftTileY = 0;
+
   //var move_speed = 2000;
-  //var currentTile = [{x: 16, y: 0},{x: 16, y: 0}];
-  //var nextTile = [{x: 16, y: 1}, {x: 16, y: 1}];
+  //this.currentTile = {x: 16.5, y: 0};
+//  var nextTile = {x: 16.5, y: 1};
+  //var rightTile = {x: 15.5, y: 0};
+//  var leftTile = {x: 17.5, y: 0};
   //var tempTile = [{x: 15, y: 1}, {x: 15, y: 1}];
   //var nextTile = path[currentTile + 1] * 32;
   //var lifeFlag = 1;
+  var x = 16.5 * 32;
+  var y = 0 * 32;
+  var direction = 2;
+
 
   this.game = game;
-  this.health = 4;
+  this.health = 10;
   this.player = player;
   this.projectile = projectile;
   this.kill_reward = 5;
@@ -65,14 +72,83 @@ Creep.prototype.update = function()
 //this.creep.tile = path[1];
 
 
-/*
+
 	 // for (var i = 0; i < totalCreeps; i++)
 	// {
-  if(this.creep.currentTileX != 16 && this.creep.currentTileY != 31)
+//  if(this.creep.currentTileX != 16 && this.creep.currentTileY != 31)
+//  {
+  //  marker.x = currentLayer.getTileX(game.input.activePointer.worldX) * 32;
+  //  marker.y = nextTileY * 32;
+		//for (var i = 0; i < totalCreeps; i++)
+  //  index = contains.call(towerSpace, this.creep.nextTileY);
+
+//this.creep.currentTileY += 1;
+//  if(this.creep.y < 1080 )
+//    this.creep.y += 1;
+if(this.creep.y < 1080)// && this.creep.x > 416 && this.creep.x < 576)
+    //if((this.creep.currentTileX > 384) && (this.creep.currentTileX < 608) )  //&& this.creep.nextTileY != towerSpace[]
+		{
+for (var i = 0; i < wallCount; i++)
+{
+  if(this.creep.x == 432)
   {
-    this.creep.currentTileY += 1;
-    this.creep.nextTileY += 1;
-    this.creep.tempTileY += 1;
+//  this.creep.direction = 6;
+//  }
+  if( wall[i].x == this.creep.x)
+	{
+      if(wall[i].y < this.creep.y + 32)
+      {
+              this.creep.x += 32;
+
+      }
+	}
+	}
+
+  if(this.creep.x == 560)
+  {
+  if( wall[i].x == this.creep.x)
+	{
+      if(wall[i].y < this.creep.y + 32)
+      {
+             this.creep.x -= 32;
+      }
+
+      }
+	}
+
+else {
+  if( wall[i].x == this.creep.x)
+	{
+      if(wall[i].y < this.creep.y + 32)
+      {
+             this.creep.x -= 32;
+      }
+
+      }
+}
+
+
+}
+  //  if((this.creep.x > 384) && (this.creep.x < 608) )
+  //  {
+    this.creep.y += 1;
+  //  this.creep.currentTileY += 1;
+//    this.creep.nextTileY += 1;
+  //  this.creep.rightTileY += 1;
+    }
+
+
+//    this.creep.leftTileY += 1;
+  //  }
+//     }
+
+    // else {
+  //     if()
+//  var currentTile = {x: 16.5, y: 0};
+//  var nextTile = {x: 16.5, y: 1};
+//  var rightTile = {x: 15.5, y: 0};
+//  var leftTile = {x: 17.5, y: 0};
+//     }
 //    this.creep.x = this.creep.currentTileX * 32;
   //  this.creep.y = this.creep.currentTileY * 32;
 
@@ -84,18 +160,18 @@ Creep.prototype.update = function()
   //      theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
   //      theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
   //  }
-  }
+//  }
 //}
 
-*/
+
 
 //this.creep.currentTileY += 1;
 
 //  if(this.creep.currentTile != target && tileMap.nextTile.walkable = true)
 //start[0].x * 32, start[0].y * 32
 
-  if(this.creep.y < 1080)
-    this.creep.y += 1;
+//  if(this.creep.y < 1080 )
+//    this.creep.y += 1;
 /*
   if(this.creep.y < 1080)
     this.creep.y += 1;
@@ -142,12 +218,17 @@ function preload ()
 
 //var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
 //var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
-
+var wall = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
+//var wall = [{x: 0, y: 0}];
+var wallCount = 0;
 //var start = [{x: 16, y: 0}, {x: 16, y: 0}];
 var startX = 16;
 var startY = 1;
 //var targetX = 18;
 //var targetY = 31;
+var wallLeft = 12;
+var wallRight = 19;
+var towerSpace = [600];
 var tileSize = 32;
 var creepType = ['Sheep', 'TEST', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep'];
 var lives = 20;
@@ -170,13 +251,14 @@ var one;
 var theCreeps;
 var creep;
 var creepProjectile;
+var totalTowers = 1;
 var totalCreeps = 0;
 var aliveCreeps = 0;
 var explosions;
 var logo;
 var cursors;
 var creepSpacing = 0;
-var tileMap;
+var map;
 var pathLayer;
 var atTile;
 var TurretList = [];
@@ -188,9 +270,9 @@ function create ()
   this.theCreeps = [];
   one = game.add.tileSprite(0, 0, 1100, 1100, 'one');
 
-  tileMap = game.add.tilemap('lvlone');
-//  pathLayer = map.createLayer('traverse');
-  //layer.resizeWorld();
+  map = game.add.tilemap('lvlone');
+  //pathLayer = tileMap.createLayer('traverse');
+  //pathLayer.resizeWorld();
 
   totalCreeps = 10;
   aliveCreeps = 10;
@@ -234,9 +316,9 @@ function create ()
 }
 
 function createBomber(bomber) {
-  console.log('Attempting to create bomber');
-  console.log(bomber);
-  if (bomber.x < 400 || bomber.x > 579) {
+//  console.log('Attempting to create bomber');
+//  console.log(bomber);
+  if (bomber.x < 416 || bomber.x > 608) {
     bomber.destroy();
   } else if (bomber.hasOwnProperty('fireRate')) {
     credits -= Bomber.cost;
@@ -245,8 +327,13 @@ function createBomber(bomber) {
   } else {
     bomber.destroy();
   }
-  console.log('New Bomber List: ');
-  console.log(BomberList);
+  wall[wallCount].x = bomber.x;
+  wall[wallCount].y = bomber.y;
+
+console.log(wall[wallCount].x);
+console.log(wall[wallCount].y);
+console.log(wallCount);
+  wallCount++;
 }
 
 function addBomber() {
@@ -264,9 +351,9 @@ function addBomber() {
 }
 
 function createTurret(turret) {
-  console.log("Attempting to create turret")
-  console.log(turret)
-  if (turret.x < 400 || turret.x > 579)
+//  console.log("Attempting to create turret")
+//  console.log(turret)
+  if (turret.x < 416 || turret.x > 608)
   {
     //TODO:  integrate with code to actually check the map for valid placement
     turret.destroy();
@@ -279,8 +366,15 @@ function createTurret(turret) {
   } else {
     turret.destroy();
   }
-  console.log('New Turret List:')
-  console.log(TurretList)
+//  console.log('New Turret List:')
+//  console.log(TurretList)
+  wall[wallCount].x = turret.x;
+  wall[wallCount].y = turret.y;
+
+console.log(wall[wallCount].x);
+console.log(wall[wallCount].y);
+console.log(wallCount);
+  wallCount++;
 }
 
 function addTurret() {
@@ -300,7 +394,7 @@ function addTurret() {
              sprite.input.startDrag(pointer);
         } else if (this.hasOwnProperty('fireRate')) {
           createTurret(this);
-        } 
+        }
       }, this)*/
     }
   }
@@ -400,27 +494,6 @@ if( (currentWave == 0) && (start == 1) )
 
 
 
-
-	  for (var i = 0; i < totalCreeps; i++)
-	  {
-  if((theCreeps[i].creep.currentTileX != 18) && (theCreeps[i].creep.currentTileY != 17))
-  {
-    theCreeps[i].creep.currentTileY += 1;
-    theCreeps[i].creep.nextTileY += 1;
-    theCreeps[i].creep.tempTileY += 1;
-  //  theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
-  //  theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
-
-  //  elseif(theCreeps[i].creep.tempTile.walkable = true )
-//    {
-  //      theCreeps[i].creep.currentTileX -= 1;
-  //      theCreeps[i].creep.nextTileX -= 1;
-  //      theCreeps[i].creep.tempTileX -= 1;
-  //      theCreeps[i].creep.x = theCreeps[i].creep.currentTileX * 32;
-  //      theCreeps[i].creep.y = theCreeps[i].creep.currentTileY * 32;
-  //  }
-  }
-}
 
 
 
@@ -595,7 +668,7 @@ function render ()
     game.debug.text('Next Wave: ' + creepType[currentWave + 1], 700, 25, 'magenta');
   }
 
-  game.debug.text('still learning / testing phaser: more to come', 160, 470);
+  game.debug.text('still learning phaser: more to come', 50, 150);
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {

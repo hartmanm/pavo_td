@@ -1,5 +1,5 @@
 TurretClass = function (game, imageName, bulletName, x, y) {
-  
+
   Phaser.Sprite.call(this, game, x, y, imageName);
 
   //turret attributes
@@ -42,14 +42,14 @@ TurretClass.prototype.findNearestCreep = function (theCreeps) {
       }
     }
 
-    this.currentTarget = nearestCreep;    
+    this.currentTarget = nearestCreep;
     return nearestCreep;
 };
 
 TurretClass.prototype.targetCreep = function(theCreeps) {
     if (this.currentTarget != null) {
       if (this.currentTarget.alive) {
-        console.log('firing')
+//        console.log('firing')
         if (this.game.physics.arcade.distanceBetween(this, this.currentTarget) > this.range) {
           this.findNearestCreep(theCreeps);
         }
@@ -57,7 +57,7 @@ TurretClass.prototype.targetCreep = function(theCreeps) {
         this.findNearestCreep(theCreeps);
       }
     } else {
-      console.log('finding new creep')
+  //    console.log('finding new creep')
       this.findNearestCreep(theCreeps);
     }
 }
@@ -74,5 +74,3 @@ TurretClass.prototype.updateTower = function(theCreeps) {
       this.turretWeapon.fire();
     }
 };
-
-
