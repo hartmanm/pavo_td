@@ -50,15 +50,15 @@ Creep = function (index, game, player, projectile)
   this.creep.body.immovable = false;
   this.creep.body.collideWorldBounds = true;
   this.barConfig = {
-    width: 32,
-    height: 8,
+    width: 18,
+    height: 4,
     x: 0,
     y: 0,
     bg: {
       color: '#651828'
     },
     bar: {
-      color: '#FEFF03'
+      color: '#02ff63'
     },
     animationDuration: 100,
     flipped: false
@@ -121,7 +121,7 @@ for (var i = 0; i < wallCount; i++)
       {
               this.creep.x += 32;
 							this.healthBar.setPercent(this.health/this.maxHealth*100);
-							this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
+							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 
       }
 	}
@@ -135,7 +135,7 @@ for (var i = 0; i < wallCount; i++)
       {
              this.creep.x -= 32;
              this.healthBar.setPercent(this.health/this.maxHealth*100);
-            this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
+            this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
       }
 
       }
@@ -148,7 +148,7 @@ else {
       {
              this.creep.x -= 32;
              this.healthBar.setPercent(this.health/this.maxHealth*100);
-             this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
+             this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
       }
 
       }
@@ -160,7 +160,7 @@ else {
   //  {
     this.creep.y += 1;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 25);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
   //  this.creep.currentTileY += 1;
 //    this.creep.nextTileY += 1;
   //  this.creep.rightTileY += 1;
@@ -229,7 +229,7 @@ var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, 
 function preload ()
 {
   game.load.image('sheep', 'game/one/sheep.png');
-  game.load.image('buyTurret', 'game/one/arrow.png')
+  game.load.image('buyTurret', 'game/one/arrow3large.png')
   game.load.image('buyBomb', 'game/one/bomb_64p.png');
   game.load.image('bomb', 'game/one/bomb_bullet.png');
   game.load.image('bomb_launcher', 'game/one/bomb_launcher.png');
