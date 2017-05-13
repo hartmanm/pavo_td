@@ -1,5 +1,5 @@
 TurretClass = function (game, imageName, bulletName, x, y) {
-  
+
   Phaser.Sprite.call(this, game, x, y, imageName);
 
   //turret attributes
@@ -42,7 +42,7 @@ TurretClass.prototype.findNearestCreep = function (theCreeps) {
       }
     }
 
-    this.currentTarget = nearestCreep;    
+    this.currentTarget = nearestCreep;
     return nearestCreep;
 };
 
@@ -72,5 +72,3 @@ TurretClass.prototype.updateTower = function(theCreeps) {
       this.turretWeapon.fire();
     }
 };
-
-

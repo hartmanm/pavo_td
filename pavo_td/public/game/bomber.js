@@ -1,8 +1,10 @@
 BomberClass = function (game, imageName, bombName, x, y) {
-  
+
   Phaser.Sprite.call(this, game, x, y, imageName);
 
   //turret attributes
+  this.x = x;
+  this.y = y;
   this.game = game;
   this.cost = 100;
   this.range = 256;
@@ -43,7 +45,7 @@ BomberClass.prototype.findNearestCreep = function (theCreeps) {
       }
     }
 
-    this.currentTarget = nearestCreep;    
+    this.currentTarget = nearestCreep;
     return nearestCreep;
 };
 
