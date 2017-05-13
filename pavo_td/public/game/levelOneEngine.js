@@ -88,7 +88,7 @@ Creep.prototype.update = function()
 //this.creep.tile = path[1];
   this.healthBar.setPercent(this.health/this.maxHealth*100);
   this.healthBar.setPosition(this.creep.x + 16, this.creep.y - 20);
-/*
+
 
 	 // for (var i = 0; i < totalCreeps; i++)
 	// {
@@ -100,8 +100,9 @@ Creep.prototype.update = function()
   //  index = contains.call(towerSpace, this.creep.nextTileY);
 
 //this.creep.currentTileY += 1;
-//  if(this.creep.y < 1080 )
-//    this.creep.y += 1;
+  if(this.creep.y < 1080 )
+    this.creep.y += 1;
+  /*
 if(this.creep.y < 1080)// && this.creep.x > 416 && this.creep.x < 576)
     //if((this.creep.currentTileX > 384) && (this.creep.currentTileX < 608) )  //&& this.creep.nextTileY != towerSpace[]
 		{
@@ -321,8 +322,6 @@ function create ()
     var bombExplosionAnimation = bombExplosions.create(0,0,'bomb_explode', [0], false);
     bombExplosionAnimation.anchor.setTo(0.5);
     bombExplosionAnimation.animations.add('bomb_explode');
-    bombExplosionAnimation.enableBody = true;
-    bombExplosionAnimation.physicsBodyType = Phaser.Physics.ARCADE;
   }
 
   logo = game.add.sprite(155, 155, 'logo');
