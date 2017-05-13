@@ -36,7 +36,7 @@ Creep = function (index, game, player, projectile)
 
 
   this.game = game;
-  this.health = 10;
+  this.health = 4;
   this.player = player;
   this.maxHealth = 4;
   this.projectile = projectile;
@@ -100,8 +100,9 @@ Creep.prototype.update = function()
   //  index = contains.call(towerSpace, this.creep.nextTileY);
 
 //this.creep.currentTileY += 1;
-  if(this.creep.y < 1080 )
+  if(this.creep.y < 1080) {
     this.creep.y += 1;
+  }
   /*
 if(this.creep.y < 1080)// && this.creep.x > 416 && this.creep.x < 576)
     //if((this.creep.currentTileX > 384) && (this.creep.currentTileX < 608) )  //&& this.creep.nextTileY != towerSpace[]
@@ -322,6 +323,8 @@ function create ()
     var bombExplosionAnimation = bombExplosions.create(0,0,'bomb_explode', [0], false);
     bombExplosionAnimation.anchor.setTo(0.5);
     bombExplosionAnimation.animations.add('bomb_explode');
+    bombExplosionAnimation.enableBody = true;
+    bombExplosionAnimation.physicsBodyType = Phaser.Physics.ARCADE;
   }
 
   logo = game.add.sprite(155, 155, 'logo');
@@ -514,47 +517,47 @@ if( (currentWave == 0) && (start == 1) )
 
 
 
-    if(theCreeps[0].creep.y > 100 && flag1 == 1)
+    if(theCreeps[0].creep.y > 50 && flag1 == 1)
     {
     	theCreeps[1].creep.y = 0;
 			flag1++;
     }
-    if(theCreeps[1].creep.y > 100 && flag2 == 1)
+    if(theCreeps[0].creep.y > 100 && flag2 == 1)
     {
     	theCreeps[2].creep.y = 0;
 			flag2++;
     }
-    if(theCreeps[1].creep.y > 150 && flag3 == 1)
+    if(theCreeps[0].creep.y > 150 && flag3 == 1)
     {
     	theCreeps[3].creep.y = 0;
 			flag3++;
     }
-    if(theCreeps[1].creep.y > 200 && flag4 == 1)
+    if(theCreeps[0].creep.y > 200 && flag4 == 1)
     {
     	theCreeps[4].creep.y = 0;
 			flag4++;
     }
-    if(theCreeps[1].creep.y > 250 && flag5 == 1)
+    if(theCreeps[0].creep.y > 250 && flag5 == 1)
     {
     	theCreeps[5].creep.y = 0;
 			flag5++;
     }
-    if(theCreeps[1].creep.y > 300 && flag6 == 1)
+    if(theCreeps[0].creep.y > 300 && flag6 == 1)
     {
     	theCreeps[6].creep.y = 0;
 			flag6++;
     }
-    if(theCreeps[1].creep.y > 350 && flag7 == 1)
+    if(theCreeps[0].creep.y > 350 && flag7 == 1)
     {
     	theCreeps[7].creep.y = 0;
 			flag7++;
     }
-    if(theCreeps[1].creep.y > 400 && flag8 == 1)
+    if(theCreeps[0].creep.y > 400 && flag8 == 1)
     {
     	theCreeps[8].creep.y = 0;
 			flag8++;
     }
-    if(theCreeps[1].creep.y > 450 && flag9 == 1)
+    if(theCreeps[0].creep.y > 450 && flag9 == 1)
     {
     	theCreeps[9].creep.y = 0;
 			flag9++;
@@ -650,11 +653,12 @@ function explosionDamage(explosion)
         }
       }
     }
-  }, 200);
+  }, 250);
 }
 
 function turretsHitEnemy (creep, bullets)
 {
+  console.log("turret hit!")
   bullets.kill();
 
   var destroyed = theCreeps[creep.name].damage();
@@ -668,6 +672,7 @@ function turretsHitEnemy (creep, bullets)
 }
 
 function bombsHitEnemy (creep, bombs) {
+  console.log("bomb hit!")
   bombs.kill();
   var bombAnimation = bombExplosions.getFirstExists(false);
   bombAnimation.reset(creep.x, creep.y);

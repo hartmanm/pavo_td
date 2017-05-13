@@ -5,8 +5,8 @@ TurretClass = function (game, imageName, bulletName, x, y) {
   //turret attributes
   this.game = game;
   this.cost = 20;
-  this.range = 256;
-  this.fireRate = 1000;
+  this.range = 128;
+  this.fireRate = 500;
   this.currentTarget = null;
   this.enableBody = true;
   this.physicsBodyType = Phaser.Physics.ARCADE;
