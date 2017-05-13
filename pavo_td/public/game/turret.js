@@ -49,7 +49,6 @@ TurretClass.prototype.findNearestCreep = function (theCreeps) {
 TurretClass.prototype.targetCreep = function(theCreeps) {
     if (this.currentTarget != null) {
       if (this.currentTarget.alive) {
-        console.log('firing')
         if (this.game.physics.arcade.distanceBetween(this, this.currentTarget) > this.range) {
           this.findNearestCreep(theCreeps);
         }
@@ -57,7 +56,6 @@ TurretClass.prototype.targetCreep = function(theCreeps) {
         this.findNearestCreep(theCreeps);
       }
     } else {
-      console.log('finding new creep')
       this.findNearestCreep(theCreeps);
     }
 }

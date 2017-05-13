@@ -31,6 +31,7 @@ Creep = function (index, game, player, projectile)
   this.game = game;
   this.health = 4;
   this.player = player;
+  this.maxHealth = 4;
   this.projectile = projectile;
   this.kill_reward = 5;
   this.alive = true;
@@ -41,7 +42,21 @@ Creep = function (index, game, player, projectile)
   game.physics.enable(this.creep, Phaser.Physics.ARCADE);
   this.creep.body.immovable = false;
   this.creep.body.collideWorldBounds = true;
-
+  this.barConfig = {
+    width: 32,
+    height: 8,
+    x: 0,
+    y: 0,
+    bg: {
+      color: '#651828'
+    },
+    bar: {
+      color: '#FEFF03'
+    },
+    animationDuration: 100,
+    flipped: false
+  };
+  this.healthBar = new HealthBar(this.game, this.barConfig);
 };
 
 Creep.prototype.damage = function()
@@ -52,6 +67,7 @@ Creep.prototype.damage = function()
   {
     this.alive = false;
     this.creep.kill();
+    this.healthBar.kill();
     credits += this.kill_reward;
     return true;
   }
@@ -63,8 +79,8 @@ Creep.prototype.update = function()
 {
 //this.creep.currentTile = this.creep.nextTile;
 //this.creep.tile = path[1];
-
-
+  this.healthBar.setPercent(this.health/this.maxHealth*100);
+  this.healthBar.setPosition(this.creep.x + 16, this.creep.y - 20);
 /*
 	 // for (var i = 0; i < totalCreeps; i++)
 	// {
@@ -547,19 +563,21 @@ function explosionDamage(explosion)
       clearInterval(interval);
     } else {
       for (var i = 0; i < theCreeps.length; i++) {
-        if (game.physics.arcade.distanceBetween(explosion, theCreeps[i].creep) < 64) {
-          var destroyed = theCreeps[i].damage();
+        if (theCreeps[i].alive) {
+          if (game.physics.arcade.distanceBetween(explosion, theCreeps[i].creep) < 64) {
+            var destroyed = theCreeps[i].damage();
 
-          if (destroyed)
-          {
-            var explosionAnimation = explosions.getFirstExists(false);
-            explosionAnimation.reset(theCreeps[i].creep.x, theCreeps[i].creep.y);
-            explosionAnimation.play('boom', 100, false, true);
+            if (destroyed)
+            {
+              var explosionAnimation = explosions.getFirstExists(false);
+              explosionAnimation.reset(theCreeps[i].creep.x, theCreeps[i].creep.y);
+              explosionAnimation.play('boom', 100, false, true);
+            }
           }
         }
       }
     }
-  }, 100);
+  }, 200);
 }
 
 function turretsHitEnemy (creep, bullets)
