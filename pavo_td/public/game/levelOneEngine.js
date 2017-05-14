@@ -13,6 +13,7 @@ var Turret = {
 
 Creep = function (index, game, player, projectile)
 {
+
   var currentTileX = 528;
   var currentTileY = 0;
   var nextTileX = 16.5;
@@ -36,11 +37,11 @@ Creep = function (index, game, player, projectile)
 
   this.lifeCost = 1;
   this.game = game;
-  this.health = 20;
+  this.health = 10 * diff;
   this.player = player;
-  this.maxHealth = 20;
+  this.maxHealth = 10 * diff;
   this.projectile = projectile;
-  this.kill_reward = 5;
+  this.kill_reward = 5 + (diff/2);
   this.alive = true;
   this.creep = game.add.sprite(x, y, 'sheep');
   //this.creep = game.add.sprite(, , 'sheep');
@@ -236,6 +237,7 @@ var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, 
 function preload ()
 {
   game.load.image('sheep', 'game/one/sheep.png');
+  game.load.image('bruiser', 'game/one/bruiser.png');
   game.load.image('buyTurret', 'game/one/arrow3large.png')
   game.load.image('buyBomb', 'game/one/bomb_64p.png');
   game.load.image('bomb', 'game/one/bomb_bullet.png');
@@ -251,7 +253,7 @@ function preload ()
   game.load.image('one', 'game/one/levelOne.png');
 }
 
-
+var diff = 1;
 //var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
 //var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
 var wall = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
@@ -266,7 +268,7 @@ var wallLeft = 12;
 var wallRight = 19;
 var towerSpace = [600];
 var tileSize = 32;
-var creepType = ['Sheep', 'TEST', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep'];
+var creepType = ['Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'VICTORY!'];
 var lives = 20;
 var flag1 = 1;
 var flag2 = 1;
@@ -447,27 +449,29 @@ function removeLogo ()
   logo.kill();
 }
 
+
+//for potential attacking creeps later on
 function projectilesHitPlayer (creep, projectiles)
 {
   projectiles.kill();
 }
 
-function pickTile( pointer)
-{
-  atTile = game.math.snapToFloor(pointer.x, 32) / 32;
-}
+//function pickTile( pointer)
+//{
+//  atTile = game.math.snapToFloor(pointer.x, 32) / 32;
+//}
 
-function updateMarker()
-{
-  marker.x = currentLayer.getTileX(game.input.activePointer.worldX) * 32;
-  marker.y = currentLayer.getTileY(game.input.activePointer.worldY) * 32;
+//function updateMarker()
+//{
+//  marker.x = currentLayer.getTileX(game.input.activePointer.worldX) * 32;
+//  marker.y = currentLayer.getTileY(game.input.activePointer.worldY) * 32;
 
-  if (game.input.mousePointer.isDown)
-  {
-      map.putTile(currentTile, currentLayer.getTileX(marker.x), currentLayer.getTileY(marker.y), currentLayer);
+//  if (game.input.mousePointer.isDown)
+//  {
+  //    map.putTile(currentTile, currentLayer.getTileX(marker.x), currentLayer.getTileY(marker.y), currentLayer);
       // map.fill(currentTile, currentLayer.getTileX(marker.x), currentLayer.getTileY(marker.y), 4, 4, currentLayer);
-  }
-}
+//  }
+//}
 
 function update ()
 {
@@ -504,6 +508,7 @@ if( (currentWave == 0) && (start == 1) )
 
   if( (aliveCreeps == 0) && (currentWave < totalWave) )
   {
+    diff = currentWave;
     theCreeps = [];
     flag1 = 1;
     flag2 = 1;
