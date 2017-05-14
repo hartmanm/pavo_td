@@ -268,7 +268,7 @@ var wallLeft = 12;
 var wallRight = 19;
 var towerSpace = [600];
 var tileSize = 32;
-var creepType = ['Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'Sheep', 'VICTORY!'];
+var creepType = ['Sheep', 'Sick Sheep', 'Buff Sheep', 'Moar Buff Sheep', 'Is that a Sheep?', 'No more games Sheep', 'Roid Sheep', 'Sheepinator', 'Way too strong Sheep', 'Monster Sheep', 'Doom Sheep', 'VICTORY!'];
 var lives = 20;
 var flag1 = 1;
 var flag2 = 1;
@@ -711,13 +711,15 @@ function render ()
   if( aliveCreeps > 0 && lives > 0)
   {
     game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 25, 'magenta');
-    game.debug.text('Credits: ' + credits, 200, 25, 'magenta');
-    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 343, 25, 'magenta');
-    game.debug.text('Lives: ' + lives, 568, 25, 'magenta');
-    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 700, 25, 'magenta');
+    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 50, 'magenta');
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 75, 'magenta');
+    game.debug.text('Credits: ' + credits, 32, 100, 'magenta');
+    game.debug.text('Lives: ' + lives, 32, 125, 'magenta');
+
   }
 
-  game.debug.text('still learning phaser: more to come', 50, 150);
+  game.debug.text('still learning phaser: more to come', 32, 215);
+  game.debug.text('Note: it is possible to win', 32, 250);
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
