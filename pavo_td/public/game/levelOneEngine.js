@@ -34,11 +34,11 @@ Creep = function (index, game, player, projectile)
   var y = 0 * 32;
   var direction = 2;
 
-
+  this.lifeCost = 1;
   this.game = game;
-  this.health = 4;
+  this.health = 20;
   this.player = player;
-  this.maxHealth = 4;
+  this.maxHealth = 20;
   this.projectile = projectile;
   this.kill_reward = 5;
   this.alive = true;
@@ -166,7 +166,14 @@ else {
   //  this.creep.rightTileY += 1;
     }
 
-
+if(this.creep.y == 1080)
+{
+this.alive = false;
+this.creep.kill();
+this.healthBar.kill();
+lives = lives - this.lifeCost;
+this.lifeCost = 0;
+}
 //    this.creep.leftTileY += 1;
   //  }
 //     }
@@ -464,6 +471,11 @@ function updateMarker()
 
 function update ()
 {
+  if( lives != 0 )
+  {
+
+
+
   //if not enough credits to buy a tower, then fade it out
   if (credits >= Bomber.cost) {
     buyBombSprite.alpha = 1;
@@ -637,7 +649,7 @@ if( (currentWave == 0) && (start == 1) )
      }
   }
 
-
+}
 }
 
 function explosionDamage(explosion)
@@ -691,7 +703,7 @@ function bombsHitEnemy (creep, bombs) {
 
 function render ()
 {
-  if( aliveCreeps > 0)
+  if( aliveCreeps > 0 && lives > 0)
   {
     game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 25, 'magenta');
     game.debug.text('Credits: ' + credits, 200, 25, 'magenta');
@@ -705,6 +717,11 @@ function render ()
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
     game.debug.text('LEVEL COMPLETE! ', 32, 32);
+  }
+
+  if( (lives == 0) )
+  {
+    game.debug.text('FAILURE! ', 32, 32);
   }
 }
 
