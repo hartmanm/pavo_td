@@ -55,14 +55,23 @@ Creep = function (index, game, player, projectile, type)
     this.kill_reward = 5 + (diff/2);
     this.creep = game.add.sprite(x, y, 'sheep');
   }
-  else if(type === 'bruiser')
+  if(type === 'bruiser')
   {
     this.type = 1;
     this.lifeCost = 3;
-    this.health = 15 * diff;
-    this.maxHealth = 15 * diff;
+    this.health = 20 * diff;
+    this.maxHealth = 20 * diff;
     this.kill_reward = 15 + (diff/2);
     this.creep = game.add.sprite(x, y, 'bruiser');
+  }
+  if(type === 'scout')
+  {
+    this.type = 2;
+    this.lifeCost = 1;
+    this.health = 6 * diff;
+    this.maxHealth = 6 * diff;
+    this.kill_reward = 10 + (diff/2);
+    this.creep = game.add.sprite(x, y, 'scout');
   }
   //this.creep = game.add.sprite(, , 'sheep');
   this.creep.anchor.set(0.5);
@@ -319,6 +328,13 @@ if(this.type == 1)
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
+if(this.type == 2)
+{
+    this.creep.y += 1.5;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+
 
 }
 
@@ -395,6 +411,7 @@ function preload ()
   game.load.image('iceshot', 'game/one/iceshot.png')
   game.load.image('sheep', 'game/one/sheep.png');
   game.load.image('bruiser', 'game/one/bruiser2.png');
+  game.load.image('scout', 'game/one/scout4.png');
   game.load.image('buyTurret', 'game/one/arrow3large.png')
   game.load.image('buyBomb', 'game/one/bomb_64p.png');
   game.load.image('bomb', 'game/one/bomb_bullet.png');
@@ -427,7 +444,7 @@ var wallLeft = 12;
 var wallRight = 19;
 var towerSpace = [600];
 var tileSize = 32;
-var creepType = ['Sheep', 'Sick Sheep', 'Buff Sheep', 'Moar Buff Sheep', 'Is that a Sheep?', 'No more games Sheep', 'Roid Sheep', 'Sheepinator', 'Way too strong Sheep', 'Monster Sheep', 'Doom Sheep', 'VICTORY!'];
+var creepType = ['Sheep', 'Sick Sheep', 'Angry Sheep', 'Bruiser', 'Scout', 'Moar Buff Sheep', 'Roid Sheep', 'Sheepinator', 'Monster Sheep', 'Super Scout', 'Elite Bruiser', 'VICTORY!'];
 var lives = 20;
 var flag1 = 1;
 var flag2 = 1;
@@ -464,7 +481,7 @@ var IceList = [];
 var type;
 //var sheep;
 //var bruiser;
-var waves = ['sheep', 'sheep', 'bruiser', 'sheep', 'sheep', 'sheep', 'sheep', 'sheep', 'sheep', 'bruiser']
+var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser']
 
 function create ()
 {
