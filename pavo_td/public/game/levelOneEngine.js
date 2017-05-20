@@ -326,7 +326,7 @@ if(this.type == 1)
 }
 if(this.type == 2)
 {
-    this.creep.y += 2;
+    this.creep.y += 1.5;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
