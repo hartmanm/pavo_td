@@ -11,17 +11,17 @@ var Turret = {
 
 //wall = function (x,y)
 
-Creep = function (index, game, player, projectile)
+Creep = function (index, game, player, projectile, type)
 {
 
-  var currentTileX = 528;
-  var currentTileY = 0;
-  var nextTileX = 16.5;
-  var nextTileY = 1;
-  var rightTileX = 15.5;
-  var rightTileY = 0;
-  var leftTileX = 17.5;
-  var leftTileY = 0;
+  //var currentTileX = 528;
+  //var currentTileY = 0;
+  //var nextTileX = 16.5;
+  //var nextTileY = 1;
+  //var rightTileX = 15.5;
+  //var rightTileY = 0;
+  //var leftTileX = 17.5;
+  //var leftTileY = 0;
 
   //var move_speed = 2000;
   //this.currentTile = {x: 16.5, y: 0};
@@ -36,15 +36,30 @@ Creep = function (index, game, player, projectile)
   var last = 0;
 //  this.direction = 2;
 
-  this.lifeCost = 1;
+
   this.game = game;
-  this.health = 10 * diff;
   this.player = player;
-  this.maxHealth = 10 * diff;
   this.projectile = projectile;
-  this.kill_reward = 5 + (diff/2);
   this.alive = true;
-  this.creep = game.add.sprite(x, y, 'sheep');
+
+  if(type === 'sheep')
+  {
+    this.type = 0;
+    this.lifeCost = 1;
+    this.health = 10 * diff;
+    this.maxHealth = 10 * diff;
+    this.kill_reward = 5 + (diff/2);
+    this.creep = game.add.sprite(x, y, 'sheep');
+  }
+  else if(type === 'bruiser')
+  {
+    this.type = 1;
+    this.lifeCost = 3;
+    this.health = 15 * diff;
+    this.maxHealth = 15 * diff;
+    this.kill_reward = 15 + (diff/2);
+    this.creep = game.add.sprite(x, y, 'bruiser');
+  }
   //this.creep = game.add.sprite(, , 'sheep');
   this.creep.anchor.set(0.5);
   this.creep.name = index.toString();
@@ -70,6 +85,7 @@ Creep = function (index, game, player, projectile)
 
 Creep.prototype.damage = function()
 {
+
   this.health -= 1;
 
   if (this.health <= 0)
@@ -287,9 +303,18 @@ else {
   //  this.creep.rightTileY += 1;
     }
 
+if(this.type == 0)
+{
     this.creep.y += 1;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+if(this.type == 1)
+{
+    this.creep.y += 0.5;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
 
 }
 
@@ -365,7 +390,7 @@ function preload ()
   game.load.image('icetower', 'game/one/icetower.png');
   game.load.image('iceshot', 'game/one/iceshot.png')
   game.load.image('sheep', 'game/one/sheep.png');
-  game.load.image('bruiser', 'game/one/bruiser.png');
+  game.load.image('bruiser', 'game/one/bruiser2.png');
   game.load.image('buyTurret', 'game/one/arrow3large.png')
   game.load.image('buyBomb', 'game/one/bomb_64p.png');
   game.load.image('bomb', 'game/one/bomb_bullet.png');
@@ -428,8 +453,11 @@ var map;
 var pathLayer;
 var atTile;
 var TurretList = [];
-var BomberList = []
-
+var BomberList = [];
+var type;
+//var sheep;
+//var bruiser;
+var waves = ['sheep', 'sheep', 'bruiser', 'sheep', 'sheep', 'sheep', 'sheep', 'sheep', 'sheep', 'bruiser']
 
 function create ()
 {
@@ -566,9 +594,9 @@ function addTurret() {
   }
 }
 
-function makeCreep(i)
+function makeCreep(i, type)
 {
-    theCreeps.push(new Creep(i, game, creep, creepProjectile));
+    theCreeps.push(new Creep(i, game, creep, creepProjectile, type));
 }
 
 function removeLogo ()
@@ -627,13 +655,14 @@ if( (currentWave == 0) && (start == 1) )
 
   for (var i = 0; i < totalCreeps; i++)
 	{
-		makeCreep(i);
+		makeCreep(i, waves[currentWave]);
 	}
 
 	start = 0;
 }
 
 
+//  if( (currentWave != 0) && (aliveCreeps == 0) && (currentWave < totalWave) )
   if( (aliveCreeps == 0) && (currentWave < totalWave) )
   {
     diff = currentWave;
@@ -650,7 +679,7 @@ if( (currentWave == 0) && (start == 1) )
 
 	  for (var i = 0; i < totalCreeps; i++)
 	  {
-			makeCreep(i);
+			makeCreep(i, waves[currentWave]);
 	  }
 		currentWave++;
   }
