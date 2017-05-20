@@ -2,7 +2,7 @@
 window.onload = function(){
 
 var Bomber = {
-  cost: 65
+  cost: 55
 };
 
 var Turret = {
@@ -362,6 +362,8 @@ var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, 
 
 function preload ()
 {
+  game.load.image('icetower', 'game/one/icetower.png');
+  game.load.image('iceshot', 'game/one/iceshot.png')
   game.load.image('sheep', 'game/one/sheep.png');
   game.load.image('bruiser', 'game/one/bruiser.png');
   game.load.image('buyTurret', 'game/one/arrow3large.png')
@@ -450,7 +452,7 @@ function create ()
   buyBombSprite.alpha = 0.2; //set to 1 if enough credits to buy
   buyBombSprite.events.onInputDown.add(addBomber, this);
   buyBombText = game.add.text(32, game.height - 128, '', {font: '16px Arial', align: 'center'});
-  buyBombText.text = 'Bomb: $65';
+  buyBombText.text = 'Bomb Tower: $55';
 
   buyTurretSprite = game.add.sprite(32, game.height - 224, 'buyTurret');
   buyTurretSprite.inputEnabled = true;
