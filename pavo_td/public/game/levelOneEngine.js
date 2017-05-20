@@ -159,7 +159,7 @@ else {
 }
   //  if((this.creep.x > 384) && (this.creep.x < 608) )
   //  {
-    this.creep.y += 1;
+    //this.creep.y += 1;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
   //  this.creep.currentTileY += 1;
@@ -500,6 +500,7 @@ if( (currentWave == 0) && (start == 1) )
   for (var i = 0; i < totalCreeps; i++)
 	{
 		makeCreep(i);
+    theCreeps[i].creep.body.velocity.y = 32;
 	}
 
 	start = 0;
@@ -523,6 +524,7 @@ if( (currentWave == 0) && (start == 1) )
 	  for (var i = 0; i < totalCreeps; i++)
 	  {
 			makeCreep(i);
+      theCreeps[i].creep.body.velocity.y = 32;
 	  }
 		currentWave++;
   }
@@ -541,16 +543,20 @@ if( (currentWave == 0) && (start == 1) )
 
 
 
-
+    theCreeps[0].creep.body.velocity.y = 32;
+    //console.log(theCreeps[0].creep.y)
 
     if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
-    	theCreeps[1].creep.y = 0;
+    	console.log('start creep 1')
+      theCreeps[1].creep.y = 0;
+      theCreeps[1].creep.body.velocity.y = 32;
 			flag1++;
     }
     if(theCreeps[1].creep.y > 100 && flag2 == 1)
     {
     	theCreeps[2].creep.y = 0;
+      theCreeps[2].creep.body.velocity.y = 32;
 			flag2++;
     }
     if(theCreeps[1].creep.y > 150 && flag3 == 1)
