@@ -4,7 +4,7 @@ BomberClass = function (game, imageName, bombName, x, y) {
 
   //turret attributes
   this.game = game;
-  this.cost = 100;
+  this.cost = 65;
   this.range = 256;
   this.fireRate = 2000;
   this.enableBody = true;

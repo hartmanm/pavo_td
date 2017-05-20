@@ -10,6 +10,7 @@ TurretClass = function (game, imageName, bulletName, x, y) {
   this.currentTarget = null;
   this.enableBody = true;
   this.physicsBodyType = Phaser.Physics.ARCADE;
+  this.immovable = true;
   //this.body.immovable = true;
   this.turretWeapon = game.add.weapon(20, bulletName);
   this.turretWeapon.bulletKillType = Phaser.Weapon.KILL_DISTANCE;
