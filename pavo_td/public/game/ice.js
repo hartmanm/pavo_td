@@ -1,24 +1,25 @@
-IceClass = function (game, imageName, bulletName, x, y) {
+IceClass = function (game, imageName, effectName, x, y) {
 
   Phaser.Sprite.call(this, game, x, y, imageName);
 
   //turret attributes
   this.game = game;
-  this.cost = 20;
+  this.cost = 50;
   this.range = 128;
-  this.fireRate = 500;
-  this.isFreezing = false;
+  this.fireRate = 10000;
+  this.lastFired = 0;
   this.currentTarget = null;
   this.enableBody = true;
   this.physicsBodyType = Phaser.Physics.ARCADE;
   this.immovable = true;
-  this.body.moves = false;
   this.inputEnabled = true;
   this.input.enableDrag();
   this.input.enableSnap(32,32,true,true, 16, 16);
   this.anchor.set(0.5);
-  //this.events.onDragStop.add(createTurret, this);
-
+  this.freezeAnimation = this.game.add.sprite(0, 0, effectName);
+  this.freezeAnimation.anchor.setTo(0.5, 0.5);
+  this.freezeAnimation.animations.add('blast');
+  this.freezeAnimation.visible = false;
   game.add.existing(this)
 }
 
@@ -56,15 +57,26 @@ IceClass.prototype.targetCreep = function(theCreeps) {
     }
 }
 
-IceClass.prototype.freeze = function(theCreeps) {
-
+IceClass.prototype.freeze = function() {
+  console.log('freezing now');
+  this.lastFired = Date.now();
+  this.freezeAnimation.reset(this.x, this.y);
+  //this.freezeAnimation.scale.setTo(2,2);
+  this.freezeAnimation.visible = true;
+  this.freezeAnimation.animations.play('blast', 10, false);
 }
 
 IceClass.prototype.updateTower = function(theCreeps) {
     this.targetCreep(theCreeps);
     //nearestCreep = this.findNearestCreep(theCreeps);
     if (this.currentTarget != null) {
-      this.rotateTower(this.currentTarget);
-      this.turretWeapon.fire();
+      console.log(Date.now())
+      console.log(this.lastFired);
+      if (Date.now() - this.lastFired > this.fireRate) {
+        this.freeze();
+      }
+      if (Date.now() - this.lastFired > 4000) {
+        this.freezeAnimation.visible = false;
+      }
     }
 };

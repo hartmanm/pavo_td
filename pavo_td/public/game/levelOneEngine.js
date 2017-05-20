@@ -9,6 +9,10 @@ var Turret = {
   cost: 20
 };
 
+var Ice = {
+  cost: 50
+};
+
 //wall = function (x,y)
 
 Creep = function (index, game, player, projectile, type)
@@ -387,7 +391,7 @@ var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, 
 
 function preload ()
 {
-  game.load.image('icetower', 'game/one/icetower.png');
+  game.load.image('icetower', 'game/one/iceTower_2.png');
   game.load.image('iceshot', 'game/one/iceshot.png')
   game.load.image('sheep', 'game/one/sheep.png');
   game.load.image('bruiser', 'game/one/bruiser2.png');
@@ -402,8 +406,10 @@ function preload ()
   game.load.image('arrow', 'game/one/arrow3.png');
   game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
   game.load.spritesheet('bomb_explode', 'game/one/explosion_transparent.png', 64, 64, 25);
+  game.load.spritesheet('freeze', 'game/one/fx_4_ver2_strip40.png', 128, 128, 40);
   game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('one', 'game/one/levelOne.png');
+  game.load.image('buyIce', 'game/one/iceTower_buy.png');
 }
 
 var diff = 1;
@@ -454,6 +460,7 @@ var pathLayer;
 var atTile;
 var TurretList = [];
 var BomberList = [];
+var IceList = [];
 var type;
 //var sheep;
 //var bruiser;
@@ -480,7 +487,7 @@ function create ()
   buyBombSprite.alpha = 0.2; //set to 1 if enough credits to buy
   buyBombSprite.events.onInputDown.add(addBomber, this);
   buyBombText = game.add.text(32, game.height - 128, '', {font: '16px Arial', align: 'center'});
-  buyBombText.text = 'Bomb Tower: $55';
+  buyBombText.text = 'Bomber: $55';
 
   buyTurretSprite = game.add.sprite(32, game.height - 224, 'buyTurret');
   buyTurretSprite.inputEnabled = true;
@@ -489,6 +496,12 @@ function create ()
   buyTurretText = game.add.text(32, game.height - 256, '', {font: '16px Arial', align: 'center'});
   buyTurretText.text = 'Turret: $20';
 
+  buyIceSprite = game.add.sprite(32, game.height - 352, 'buyIce');
+  buyIceSprite.inputEnabled = true;
+  buyIceSprite.alpha = 0.2;
+  buyIceSprite.events.onInputDown.add(addIce, this);
+  buyIceText = game.add.text(32, game.height - 384, '', {font: '16px Arial', align: 'center'});
+  buyIceText.text = 'Icer: $50';
 
   for (var i = 0; i < 10; i++)
   {
@@ -594,6 +607,48 @@ function addTurret() {
   }
 }
 
+function createIce(ice) {
+//  console.log("Attempting to create turret")
+//  console.log(turret)
+  if (ice.x < 416 || ice.x > 608)
+  {
+    //TODO:  integrate with code to actually check the map for valid placement
+    ice.destroy();
+  } else if (ice.hasOwnProperty('fireRate')) {
+    //TODO:  check that placement won't block creeps
+    //TODO:  check that placement won't overlap existing tower
+    credits -= ice.cost;
+    ice.input.draggable = false;
+    IceList.push(ice)
+  } else {
+    ice.destroy();
+  }
+//  console.log('New Turret List:')
+//  console.log(TurretList)
+  wall[wallCount].x = ice.x;
+  wall[wallCount].y = ice.y;
+
+//console.log(wall[wallCount].x);
+//console.log(wall[wallCount].y);
+//console.log(wallCount);
+  wallCount++;
+}
+
+function addIce() {
+  if (credits >= Ice.cost) {
+    var newIce = new IceClass(game, 'icetower', 'freeze', 0, 0);
+    newIce.events.onDragStop.add(createIce, this);
+    if (newIce) {
+      newIce.reset(game.input.x, game.input.y);
+      newIce.bringToTop();
+
+      if (game.input.activePointer.isDown) {
+        newIce.input.startDrag(game.input.activePointer);
+      }
+    }
+  }
+}
+
 function makeCreep(i, type)
 {
     theCreeps.push(new Creep(i, game, creep, creepProjectile, type));
@@ -646,6 +701,11 @@ function update ()
     buyTurretSprite.alpha = 1;
   } else {
     buyTurretSprite.alpha = 0.2;
+  }
+  if (credits >= Ice.cost) {
+    buyIceSprite.alpha = 1;
+  } else {
+    buyIceSprite.alpha = 0.2;
   }
 
 if( (currentWave == 0) && (start == 1) )
@@ -793,6 +853,9 @@ if( (currentWave == 0) && (start == 1) )
   }
   for (var b = 0; b < BomberList.length; b++) {
     BomberList[b].updateTower(theCreeps);
+  }
+  for (var f = 0; f < IceList.length; f++) {
+    IceList[f].updateTower(theCreeps);
   }
 
   for (var i = 0; i < theCreeps.length; i++)
