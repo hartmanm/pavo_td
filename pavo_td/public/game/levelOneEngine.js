@@ -114,7 +114,8 @@ Creep.prototype.damage = function()
   return false;
 }
 
-Creep.prototype.checkslow = function(iceTowers) {
+Creep.prototype.checkslow = function(iceTowers)
+{
   /*for (var i = 0; i < iceCount; i++)
   {
   if(ice[i].x < this.creep.x + 128 || ice[i].y < this.creep.y + 128 )
@@ -125,18 +126,27 @@ Creep.prototype.checkslow = function(iceTowers) {
     this.slowed = 0;
   }
   }*/
-  this.slowed = 0;
-  for (var i = 0; i < iceTowers.length; i++) {
-    if (iceTowers[i].freezeAnimation.visible){
-      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range) {
+  //this.slowed = 0;
+  for (var i = 0; i < iceTowers.length; i++)
+{
+    if (iceTowers[i].freezeAnimation.visible)
+      {
+      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < (iceTowers[i].range / 2) )
+      {
         //console.log('slowing creep');
+//if(ice[iceCount].y < this.creep.y + 64 || ice[iceCount].y > this.creep.y - 64)
+//if( this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range * 0.5 )
+//{
+  //ice[iceCount]freezeAnimation.visible &&
         this.slowed = 1;
-      } else {
-        //console.log('creep going faster');
-        this.slowed = 0;
       }
     }
+else {
+	//console.log('creep going faster');
+	this.slowed = 0;
+}
   }
+
 }
 
 Creep.prototype.update = function(iceTowers)
@@ -335,12 +345,68 @@ else {
 
 //}
 
+
+
+
+
+
+
+
+
+//if( iceCount > 0 )
+//{
+//this.checkslow(iceTowers);
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
+if(this.creep.y >= 1072)
+{
+this.alive = false;
+this.creep.kill();
+this.healthBar.kill();
+lives = lives - this.lifeCost;
+this.lifeCost = 0;
+}
 
+this.slowed = 0;
 
-this.checkslow(iceTowers);
-
+  for (var i = 0; i < iceTowers.length; i++)
+{
+    if (iceTowers[i].freezeAnimation.visible)
+      {
+      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < (iceTowers[i].range / 2) )
+      {
+        //console.log('slowing creep');
+//if(ice[iceCount].y < this.creep.y + 64 || ice[iceCount].y > this.creep.y - 64)
+//if( this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range * 0.5 )
+//{
+  //ice[iceCount]freezeAnimation.visible &&
+        this.slowed = 1;
+      }
+    }
+//else {
+	//console.log('creep going faster');
+	//this.slowed = 0;
+//}
+  }
 
 
 
@@ -402,14 +468,7 @@ if(this.type == 2)
 
 }
 
-if(this.creep.y == 1080)
-{
-this.alive = false;
-this.creep.kill();
-this.healthBar.kill();
-lives = lives - this.lifeCost;
-this.lifeCost = 0;
-}
+
 //    this.creep.leftTileY += 1;
   //  }
 //     }
@@ -543,12 +602,13 @@ var TurretList = [];
 var BomberList = [];
 var IceList = [];
 var type;
+//var ice2 = iceTowers;
 //var iceCount = 0;
 //var ice = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
 
 //var sheep;
 //var bruiser;
-var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser']
+var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser'];
 
 function create ()
 {
