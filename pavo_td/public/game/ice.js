@@ -7,6 +7,7 @@ IceClass = function (game, imageName, effectName, x, y) {
   this.cost = 50;
   this.range = 128;
   this.fireRate = 10000;
+  this.freezeDuration = 4000;
   this.lastFired = 0;
   this.currentTarget = null;
   this.enableBody = true;
@@ -58,7 +59,6 @@ IceClass.prototype.targetCreep = function(theCreeps) {
 }
 
 IceClass.prototype.freeze = function() {
-  console.log('freezing now');
   this.lastFired = Date.now();
   this.freezeAnimation.reset(this.x, this.y);
   //this.freezeAnimation.scale.setTo(2,2);
@@ -70,13 +70,8 @@ IceClass.prototype.updateTower = function(theCreeps) {
     this.targetCreep(theCreeps);
     //nearestCreep = this.findNearestCreep(theCreeps);
     if (this.currentTarget != null) {
-      console.log(Date.now())
-      console.log(this.lastFired);
       if (Date.now() - this.lastFired > this.fireRate) {
         this.freeze();
-      }
-      if (Date.now() - this.lastFired > 4000) {
-        this.freezeAnimation.visible = false;
       }
     }
 };

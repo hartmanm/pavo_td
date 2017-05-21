@@ -127,8 +127,8 @@ Creep.prototype.checkslow = function(iceTowers) {
   }*/
   this.slowed = 0;
   for (var i = 0; i < iceTowers.length; i++) {
-    if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range) {
-      if (iceTowers[i].freezeAnimation.visible) {
+    if (iceTowers[i].freezeAnimation.visible){
+      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range) {
         //console.log('slowing creep');
         this.slowed = 1;
       } else {
