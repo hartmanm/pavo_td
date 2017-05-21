@@ -114,7 +114,32 @@ Creep.prototype.damage = function()
   return false;
 }
 
-Creep.prototype.update = function()
+Creep.prototype.checkslow = function(iceTowers) {
+  /*for (var i = 0; i < iceCount; i++)
+  {
+  if(ice[i].x < this.creep.x + 128 || ice[i].y < this.creep.y + 128 )
+  {
+    this.slowed = 1;
+  }
+  else {
+    this.slowed = 0;
+  }
+  }*/
+  this.slowed = 0;
+  for (var i = 0; i < iceTowers.length; i++) {
+    if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < iceTowers[i].range) {
+      if (iceTowers[i].freezeAnimation.visible) {
+        //console.log('slowing creep');
+        this.slowed = 1;
+      } else {
+        //console.log('creep going faster');
+        this.slowed = 0;
+      }
+    }
+  }
+}
+
+Creep.prototype.update = function(iceTowers)
 {
 //this.creep.currentTile = this.creep.nextTile;
 //this.creep.tile = path[1];
@@ -312,16 +337,9 @@ else {
 
   }
 
-for (var i = 0; i < iceCount; i++)
-{
-if(ice[i].x < this.creep.x + 128 || ice[i].y < this.creep.y + 128 )
-{
-  this.slowed = 1;
-}
-else {
-	this.slowed = 0;
-}
-}
+
+
+this.checkslow(iceTowers);
 
 
 
@@ -943,7 +961,7 @@ if( (currentWave == 0) && (start == 1) )
     //  for (var f = 0; f < IceList.length; f++) {
     //    game.physics.arcade.overlap(IceList[f].range, theCreeps[i].creep, iceHitEnemy, null, this);
     //  }
-      theCreeps[i].update();
+      theCreeps[i].update(IceList);
      }
   }
 
