@@ -45,6 +45,7 @@ Creep = function (index, game, player, projectile, type)
   this.player = player;
   this.projectile = projectile;
   this.alive = true;
+  this.slowed = 0;
 
   if(type === 'sheep')
   {
@@ -305,17 +306,36 @@ else {
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
     }
-
-
 */
+
+//}
+
+  }
+
+for (var i = 0; i < iceCount; i++)
+{
+if(ice[i].x < this.creep.x + 128 || ice[i].y < this.creep.y + 128 )
+{
+  this.slowed = 1;
+}
+else {
+	this.slowed = 0;
+}
+}
+
+
+
+
 
 
 
   //  this.creep.currentTileY += 1;
 //    this.creep.nextTileY += 1;
   //  this.creep.rightTileY += 1;
-    }
 
+
+if(this.slowed == 0)
+{
 if(this.type == 0)
 {
     this.creep.y += 1;
@@ -333,6 +353,32 @@ if(this.type == 2)
     this.creep.y += 1.5;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+}
+
+if(this.slowed == 1)
+{
+if(this.type == 0)
+{
+    //this.creep.y += 0.75;
+    this.creep.y += 0.1;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+if(this.type == 1)
+{
+  //  this.creep.y += 0.25;
+    this.creep.y += 0.025;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+if(this.type == 2)
+{
+  //  this.creep.y += 1.25;
+    this.creep.y += 0.125;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
 }
 
 
@@ -479,6 +525,9 @@ var TurretList = [];
 var BomberList = [];
 var IceList = [];
 var type;
+
+var ice = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
+var iceCount = 0;
 //var sheep;
 //var bruiser;
 var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser']
@@ -644,11 +693,15 @@ function createIce(ice) {
 //  console.log(TurretList)
   wall[wallCount].x = ice.x;
   wall[wallCount].y = ice.y;
+  wallCount++;
 
+  ice[iceCount].x = ice.x;
+  ice[iceCount].y = ice.y;
+  iceCount++;
 //console.log(wall[wallCount].x);
 //console.log(wall[wallCount].y);
 //console.log(wallCount);
-  wallCount++;
+
 }
 
 function addIce() {
@@ -887,6 +940,9 @@ if( (currentWave == 0) && (start == 1) )
       for (var b = 0; b < BomberList.length; b++) {
         game.physics.arcade.overlap(BomberList[b].bomberWeapon.bullets, theCreeps[i].creep, bombsHitEnemy, null, this);
       }
+    //  for (var f = 0; f < IceList.length; f++) {
+    //    game.physics.arcade.overlap(IceList[f].range, theCreeps[i].creep, iceHitEnemy, null, this);
+    //  }
       theCreeps[i].update();
      }
   }
@@ -943,6 +999,13 @@ function bombsHitEnemy (creep, bombs) {
   explosionDamage(bombAnimation);
 }
 
+//function iceHitEnemy (creep, range) {
+  //console.log("bomb hit!")
+//  this.creep.slowed = 1;
+//}
+
+
+
 function render ()
 {
   if( aliveCreeps > 0 && lives > 0)
@@ -955,7 +1018,7 @@ function render ()
 
   }
 
-  game.debug.text('still learning phaser: more to come', 32, 215);
+//  game.debug.text('More to come', 32, 215);
   game.debug.text('Note: it is possible to win', 32, 250);
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
