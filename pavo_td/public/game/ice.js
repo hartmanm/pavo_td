@@ -74,4 +74,7 @@ IceClass.prototype.updateTower = function(theCreeps) {
         this.freeze();
       }
     }
+    if (Date.now() - this.lastFired > this.freezeDuration) {
+      this.freezeAnimation.visible = false;
+    }
 };

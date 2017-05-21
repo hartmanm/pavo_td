@@ -713,9 +713,9 @@ function createIce(ice) {
   wall[wallCount].y = ice.y;
   wallCount++;
 
-  ice[iceCount].x = ice.x;
-  ice[iceCount].y = ice.y;
-  iceCount++;
+  //ice[iceCount].x = ice.x;
+  //ice[iceCount].y = ice.y;
+  //iceCount++;
 //console.log(wall[wallCount].x);
 //console.log(wall[wallCount].y);
 //console.log(wallCount);
