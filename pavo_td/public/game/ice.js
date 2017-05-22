@@ -21,6 +21,7 @@ IceClass = function (game, imageName, effectName, x, y) {
   this.freezeAnimation.anchor.setTo(0.5, 0.5);
   this.freezeAnimation.animations.add('blast');
   this.freezeAnimation.visible = false;
+  this.freezeAnimation.scale.setTo(2, 2);
   game.add.existing(this)
 }
 

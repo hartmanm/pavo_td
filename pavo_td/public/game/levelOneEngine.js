@@ -567,6 +567,7 @@ function preload ()
   game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
   game.load.spritesheet('bomb_explode', 'game/one/explosion_transparent.png', 64, 64, 25);
   game.load.spritesheet('freeze', 'game/one/fx_4_ver2_strip40.png', 128, 128, 40);
+  game.load.spritesheet('freeze_small', 'game/one/fx_4_ver2_strip40_small.png', 64, 64, 40);
   game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
   game.load.image('one', 'game/one/levelOne.png');
   game.load.image('buyIce', 'game/one/iceTower_buy.png');
@@ -632,6 +633,7 @@ var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 's
 
 function create ()
 {
+  game.time.desiredFps = 30;
   this.theCreeps = [];
   one = game.add.tileSprite(0, 0, 1100, 1100, 'one');
 
@@ -804,7 +806,7 @@ function createIce(ice) {
 
 function addIce() {
   if (credits >= Ice.cost) {
-    var newIce = new IceClass(game, 'icetower', 'freeze', 0, 0);
+    var newIce = new IceClass(game, 'icetower', 'freeze_small', 0, 0);
     newIce.events.onDragStop.add(createIce, this);
     if (newIce) {
       newIce.reset(game.input.x, game.input.y);
