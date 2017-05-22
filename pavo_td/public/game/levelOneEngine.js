@@ -392,7 +392,7 @@ this.slowed = 0;
 {
     if (iceTowers[i].freezeAnimation.visible)
       {
-      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < (iceTowers[i].range / 2) )
+      if(this.game.physics.arcade.distanceBetween(iceTowers[i], this.creep) < (iceTowers[i].range) )
       {
         //console.log('slowing creep');
 //if(ice[iceCount].y < this.creep.y + 64 || ice[iceCount].y > this.creep.y - 64)

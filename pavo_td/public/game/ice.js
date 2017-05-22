@@ -5,7 +5,7 @@ IceClass = function (game, imageName, effectName, x, y) {
   //turret attributes
   this.game = game;
   this.cost = 50;
-  this.range = 128;
+  this.range = 64;
   this.fireRate = 10000;
   this.freezeDuration = 4000;
   this.lastFired = 0;
