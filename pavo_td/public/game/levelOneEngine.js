@@ -44,7 +44,14 @@ Creep = function (index, game, player, projectile, type)
   this.game = game;
   this.player = player;
   this.projectile = projectile;
-  this.alive = true;
+
+  /***********************
+  BB UPDATE
+  Updated alive from true to false
+  So creeps dont all start moving
+  automatically each wave
+  ***********************/
+  this.alive = false;
   this.slowed = 0;
 
   if(type === 'sheep')
@@ -417,24 +424,34 @@ this.slowed = 0;
 //    this.creep.nextTileY += 1;
   //  this.creep.rightTileY += 1;
 
-
+/***********************
+BB UPDATE
+Commented out the y increment
+Replaced with velocity
+Probably a way to refactor this
+Like store speed as a creep attribute
+and then if slow, set velocity to speed/2
+***********************/
 if(this.slowed == 0)
 {
 if(this.type == 0)
 {
-    this.creep.y += 1;
+    //this.creep.y += 1;
+    this.creep.body.velocity.y = 32;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 if(this.type == 1)
 {
-    this.creep.y += 0.5;
+    //this.creep.y += 0.5;
+    this.creep.body.velocity.y = 16;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 if(this.type == 2)
 {
-    this.creep.y += 1.5;
+    //this.creep.y += 1.5;
+    this.creep.body.velocity.y = 48;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
@@ -445,21 +462,24 @@ if(this.slowed == 1)
 if(this.type == 0)
 {
     //this.creep.y += 0.75;
-    this.creep.y += 0.5;
+    //this.creep.y += 0.5;
+    this.creep.body.velocity.y = 16;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 if(this.type == 1)
 {
   //  this.creep.y += 0.25;
-    this.creep.y += 0.25;
+    //this.creep.y += 0.25;
+    this.creep.body.velocity.y = 8;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 if(this.type == 2)
 {
   //  this.creep.y += 1.25;
-    this.creep.y += 0.75;
+    //this.creep.y += 0.75;
+    this.creep.body.velocity.y = 32;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
@@ -856,6 +876,15 @@ function update ()
     buyIceSprite.alpha = 0.2;
   }
 
+/***********************
+BB UPDATE
+Since creeps.alive is now set to false
+in constructor function - have to set to
+true when each creep starts moving
+set creep[0] to alive on create, 
+set others to alive in the flag and y
+position check
+************************/
 if( (currentWave == 0) && (start == 1) )
 {
   theCreeps = [];
@@ -865,7 +894,7 @@ if( (currentWave == 0) && (start == 1) )
 	{
 		makeCreep(i, waves[currentWave]);
 	}
-
+  theCreeps[0].alive = true;
 	start = 0;
 }
 
@@ -889,6 +918,7 @@ if( (currentWave == 0) && (start == 1) )
 	  {
 			makeCreep(i, waves[currentWave]);
 	  }
+    theCreeps[0].alive = true;  
 		currentWave++;
   }
 
@@ -910,47 +940,56 @@ if( (currentWave == 0) && (start == 1) )
 
     if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
+      theCreeps[1].alive = true;
       theCreeps[1].creep.y = 0;
 			flag1++;
     }
     if(theCreeps[1].creep.y > 100 && flag2 == 1)
     {
-    	theCreeps[2].creep.y = 0;
+    	theCreeps[2].alive = true;
+      theCreeps[2].creep.y = 0;
 			flag2++;
     }
     if(theCreeps[1].creep.y > 150 && flag3 == 1)
     {
-    	theCreeps[3].creep.y = 0;
+    	theCreeps[3].alive = true;
+      theCreeps[3].creep.y = 0;
 			flag3++;
     }
     if(theCreeps[1].creep.y > 200 && flag4 == 1)
     {
-    	theCreeps[4].creep.y = 0;
+    	theCreeps[4].alive = true;
+      theCreeps[4].creep.y = 0;
 			flag4++;
     }
     if(theCreeps[1].creep.y > 250 && flag5 == 1)
     {
-    	theCreeps[5].creep.y = 0;
+    	theCreeps[5].alive = true;
+      theCreeps[5].creep.y = 0;
 			flag5++;
     }
     if(theCreeps[1].creep.y > 300 && flag6 == 1)
     {
-    	theCreeps[6].creep.y = 0;
+    	theCreeps[6].alive = true;
+      theCreeps[6].creep.y = 0;
 			flag6++;
     }
     if(theCreeps[1].creep.y > 350 && flag7 == 1)
     {
-    	theCreeps[7].creep.y = 0;
+    	theCreeps[7].alive = true;
+      theCreeps[7].creep.y = 0;
 			flag7++;
     }
     if(theCreeps[1].creep.y > 400 && flag8 == 1)
     {
-    	theCreeps[8].creep.y = 0;
+    	theCreeps[8].alive = true;
+      theCreeps[8].creep.y = 0;
 			flag8++;
     }
     if(theCreeps[1].creep.y > 450 && flag9 == 1)
     {
-    	theCreeps[9].creep.y = 0;
+    	theCreeps[9].alive = true;
+      theCreeps[9].creep.y = 0;
 			flag9++;
     }
 
