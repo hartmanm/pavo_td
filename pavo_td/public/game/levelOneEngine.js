@@ -576,6 +576,7 @@ function preload ()
   game.load.image('buyIce', 'game/one/iceTower_buy.png');
 }
 
+var kill = 0;
 var diff = 1;
 //var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
 //var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
@@ -694,7 +695,16 @@ function create ()
 function createBomber(bomber) {
 //  console.log('Attempting to create bomber');
 //  console.log(bomber);
-  if (bomber.x < 416 || bomber.x > 608) {
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(bomber.x == wall[i].x && bomber.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+  if (bomber.x < 416 || bomber.x > 608 || kill == 1) {
     bomber.destroy();
   } else if (bomber.hasOwnProperty('fireRate')) {
     credits -= Bomber.cost;
@@ -729,8 +739,18 @@ function addBomber() {
 function createTurret(turret) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if (turret.x < 416 || turret.x > 608)
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(turret.x == wall[i].x && turret.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+  if (turret.x < 416 || turret.x > 608 || kill == 1)
   {
+
     //TODO:  integrate with code to actually check the map for valid placement
     turret.destroy();
   } else if (turret.hasOwnProperty('fireRate')) {
@@ -779,7 +799,16 @@ function addTurret() {
 function createIce(ice) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if (ice.x < 416 || ice.x > 608)
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(ice.x == wall[i].x && ice.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+  if (ice.x < 416 || ice.x > 608 || kill == 1)
   {
     //TODO:  integrate with code to actually check the map for valid placement
     ice.destroy();

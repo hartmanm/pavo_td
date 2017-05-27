@@ -155,7 +155,7 @@ if(this.creep.y < 236 && wallCount > 0)
 }
 
 
-if(this.creep.y > 236 && this.creep.x > 237 && wallCount > 0)
+if(this.creep.y > 236 && this.creep.x > 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -184,7 +184,7 @@ if(this.creep.y > 236 && this.creep.x > 237 && wallCount > 0)
 }
 
 
-if(this.creep.y > 236 && this.creep.x < 237 && wallCount > 0)
+if(this.creep.y > 236 && this.creep.x < 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -273,7 +273,7 @@ if(this.creep.y > 300 && this.creep.x > 656 && wallCount > 0)
 
 
 
-if(this.creep.y > 428 && this.creep.x > 237 && wallCount > 0)
+if(this.creep.y > 428 && this.creep.x > 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -302,7 +302,7 @@ if(this.creep.y > 428 && this.creep.x > 237 && wallCount > 0)
 }
 
 
-if(this.creep.y > 428 && this.creep.x < 237 && wallCount > 0)
+if(this.creep.y > 428 && this.creep.x < 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -389,7 +389,7 @@ if(this.creep.y > 492 && this.creep.x > 656 && wallCount > 0)
 }
 
 
-if(this.creep.y > 620 && this.creep.x > 237 && wallCount > 0)
+if(this.creep.y > 620 && this.creep.x > 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -418,7 +418,7 @@ if(this.creep.y > 620 && this.creep.x > 237 && wallCount > 0)
 }
 
 
-if(this.creep.y > 620 && this.creep.x < 237 && wallCount > 0)
+if(this.creep.y > 620 && this.creep.x < 242 && wallCount > 0)
 {
 	if(this.type == 0)
 	{
@@ -573,7 +573,7 @@ if(this.creep.y > 684 && this.creep.x > 656 && wallCount > 0 && first_shortcut =
 			}
 }
 
-if(this.creep.y > 812 && this.creep.x > 237 && wallCount > 0 && first_shortcut == 1)
+if(this.creep.y > 812 && this.creep.x > 242 && wallCount > 0 && first_shortcut == 1)
 {
     	if(this.type == 0)
 			{
@@ -602,7 +602,7 @@ if(this.creep.y > 812 && this.creep.x > 237 && wallCount > 0 && first_shortcut =
 }
 
 
-if(this.creep.y > 812 && this.creep.x < 237 && wallCount > 0 && first_shortcut == 1)
+if(this.creep.y > 812 && this.creep.x < 242 && wallCount > 0 && first_shortcut == 1)
 {
 //  wallFlag = 1;
 
@@ -672,8 +672,39 @@ if(this.creep.y > 908 && this.creep.x < 720 && wallCount > 0 && first_shortcut =
 
 
 
-if(this.creep.y > 992 && this.creep.x > 480 && wallCount > 0)
+if(this.creep.y > 908 && this.creep.x > 720 && wallCount > 0)
 {
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 32;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 16;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 48;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+
+if(this.creep.y > 1008 && this.creep.x > 496 && wallCount > 0 )
+{
+//  wallFlag = 1;
     	if(this.type == 0)
 			{
 			    //this.creep.y += 1;
@@ -701,11 +732,8 @@ if(this.creep.y > 992 && this.creep.x > 480 && wallCount > 0)
 }
 
 
-
-if(this.creep.y > 992 && this.creep.x < 480 && wallCount > 0 )
+if(this.creep.y > 1008 && this.creep.x < 496 && wallCount > 0 )
 {
-//  wallFlag = 1;
-
     	if(this.type == 0)
 			{
 			    //this.creep.y += 1;
@@ -848,6 +876,10 @@ else {
 
   }
 
+
+
+*/
+
 if(this.creep.y >= 1072)
 {
 this.alive = false;
@@ -880,64 +912,24 @@ this.slowed = 0;
 //Like store speed as a creep attribute
 //and then if slow, set velocity to speed/2
 
-if(this.slowed == 0)
-{
-if(this.type == 0)
-{
-    //this.creep.y += 1;
-    this.creep.body.velocity.y = 32;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 1)
-{
-    //this.creep.y += 0.5;
-    this.creep.body.velocity.y = 16;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 2)
-{
-    //this.creep.y += 1.5;
-    this.creep.body.velocity.y = 48;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-}
+//if(this.slowed == 0)
+//{
+//    this.creep.body.velocity.y = this.creep.body.velocity.y * 0.5;
+//    this.healthBar.setPercent(this.health/this.maxHealth*100);
+//    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+//}
 
 if(this.slowed == 1)
 {
-if(this.type == 0)
-{
-    //this.creep.y += 0.75;
-    //this.creep.y += 0.5;
-    this.creep.body.velocity.y = 16;
+    this.creep.body.velocity.x = this.creep.body.velocity.x * 0.5;
+    this.creep.body.velocity.y = this.creep.body.velocity.y * 0.5;
     this.healthBar.setPercent(this.health/this.maxHealth*100);
     this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
-if(this.type == 1)
-{
-  //  this.creep.y += 0.25;
-    //this.creep.y += 0.25;
-    this.creep.body.velocity.y = 8;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 2)
-{
-  //  this.creep.y += 1.25;
-    //this.creep.y += 0.75;
-    this.creep.body.velocity.y = 32;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-}
 
 
-}
 
 
-*/
 
 
 
@@ -981,6 +973,11 @@ var diff = 1;
 var wall = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
 //var wall = [{x: 0, y: 0}];
 var wallCount = 0;
+
+var nonPath = [{x: 240, y: 368},{x: 272, y: 368},{x: 304, y: 368},{x: 336, y: 368},{x: 368, y: 368},{x: 400, y: 368},{x: 432, y: 368},{x: 464, y: 368},{x: 496, y: 368},{x: 528, y: 368},{x: 560, y: 368},{x: 592, y: 368},{x: 624, y: 368},{x: 656, y: 368},{x: 688, y: 368},{x: 720, y: 368}]
+//var wall = [{x: 0, y: 0}];
+var nonPathCount = 15;
+var kill = 0;
 //var start = [{x: 16, y: 0}, {x: 16, y: 0}];
 var startX = 16;
 var startY = 1;
@@ -1093,7 +1090,25 @@ function create ()
 function createBomber(bomber) {
 //  console.log('Attempting to create bomber');
 //  console.log(bomber);
-  if ( bomber.x < 237 || bomber.x > 736 || bomber.y < 288 || bomber.y > 928 )
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(bomber.x == wall[i].x && bomber.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+     for (var i = 0; i < nonPathCount; i++)
+     {
+     if(bomber.x == nonPath[i].x && bomber.y == nonPath[i].y)
+     {
+       kill = 1;
+     }
+     }
+//  wallFlag = 0;
+
+  if ( bomber.x < 237 || bomber.x > 736 || bomber.y < 288 || bomber.y > 928 || kill == 1 )
 {
     bomber.destroy();
   } else if (bomber.hasOwnProperty('fireRate')) {
@@ -1129,7 +1144,24 @@ function addBomber() {
 function createTurret(turret) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if ( turret.x < 237 || turret.x > 736 || turret.y < 288 || turret.y > 928 )
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(turret.x == wall[i].x && turret.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+     for (var i = 0; i < nonPathCount; i++)
+     {
+     if(turret.x == nonPath[i].x && turret.y == nonPath[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+  if ( turret.x < 237 || turret.x > 736 || turret.y < 288 || turret.y > 928 || kill == 1)
   {
     //TODO:  integrate with code to actually check the map for valid placement
     turret.destroy();
@@ -1179,7 +1211,24 @@ function addTurret() {
 function createIce(ice) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if ( ice.x < 237 || ice.x > 736 || ice.y < 288 || ice.y > 928 )
+  kill = 0;
+     for (var i = 0; i < wallCount; i++)
+     {
+     if(ice.x == wall[i].x && ice.y == wall[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+     for (var i = 0; i < nonPathCount; i++)
+     {
+     if(ice.x == nonPath[i].x && ice.y == nonPath[i].y)
+     {
+       kill = 1;
+     }
+     }
+
+  if ( ice.x < 237 || ice.x > 736 || ice.y < 288 || ice.y > 928 || kill == 1)
   {
     //TODO:  integrate with code to actually check the map for valid placement
     ice.destroy();
