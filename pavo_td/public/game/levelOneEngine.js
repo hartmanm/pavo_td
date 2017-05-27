@@ -36,7 +36,7 @@ Creep = function (index, game, player, projectile, type)
   //var nextTile = path[currentTile + 1] * 32;
   //var lifeFlag = 1;
   var x = 16.5 * 32;
-  var y = 0 * 32;
+  var y = -64;
   var last = 0;
 //  this.direction = 2;
 
@@ -61,7 +61,10 @@ Creep = function (index, game, player, projectile, type)
     this.health = 10 * diff;
     this.maxHealth = 10 * diff;
     this.kill_reward = 5 + (diff/2);
+  //   if(this.index != 0)
+	//   {
     this.creep = game.add.sprite(x, y, 'sheep');
+  //   }
   }
   if(type === 'bruiser')
   {
@@ -86,7 +89,7 @@ Creep = function (index, game, player, projectile, type)
   this.creep.name = index.toString();
   game.physics.enable(this.creep, Phaser.Physics.ARCADE);
   this.creep.body.immovable = false;
-  this.creep.body.collideWorldBounds = true;
+  //this.creep.body.collideWorldBounds = true;
   this.barConfig = {
     width: 18,
     height: 4,
@@ -883,7 +886,7 @@ BB UPDATE
 Since creeps.alive is now set to false
 in constructor function - have to set to
 true when each creep starts moving
-set creep[0] to alive on create, 
+set creep[0] to alive on create,
 set others to alive in the flag and y
 position check
 ************************/
@@ -920,7 +923,7 @@ if( (currentWave == 0) && (start == 1) )
 	  {
 			makeCreep(i, waves[currentWave]);
 	  }
-    theCreeps[0].alive = true;  
+    theCreeps[0].alive = true;
 		currentWave++;
   }
 
@@ -939,6 +942,7 @@ if( (currentWave == 0) && (start == 1) )
 
 
     //console.log(theCreeps[0].creep.y)
+  //  theCreeps[0].alive = true;
 
     if(theCreeps[0].creep.y > 100 && flag1 == 1)
     {
@@ -947,7 +951,10 @@ if( (currentWave == 0) && (start == 1) )
 			flag1++;
     }
     if(theCreeps[1].creep.y > 100 && flag2 == 1)
-    {
+  {
+    //  theCreeps[0].alive = false;
+    //  theCreeps[0].creep.kill();
+  //    theCreeps[0].healthBar.kill();
     	theCreeps[2].alive = true;
       theCreeps[2].creep.y = 0;
 			flag2++;
@@ -1067,6 +1074,23 @@ if( (currentWave == 0) && (start == 1) )
   }
 
 }
+
+
+  if( lives == 0 )
+  {
+  for (var i = 0; i < theCreeps.length; i++)
+  {
+//if (theCreeps[i].alive)
+//{
+	//theCreeps[i].alive = false;
+//	theCreeps[i].creep.kill();
+	theCreeps[i].healthBar.kill();
+}
+  }
+
+
+
+
 }
 
 function explosionDamage(explosion)
@@ -1129,16 +1153,16 @@ function render ()
 {
   if( aliveCreeps > 0 && lives > 0)
   {
-    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 25, 'magenta');
-    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 50, 'magenta');
-    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 75, 'magenta');
-    game.debug.text('Credits: ' + credits, 32, 100, 'magenta');
-    game.debug.text('Lives: ' + lives, 32, 125, 'magenta');
+    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 85, 'magenta');
+    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 110, 'magenta');
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 135, 'magenta');
+    game.debug.text('Credits: ' + credits, 32, 160, 'magenta');
+    game.debug.text('Lives: ' + lives, 32, 185, 'magenta');
 
   }
 
 //  game.debug.text('More to come', 32, 215);
-  game.debug.text('Note: it is possible to win', 32, 250);
+//  game.debug.text('Note: it is possible to win', 32, 250);
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
