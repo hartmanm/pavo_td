@@ -360,6 +360,385 @@ if(this.creep.y > 492 && this.creep.x < 656 && wallCount > 0)
 }
 
 
+if(this.creep.y > 492 && this.creep.x > 656 && wallCount > 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 32;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 16;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 48;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+
+if(this.creep.y > 620 && this.creep.x > 237 && wallCount > 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = -32;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = -16;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = -48;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+
+if(this.creep.y > 620 && this.creep.x < 237 && wallCount > 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 32;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 16;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 48;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+
+if(this.creep.y > 684 && this.creep.x < 656 && wallCount > 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = 32;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = 16;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = 48;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+
+// first shortcut switch
+	for (var i = 0; i < wallCount; i++)
+	{
+	  if( wall[i].x == 688 && wall[i].y == 688 )
+		{
+	     first_shortcut = 1;
+	  }
+	}
+
+if(this.creep.y > 684 && this.creep.x > 656 && wallCount > 0 && first_shortcut == 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = 32;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = 16;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = 48;
+	    this.creep.body.velocity.y = 0;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+if(this.creep.y > 684 && this.creep.x > 720 && wallCount > 0 && first_shortcut == 0)
+{
+	if(this.type == 0)
+	{
+	    //this.creep.y += 1;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 32;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 1)
+	{
+	    //this.creep.y += 0.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 16;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+	if(this.type == 2)
+	{
+	    //this.creep.y += 1.5;
+	    this.creep.body.velocity.x = 0;
+	    this.creep.body.velocity.y = 48;
+	    this.healthBar.setPercent(this.health/this.maxHealth*100);
+	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	}
+}
+
+
+
+
+
+if(this.creep.y > 684 && this.creep.x > 656 && wallCount > 0 && first_shortcut == 1)
+{
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 32;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 16;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 48;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+if(this.creep.y > 812 && this.creep.x > 237 && wallCount > 0 && first_shortcut == 1)
+{
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = -32;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = -16;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = -48;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+if(this.creep.y > 812 && this.creep.x < 237 && wallCount > 0 && first_shortcut == 1)
+{
+//  wallFlag = 1;
+
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 32;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 16;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 48;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+
+if(this.creep.y > 908 && this.creep.x < 720 && wallCount > 0 && first_shortcut == 1)
+{
+  //   if(wallFlag == 1)
+  //   {
+	 //  wall[wallCount].x = 688;
+	//   wall[wallCount].y = 880;
+	//   wallCount++;
+  //   }
+//  wallFlag = 0;
+
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = 32;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = 16;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = 48;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+
+if(this.creep.y > 992 && this.creep.x > 480 && wallCount > 0)
+{
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = -32;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = -16;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = -48;
+			    this.creep.body.velocity.y = 0;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+
+if(this.creep.y > 992 && this.creep.x < 480 && wallCount > 0 )
+{
+//  wallFlag = 1;
+
+    	if(this.type == 0)
+			{
+			    //this.creep.y += 1;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 32;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 1)
+			{
+			    //this.creep.y += 0.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 16;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+			if(this.type == 2)
+			{
+			    //this.creep.y += 1.5;
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = 48;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+			}
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -594,6 +973,8 @@ function preload ()
   game.load.image('buyIce', 'game/two/iceTower_buy.png');
 }
 
+var wallFlag = 0;
+var first_shortcut = 0;
 var diff = 1;
 //var wall = ["13", "20", "45", "52", "77", "84", "109", "116", "141", "148", "173", "180"]
 //var path = ["17", "49", "81", "113", "145", "177", "209", "241", "273", "305", "337", "369"]
@@ -712,7 +1093,8 @@ function create ()
 function createBomber(bomber) {
 //  console.log('Attempting to create bomber');
 //  console.log(bomber);
-  if (bomber.x < 416 || bomber.x > 608) {
+  if ( bomber.x < 237 || bomber.x > 736 || bomber.y < 288 || bomber.y > 928 )
+{
     bomber.destroy();
   } else if (bomber.hasOwnProperty('fireRate')) {
     credits -= Bomber.cost;
@@ -747,7 +1129,7 @@ function addBomber() {
 function createTurret(turret) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if (turret.x < 416 || turret.x > 608)
+  if ( turret.x < 237 || turret.x > 736 || turret.y < 288 || turret.y > 928 )
   {
     //TODO:  integrate with code to actually check the map for valid placement
     turret.destroy();
@@ -797,7 +1179,7 @@ function addTurret() {
 function createIce(ice) {
 //  console.log("Attempting to create turret")
 //  console.log(turret)
-  if (ice.x < 416 || ice.x > 608)
+  if ( ice.x < 237 || ice.x > 736 || ice.y < 288 || ice.y > 928 )
   {
     //TODO:  integrate with code to actually check the map for valid placement
     ice.destroy();
@@ -814,13 +1196,16 @@ function createIce(ice) {
 //  console.log(TurretList)
   wall[wallCount].x = ice.x;
   wall[wallCount].y = ice.y;
+
+console.log(wall[wallCount].x);
+console.log(wall[wallCount].y);
+
   wallCount++;
 
   //ice[iceCount].x = ice.x;
   //ice[iceCount].y = ice.y;
   //iceCount++;
-//console.log(wall[wallCount].x);
-//console.log(wall[wallCount].y);
+
 //console.log(wallCount);
 
 }
