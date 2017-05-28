@@ -13,14 +13,24 @@ router.get('/', function(req, res, next) {
 
 router.get('/home', function(req, res, next) {
   if (req.session && req.session.email) {
-    res.render('index', {welcome: 'Welcome ' + req.session.email, title: 'PavoTD' })
+    var db = req.db;
+    var completedLevels = db.get('completedLevels');
+    completedLevels.find({"user_id": req.session.userId, "gameVersion": "0.2"}, function(e, docs) {
+      console.log(docs);
+      res.render('index', {
+        welcome: 'Welcome ' + req.session.email, 
+        title: 'PavoTD',
+        completedLevels: docs
+      });
+    });
   } else {
-    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD' });
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', completedLevels: []});
   }
 });
 
 router.get('/levelOne', function(req, res, next) {
   if (req.session && req.session.email) {
+
     res.render('levelOne', { welcome: 'Welcome ' + req.session.email})
   } else {
     res.render('levelOne', { welcome: 'Welcome Guest' });
@@ -66,6 +76,38 @@ router.get('/createUser', function(req, res, next) {
       "userList": docs
     });
   });
+});
+
+//handle save user data upon level completion
+router.post('/levelCompleted', function(req, res, next) {
+  var db = req.db;
+  var completedLevels = db.get('completedLevels');
+  var completedTime = Date.now();
+  var postedData = JSON.parse(req.body.data)
+  //all data being sent by us so no need to validate user inputs
+  //check that user is logged in
+  if (req.session.userId) {
+    console.log(req.body);
+    console.log(postedData);
+    completedLevels.insert({
+      user_id: req.session.userId,
+      datetime: completedTime,
+      level: postedData.level,
+      difficulty: postedData.difficulty,
+      gameVersion: postedData.gameVersion,
+      livesRemaining: postedData.livesRemaining,
+      towers: postedData.towers,
+      creditsRemaining: postedData.creditsRemaining
+    }, function(e, doc) {
+      if (e) {
+        console.warn(e.message);
+      } else {
+        res.json(doc);
+      }
+    });
+  } else {
+    res.send("No User logged in");
+  }
 });
 
 //Handle form submissions

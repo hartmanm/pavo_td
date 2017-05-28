@@ -604,8 +604,8 @@ var flag7 = 1;
 var flag8 = 1;
 var flag9 = 1;
 var start = 1;
-var totalWave = 10;
-var currentWave = 0;
+var totalWave = 1;  //temporarily changed to 1 for testing user save data
+var currentWave = 0; 
 var credits = 100;
 var path;
 var nonPath;
@@ -627,6 +627,8 @@ var TurretList = [];
 var BomberList = [];
 var IceList = [];
 var type;
+var difficulty = "normal";
+var gameOver = false;
 //var ice2 = iceTowers;
 //var iceCount = 0;
 //var ice = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
@@ -890,8 +892,6 @@ function update ()
 {
   if( lives != 0 )
   {
-
-
 
   //if not enough credits to buy a tower, then fade it out
   if (credits >= Bomber.cost) {
@@ -1176,7 +1176,26 @@ function bombsHitEnemy (creep, bombs) {
 //  this.creep.slowed = 1;
 //}
 
-
+function levelComplete() {
+  console.log("credist: " + credits);
+  completedLevel = JSON.stringify({
+    "level": 1,
+    "difficulty": difficulty,
+    "gameVersion": "0.2",
+    "livesRemaining": lives,
+    "towers": {
+      "turrets": TurretList.length,
+      "bombers": BomberList.length,
+      "icers": IceList.length,
+    },
+    "creditsRemaining": credits
+  });
+  console.log(completedLevel);
+  //relies on jQuery for ajax post
+  $.post("levelCompleted", {"data": completedLevel}, function(data) {
+    console.log(data);
+  }, "json");
+}
 
 function render ()
 {
@@ -1196,6 +1215,10 @@ function render ()
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
     game.debug.text('LEVEL COMPLETE! ', 32, 32);
+    if (!gameOver) {
+      gameOver = true;
+      levelComplete();
+    }
   }
 
   if( (lives == 0) )

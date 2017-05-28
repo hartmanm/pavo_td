@@ -44,3 +44,23 @@ block body
     {image: "images/levelthreeAdvanced.jpg", p: "Level Three", button: {caption: "Launch", url: "levelThree"}}
     ])
 
+  .container
+    .col-md-4
+      h2 Level 1 Highscore
+      each completedLevel, i in completedLevels
+        fieldset
+          -var levelText = JSON.stringify(completedLevel, null, 2)
+          p #{levelText}
+    .col-md-4
+      h2 Level 2 Highscore
+      each completedLevel, i in completedLevels
+        fieldset
+          -var levelText = JSON.stringify(completedLevel, null, 2)
+          p #{levelText}
+    .col-md-4
+      h2 Level 3 Highscore
+      each completedLevel, i in completedLevels
+        fieldset
+          -var levelText = JSON.stringify(completedLevel, null, 2)
+          p #{levelText}
+
