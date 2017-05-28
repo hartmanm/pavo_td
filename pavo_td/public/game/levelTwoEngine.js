@@ -1396,61 +1396,61 @@ if( (currentWave == 0) && (start == 1) )
     //console.log(theCreeps[0].creep.y)
   //  theCreeps[0].alive = true;
 
-    if(theCreeps[0].creep.y > 100 && flag1 == 1)
+    if(theCreeps[0].creep.y > 0 && flag1 == 1)
     {
       theCreeps[1].alive = true;
-      theCreeps[1].creep.y = 0;
+      theCreeps[1].creep.y = -75;
 			flag1++;
     }
-    if(theCreeps[1].creep.y > 100 && flag2 == 1)
+    if(theCreeps[1].creep.y > 50 && flag2 == 1)
   {
     //  theCreeps[0].alive = false;
     //  theCreeps[0].creep.kill();
   //    theCreeps[0].healthBar.kill();
     	theCreeps[2].alive = true;
-      theCreeps[2].creep.y = 0;
+      theCreeps[2].creep.y = -25;
 			flag2++;
     }
-    if(theCreeps[1].creep.y > 150 && flag3 == 1)
+    if(theCreeps[1].creep.y > 50 && flag3 == 1)
     {
     	theCreeps[3].alive = true;
-      theCreeps[3].creep.y = 0;
+      theCreeps[3].creep.y = -100;
 			flag3++;
     }
-    if(theCreeps[1].creep.y > 200 && flag4 == 1)
+    if(theCreeps[1].creep.y > 50 && flag4 == 1)
     {
     	theCreeps[4].alive = true;
-      theCreeps[4].creep.y = 0;
+      theCreeps[4].creep.y = -150;
 			flag4++;
     }
-    if(theCreeps[1].creep.y > 250 && flag5 == 1)
+    if(theCreeps[1].creep.y > 50 && flag5 == 1)
     {
     	theCreeps[5].alive = true;
-      theCreeps[5].creep.y = 0;
+      theCreeps[5].creep.y = -200;
 			flag5++;
     }
-    if(theCreeps[1].creep.y > 300 && flag6 == 1)
+    if(theCreeps[1].creep.y > 50 && flag6 == 1)
     {
     	theCreeps[6].alive = true;
-      theCreeps[6].creep.y = 0;
+      theCreeps[6].creep.y = -250;
 			flag6++;
     }
-    if(theCreeps[1].creep.y > 350 && flag7 == 1)
+    if(theCreeps[1].creep.y > 50 && flag7 == 1)
     {
     	theCreeps[7].alive = true;
-      theCreeps[7].creep.y = 0;
+      theCreeps[7].creep.y = -300;
 			flag7++;
     }
-    if(theCreeps[1].creep.y > 400 && flag8 == 1)
+    if(theCreeps[1].creep.y > 50 && flag8 == 1)
     {
     	theCreeps[8].alive = true;
-      theCreeps[8].creep.y = 0;
+      theCreeps[8].creep.y = -350;
 			flag8++;
     }
     if(theCreeps[1].creep.y > 450 && flag9 == 1)
     {
     	theCreeps[9].alive = true;
-      theCreeps[9].creep.y = 0;
+      theCreeps[9].creep.y = -400;
 			flag9++;
     }
 
