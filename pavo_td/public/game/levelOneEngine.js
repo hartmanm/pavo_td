@@ -549,7 +549,7 @@ if(this.type == 2)
 
 
 
-var game = new Phaser.Game(1100, 600, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(700, 600, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
 function preload ()
 {
@@ -604,8 +604,8 @@ var flag7 = 1;
 var flag8 = 1;
 var flag9 = 1;
 var start = 1;
-var totalWave = 1;  //temporarily changed to 1 for testing user save data
-var currentWave = 0; 
+var totalWave = 10;  //temporarily changed to 1 for testing user save data
+var currentWave = 0;
 var credits = 100;
 var path;
 var nonPath;
@@ -796,7 +796,7 @@ function addTurret() {
       /*if(game.input.activePointer.isDown) {
         newTurret.input.startDrag(game.input.activePointer)
       }
-      
+
       newTurret.events.onInputOver.add(function(sprite, pointer){
         if(pointer.isDown){
              sprite.input.startDrag(pointer);
@@ -1214,11 +1214,11 @@ function render ()
 {
   if( aliveCreeps > 0 && lives > 0)
   {
-    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 85, 'magenta');
-    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 110, 'magenta');
-    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 135, 'magenta');
-    game.debug.text('Credits: ' + credits, 32, 160, 'magenta');
-    game.debug.text('Lives: ' + lives, 32, 185, 'magenta');
+    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 25, 'magenta');
+    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 50, 'magenta');
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 75, 'magenta');
+    game.debug.text('Credits: ' + credits, 32, 100, 'magenta');
+    game.debug.text('Lives: ' + lives, 32, 125, 'magenta');
 
   }
 
