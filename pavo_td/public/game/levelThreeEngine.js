@@ -59,7 +59,7 @@ function preload ()
   game.load.image('arrow', 'game/three/arrow2.png');
   game.load.spritesheet('boom', 'game/three/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
   // game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
-  game.load.image('one', 'game/three/levelThree.png'); 
+  game.load.image('one', 'game/three/levelThree.png');
 }
 
 var path;
@@ -217,7 +217,7 @@ function render ()
     game.debug.text('Creeps: ' + aliveCreeps + ' / ' + totalCreeps, 32, 32);
   }
 
-  game.debug.text('still learning / testing phaser: more to come', 150, 450);
+  //game.debug.text('still learning / testing phaser: more to come', 150, 450);
 
   if( aliveCreeps == 0)
   {
