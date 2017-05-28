@@ -549,7 +549,7 @@ if(this.type == 2)
 
 
 
-var game = new Phaser.Game(1100, 1100, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(1100, 600, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
 function preload ()
 {
@@ -647,11 +647,19 @@ function create ()
   //pathLayer = tileMap.createLayer('traverse');
   //pathLayer.resizeWorld();
 
+  game.world.setBounds(0, 0, 1100, 1100);
   totalCreeps = 10;
   aliveCreeps = 10;
 
   explosions = game.add.group();
   bombExplosions = game.add.group();
+
+  cameraSprite = game.add.sprite(0, 0, 'arrow');
+  cameraSprite.visible = false;
+  cameraSprite.anchor.setTo(0.5);
+  cameraSprite.alpha = 0;
+  game.camera.follow(cameraSprite);
+  game.camera.deadzone = new Phaser.Rectangle(0, 150, 1100, 300);
 
   //add sprites for purchasing bomb and arrow/turret
   buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
@@ -729,11 +737,12 @@ function addBomber() {
     var newBomber = new BomberClass(game, 'bomb_launcher', 'bomb', 0, 0);
     newBomber.events.onDragStop.add(createBomber, this);
     if (newBomber) {
-      newBomber.reset(game.input.x, game.input.y);
+      //newBomber.reset(game.input.activePointer.x, game.input.activePointer.y);
+      newBomber.reset(buyBombSprite.x + 80, buyBombSprite.y + 32)
       newBomber.bringToTop();
-      if (game.input.activePointer.isDown) {
+      /*if (game.input.activePointer.isDown) {
         newBomber.input.startDrag(game.input.activePointer);
-      }
+      }*/
     }
   }
 }
@@ -780,13 +789,14 @@ function addTurret() {
     var newTurret = new TurretClass(game, 'arrow', 'projectiles', 0, 0)
     newTurret.events.onDragStop.add(createTurret, this);
     if (newTurret) {
-      newTurret.reset(game.input.x, game.input.y);
+      //newTurret.reset(game.input.activePointer.x, game.input.activePointer.y);
+      newTurret.reset(buyTurretSprite.x + 80, buyTurretSprite.y + 32);
       newTurret.bringToTop();
 
-      if(game.input.activePointer.isDown) {
+      /*if(game.input.activePointer.isDown) {
         newTurret.input.startDrag(game.input.activePointer)
       }
-      /*
+      
       newTurret.events.onInputOver.add(function(sprite, pointer){
         if(pointer.isDown){
              sprite.input.startDrag(pointer);
@@ -843,12 +853,13 @@ function addIce() {
     var newIce = new IceClass(game, 'icetower', 'freeze_small', 0, 0);
     newIce.events.onDragStop.add(createIce, this);
     if (newIce) {
-      newIce.reset(game.input.x, game.input.y);
+      //newIce.reset(game.input.activePointer.x, game.input.activePointer.y);
+      newIce.reset(buyIceSprite.x + 80, buyIceSprite.y + 32);
       newIce.bringToTop();
 
-      if (game.input.activePointer.isDown) {
+      /*if (game.input.activePointer.isDown) {
         newIce.input.startDrag(game.input.activePointer);
-      }
+      }*/
     }
   }
 }
@@ -909,6 +920,8 @@ function update ()
   } else {
     buyIceSprite.alpha = 0.2;
   }
+
+cameraSprite.reset(game.input.activePointer.x, game.input.activePointer.y);
 
 /***********************
 BB UPDATE

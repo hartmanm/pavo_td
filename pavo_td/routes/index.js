@@ -5,9 +5,18 @@ var mongo = require('mongodb');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.session && req.session.email) {
-    res.render('index', {welcome: 'Welcome ' + req.session.email, title: 'PavoTD' })
+    var db = req.db;
+    var completedLevels = db.get('completedLevels');
+    completedLevels.find({"user_id": req.session.userId, "gameVersion": "0.2"}, function(e, docs) {
+      console.log(docs);
+      res.render('index', {
+        welcome: 'Welcome ' + req.session.email, 
+        title: 'PavoTD',
+        completedLevels: docs
+      });
+    });
   } else {
-    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD' });
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', completedLevels: []});
   }
 });
 
