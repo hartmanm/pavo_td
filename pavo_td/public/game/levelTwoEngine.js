@@ -212,6 +212,8 @@ if(this.creep.y > 236 && this.creep.x < 242 && wallCount > 0)
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 	}
+
+this.creep.lastUp = 0;
 }
 
 // first buildable area across
@@ -220,68 +222,54 @@ if(this.creep.y > 300 && this.creep.x < 656 && wallCount > 0)
 {
 
 this.creep.tier = 1;
+//this.creep.lastUp = 0;
+//console.log(this.creep.lastUp);
+
+// for moving left
 
 for (var i = 0; i < wallCount; i++)
 {
-	if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x)
+	if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x && wall[i].y < 400)
 	{
 
-
-			if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 1 && this.creep.y < 304)
+  //    if(this.creep.x > this.creep.lastDown + 32 )
+  //    {
+			if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 1 && this.creep.y < 304 && this.creep.lastUp == 0 )
 			{
 							this.creep.y += 32;
 							this.healthBar.setPercent(this.health/this.maxHealth*100);
 							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
               this.creep.last = 304;
       //        this.creep.lastDown = 1;
-        console.log(this.creep.last);
+              this.creep.lastDown = this.creep.x;
+              this.creep.lastUp = 1;
+      //  console.log(this.creep.last);
 			}
 
 	}
-}
 
+//}
 
-for (var i = 0; i < wallCount; i++)
-{
-	if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x)
+	if( this.creep.x > this.creep.lastDown + 32 && this.creep.last == 304)
 	{
+		if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x && wall[i].y < 400)
+		{
 
-			if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 1 && this.creep.last == 304 )
-			{
-							this.creep.y -= 32;
-							this.healthBar.setPercent(this.health/this.maxHealth*100);
-							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-              this.creep.last = 336;
-			}
+				if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 1 && this.creep.last == 304 )
+				{
+								this.creep.y -= 32;
+								this.healthBar.setPercent(this.health/this.maxHealth*100);
+								this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	              this.creep.last = 336;
+	              this.creep.lastUp = 1;
+	            //  this.creep.lastDown = this.creep.x;
+				}
 
+		}
 	}
 
 }
 
-
-
-
-
-
-
-
-/*
-
-
-for (var i = 0; i < wallCount; i++)
-{
-	if( ( wall[i].y < this.creep.y + 4 || wall[i].y > this.creep.y - 4 ) && wall[i].x > this.creep.x)
-	{
-			if(wall[i].x < this.creep.x + 32)
-			{
-							this.creep.y += 32;
-							this.healthBar.setPercent(this.health/this.maxHealth*100);
-							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-	}
-}
-
-*/
 
 
 
@@ -339,14 +327,64 @@ if(this.creep.y > 300 && this.creep.x > 656 && wallCount > 0)
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 	}
+
+this.creep.lastUp = 0;
+
 }
 
-
+// for moving right                        && wall[i].y < 400
 
 if(this.creep.y > 428 && this.creep.x > 242 && wallCount > 0)
 {
 
-this.creep.tier = 2;
+//this.creep.tier = 2;
+//console.log(this.creep.y)
+
+for (var i = 0; i < wallCount; i++)
+{
+	if( ( wall[i].y < this.creep.y - 8 || wall[i].y > this.creep.y + 8 ) && wall[i].x < this.creep.x)
+	{
+
+  //    if(this.creep.x > this.creep.lastDown + 32 )
+  //    {
+			if(wall[i].x < (this.creep.x - 32) && this.creep.y > 428 && this.creep.y < 490)
+			{
+							this.creep.y -= 32;
+							this.healthBar.setPercent(this.health/this.maxHealth*100);
+							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+              this.creep.last = 429;
+      //        this.creep.lastDown = 1;
+              this.creep.lastDown = this.creep.x;
+              this.creep.lastUp = 1;
+      //  console.log(this.creep.last);
+			}
+
+	}
+
+//}
+
+	if( this.creep.x > this.creep.lastDown - 32 && this.creep.last == 429 && this.creep.y < 490)
+	{
+		if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x < this.creep.x)
+		{
+
+				if(wall[i].x < (this.creep.x - 32) && this.creep.last == 429 )
+				{
+								this.creep.y += 32;
+								this.healthBar.setPercent(this.health/this.maxHealth*100);
+								this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	              this.creep.last = 397;
+	              this.creep.lastUp = 1;
+	            //  this.creep.lastDown = this.creep.x;
+				}
+
+		}
+	}
+
+}
+
+
+
 
 	if(this.type == 0)
 	{
@@ -401,6 +439,8 @@ if(this.creep.y > 428 && this.creep.x < 242 && wallCount > 0)
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 	}
+
+this.creep.lastUp = 0;
 }
 
 
@@ -408,6 +448,59 @@ if(this.creep.y > 492 && this.creep.x < 656 && wallCount > 0)
 {
 
 this.creep.tier = 3;
+
+
+
+
+for (var i = 0; i < wallCount; i++)
+{
+	if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x && wall[i].y < 592 && wall[i].y > 492)
+	{
+
+  //    if(this.creep.x > this.creep.lastDown + 32 )
+  //    {
+			if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 3 && this.creep.y < 496 && this.creep.lastUp == 0 )
+			{
+							this.creep.y += 32;
+							this.healthBar.setPercent(this.health/this.maxHealth*100);
+							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+              this.creep.last = 496;
+      //        this.creep.lastDown = 1;
+              this.creep.lastDown = this.creep.x;
+              this.creep.lastUp = 1;
+      //  console.log(this.creep.last);
+			}
+
+	}
+
+//}
+
+	if( this.creep.x > this.creep.lastDown + 32 && this.creep.last == 496)
+	{
+		if( ( wall[i].y < this.creep.y + 2 || wall[i].y > this.creep.y - 2 ) && wall[i].x > this.creep.x && wall[i].y < 592 && wall[i].y > 492)
+		{
+
+				if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 3 && this.creep.last == 496 )
+				{
+								this.creep.y -= 32;
+								this.healthBar.setPercent(this.health/this.maxHealth*100);
+								this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	              this.creep.last = 528;
+	              this.creep.lastUp = 1;
+	            //  this.creep.lastDown = this.creep.x;
+				}
+
+		}
+	}
+
+}
+
+
+
+
+
+
+
 
 	if(this.type == 0)
 	{
@@ -523,6 +616,8 @@ if(this.creep.y > 620 && this.creep.x < 242 && wallCount > 0)
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 	}
+
+this.creep.lastUp = 0;
 }
 
 
@@ -530,6 +625,62 @@ if(this.creep.y > 684 && this.creep.x < 656 && wallCount > 0)
 {
 
 this.creep.tier = 5;
+
+
+
+for (var i = 0; i < wallCount; i++)
+{
+	if( ( wall[i].y < this.creep.y + 8 || wall[i].y > this.creep.y - 8 ) && wall[i].x > this.creep.x && wall[i].y < 784 && wall[i].y > 680)
+	{
+console.log("inside 1")
+console.log("this.creep.lastUp")
+console.log(this.creep.lastUp)
+console.log("this.creep.y")
+console.log(this.creep.y)
+console.log("this.creep.tier")
+console.log(this.creep.tier)
+  //    if(this.creep.x > this.creep.lastDown + 32 )
+  //    {
+			if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 5 && this.creep.y < 717 && this.creep.lastUp == 0 )
+			{
+console.log("inside 2")
+							this.creep.y += 32;
+							this.healthBar.setPercent(this.health/this.maxHealth*100);
+							this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+              this.creep.last = 688;
+      //        this.creep.lastDown = 1;
+              this.creep.lastDown = this.creep.x;
+              this.creep.lastUp = 1;
+      //  console.log(this.creep.last);
+			}
+
+	}
+
+//}
+
+	if( this.creep.x > this.creep.lastDown + 32 && this.creep.last == 688)
+	{
+		if( ( wall[i].y < this.creep.y + 8 || wall[i].y > this.creep.y - 8 ) && wall[i].x > this.creep.x && wall[i].y < 784 && wall[i].y > 680)
+		{
+
+				if(wall[i].x < (this.creep.x + 32) && this.creep.tier == 5 && this.creep.last == 688 )
+				{
+								this.creep.y -= 32;
+								this.healthBar.setPercent(this.health/this.maxHealth*100);
+								this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+	              this.creep.last = 784;
+	              this.creep.lastUp = 1;
+	            //  this.creep.lastDown = this.creep.x;
+				}
+
+		}
+	}
+
+}
+
+
+
+
 
 	if(this.type == 0)
 	{
@@ -561,7 +712,7 @@ this.creep.tier = 5;
 // first shortcut switch
 	for (var i = 0; i < wallCount; i++)
 	{
-	  if( wall[i].x == 688 && wall[i].y == 688 )
+	  if( (wall[i].x == 688 && wall[i].y == 688) || (wall[i].x == 656 && wall[i].y == 688) || (wall[i].x == 720 && wall[i].y == 688) || (wall[i].x == 720 && wall[i].y == 720) || (wall[i].x == 720 && wall[i].y == 752) || (wall[i].x == 720 && wall[i].y == 784) || (wall[i].x == 720 && wall[i].y == 816) || (wall[i].x == 720 && wall[i].y == 848) || (wall[i].x == 720 && wall[i].y == 880) )
 		{
 	     first_shortcut = 1;
 	  }
