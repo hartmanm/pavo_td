@@ -45,60 +45,61 @@ block body
     ])
 
   .container
-    if (results.hasOwnProperty('maxLivesL1'))
-      .col-md-4
-        h2 Level 1 Highscore
-        if results.maxLivesL1[0]
-          p Max Lives:  #{results.maxLivesL1[0].livesRemaining}
-          p Max Credits:  #{results.maxCreditsL1[0].creditsRemaining}
-          p Max Turrets:  #{results.maxTurretsL1[0].towers.turrets}
-          p Min Turrets:  #{results.minTurretsL1[0].towers.turrets}
-          p Max Bombers:  #{results.maxBombersL1[0].towers.bombers}
-          p Min Bombers:  #{results.minBombersL1[0].towers.bombers}
-          p Max Icers:  #{results.maxIcersL1[0].towers.icers}
-          p Min Icers:  #{results.minIcersL1[0].towers.icers}
-        //-
-          each completedLevel, i in completedLevels
-            fieldset
-              -var levelText = JSON.stringify(completedLevel, null, 2)
-              p #{levelText}
-      .col-md-4
-        h2 Level 2 Highscore
-        if results.maxLivesL2[0]
-          p Max Lives:  #{results.maxLivesL2[0].livesRemaining}
-          p Max Credits:  #{results.maxCreditsL2[0].creditsRemaining}
-          p Max Turrets:  #{results.maxTurretsL2[0].towers.turrets}
-          p Min Turrets:  #{results.minTurretsL2[0].towers.turrets}
-          p Max Bombers:  #{results.maxBombersL2[0].towers.bombers}
-          p Min Bombers:  #{results.minBombersL2[0].towers.bombers}
-          p Max Icers:  #{results.maxIcersL2[0].towers.icers}
-          p Min Icers:  #{results.minIcersL2[0].towers.icers}
-        //-
-          each completedLevel, i in completedLevels
-            fieldset
-              -var levelText = JSON.stringify(completedLevel, null, 2)
-              p #{levelText}
-      .col-md-4
-        h2 Level 3 Highscore
-        if results.maxLivesL3[0]
-          p Max Lives:  #{results.maxLivesL3[0].livesRemaining}
-          p Max Credits:  #{results.maxCreditsL3[0].creditsRemaining}
-          p Max Turrets:  #{results.maxTurretsL3[0].towers.turrets}
-          p Min Turrets:  #{results.minTurretsL3[0].towers.turrets}
-          p Max Bombers:  #{results.maxBombersL3[0].towers.bombers}
-          p Min Bombers:  #{results.minBombersL3[0].towers.bombers}
-          p Max Icers:  #{results.maxIcersL3[0].towers.icers}
-          p Min Icers:  #{results.minIcersL3[0].towers.icers}
-        //-
-          each completedLevel, i in completedLevels
-            fieldset
-              -var levelText = JSON.stringify(completedLevel, null, 2)
-              p #{levelText}
-    else
-      .col-md-4
-        h2 Level 1 Highscore
-      .col-md-4
-        h2 Level 2 Highscore
-      .col-md-4
-        h2 Level 3 Highscore
+    if (results)
+      if (results.hasOwnProperty('maxLivesL1'))
+        .col-md-4
+          h2 Level 1 Highscore
+          if results.maxLivesL1[0]
+            p Max Lives:  #{results.maxLivesL1[0].livesRemaining}
+            p Max Credits:  #{results.maxCreditsL1[0].creditsRemaining}
+            p Max Turrets:  #{results.maxTurretsL1[0].towers.turrets}
+            p Min Turrets:  #{results.minTurretsL1[0].towers.turrets}
+            p Max Bombers:  #{results.maxBombersL1[0].towers.bombers}
+            p Min Bombers:  #{results.minBombersL1[0].towers.bombers}
+            p Max Icers:  #{results.maxIcersL1[0].towers.icers}
+            p Min Icers:  #{results.minIcersL1[0].towers.icers}
+          //-
+            each completedLevel, i in completedLevels
+              fieldset
+                -var levelText = JSON.stringify(completedLevel, null, 2)
+                p #{levelText}
+        .col-md-4
+          h2 Level 2 Highscore
+          if results.maxLivesL2[0]
+            p Max Lives:  #{results.maxLivesL2[0].livesRemaining}
+            p Max Credits:  #{results.maxCreditsL2[0].creditsRemaining}
+            p Max Turrets:  #{results.maxTurretsL2[0].towers.turrets}
+            p Min Turrets:  #{results.minTurretsL2[0].towers.turrets}
+            p Max Bombers:  #{results.maxBombersL2[0].towers.bombers}
+            p Min Bombers:  #{results.minBombersL2[0].towers.bombers}
+            p Max Icers:  #{results.maxIcersL2[0].towers.icers}
+            p Min Icers:  #{results.minIcersL2[0].towers.icers}
+          //-
+            each completedLevel, i in completedLevels
+              fieldset
+                -var levelText = JSON.stringify(completedLevel, null, 2)
+                p #{levelText}
+        .col-md-4
+          h2 Level 3 Highscore
+          if results.maxLivesL3[0]
+            p Max Lives:  #{results.maxLivesL3[0].livesRemaining}
+            p Max Credits:  #{results.maxCreditsL3[0].creditsRemaining}
+            p Max Turrets:  #{results.maxTurretsL3[0].towers.turrets}
+            p Min Turrets:  #{results.minTurretsL3[0].towers.turrets}
+            p Max Bombers:  #{results.maxBombersL3[0].towers.bombers}
+            p Min Bombers:  #{results.minBombersL3[0].towers.bombers}
+            p Max Icers:  #{results.maxIcersL3[0].towers.icers}
+            p Min Icers:  #{results.minIcersL3[0].towers.icers}
+          //-
+            each completedLevel, i in completedLevels
+              fieldset
+                -var levelText = JSON.stringify(completedLevel, null, 2)
+                p #{levelText}
+      else
+        .col-md-4
+          h2 Level 1 Highscore
+        .col-md-4
+          h2 Level 2 Highscore
+        .col-md-4
+          h2 Level 3 Highscore
 
