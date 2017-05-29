@@ -7,9 +7,11 @@
   "difficulty": "normal",
   "gameVersion": "v0.1",
   "livesRemaining": 20,
-  "turrets": 5,
-  "bombers": 1,
-  "icers": 2,
+  "towers": {
+    "turrets": 5,
+    "bombers": 1,
+    "icers": 0
+  },
   "creditsRemaining": 120
 }
-]
+]liv

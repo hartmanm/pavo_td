@@ -604,7 +604,7 @@ var flag7 = 1;
 var flag8 = 1;
 var flag9 = 1;
 var start = 1;
-var totalWave = 1;  //temporarily changed to 1 for testing user save data
+var totalWave = 0;  //temporarily changed to 1 for testing user save data
 var currentWave = 0; 
 var credits = 100;
 var path;
@@ -656,10 +656,11 @@ function create ()
 
   cameraSprite = game.add.sprite(0, 0, 'arrow');
   cameraSprite.visible = false;
-  cameraSprite.anchor.setTo(0.5);
+  //cameraSprite.anchor.setTo(0.5);
   cameraSprite.alpha = 0;
   game.camera.follow(cameraSprite);
-  game.camera.deadzone = new Phaser.Rectangle(0, 150, 1100, 300);
+  //game.camera.follow(cameraSprite, Phaser.Camera.FOLLOW_TOPDOWN_TIGHT);
+  //game.camera.deadzone = new Phaser.Rectangle(0, 150, 1100, 300);
 
   //add sprites for purchasing bomb and arrow/turret
   buyBombSprite = game.add.sprite(32, game.height - 96, 'buyBomb');
@@ -922,7 +923,7 @@ function update ()
   }
 
 cameraSprite.reset(game.input.activePointer.x, game.input.activePointer.y);
-
+//console.log("x: " + game.input.activePointer.x + ", y: " + game.input.activePointer.y);
 /***********************
 BB UPDATE
 Since creeps.alive is now set to false

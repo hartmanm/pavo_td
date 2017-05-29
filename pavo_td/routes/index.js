@@ -1,40 +1,145 @@
 var express = require('express');
 var router = express.Router();
 var mongo = require('mongodb');
+var async = require('async');
+var monk = require('monk');
+var db = monk('localhost:27017/pavo_td');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if (req.session && req.session.email) {
-    var db = req.db;
-    var completedLevels = db.get('completedLevels');
-    completedLevels.find({"user_id": req.session.userId, "gameVersion": "0.2"}, function(e, docs) {
-      console.log(docs);
-      res.render('index', {
-        welcome: 'Welcome ' + req.session.email, 
-        title: 'PavoTD',
-        completedLevels: docs
-      });
+if (req.session && req.session.email) {
+    var user_id = req.session.userId;
+    var version = "0.2"
+    async.parallel({
+      maxCreditsL1: async.apply(getMaxCredits, 1, version, user_id),
+      maxLivesL1: async.apply(getMaxLives, 1, version, user_id),
+      maxCreditsL2: async.apply(getMaxCredits, 2, version, user_id),
+      maxLivesL2: async.apply(getMaxLives, 2, version, user_id),
+      maxCreditsL3: async.apply(getMaxCredits, 3, version, user_id),
+      maxLivesL3: async.apply(getMaxLives, 3, version, user_id),
+      maxTurretsL1: async.apply(getMaxMinTurrets, 1, version, -1, user_id),
+      minTurretsL1: async.apply(getMaxMinTurrets, 1, version, 1, user_id),
+      maxTurretsL2: async.apply(getMaxMinTurrets, 2, version, -1, user_id),
+      minTurretsL2: async.apply(getMaxMinTurrets, 2, version, 1, user_id),
+      maxTurretsL3: async.apply(getMaxMinTurrets, 3, version, -1, user_id),
+      minTurretsL3: async.apply(getMaxMinTurrets, 3, version, 1, user_id),
+      maxBombersL1: async.apply(getMaxMinBombers, 1, version, -1, user_id),
+      minBombersL1: async.apply(getMaxMinBombers, 1, version, 1, user_id),
+      maxBombersL2: async.apply(getMaxMinBombers, 2, version, -1, user_id),
+      minBombersL2: async.apply(getMaxMinBombers, 2, version, 1, user_id),
+      maxBombersL3: async.apply(getMaxMinBombers, 3, version, -1, user_id),
+      minBombersL3: async.apply(getMaxMinBombers, 3, version, 1, user_id),
+      maxIcersL1: async.apply(getMaxMinIcers, 1, version, -1, user_id),
+      minIcersL1: async.apply(getMaxMinIcers, 1, version, 1, user_id),
+      maxIcersL2: async.apply(getMaxMinIcers, 2, version, -1, user_id),
+      minIcersL2: async.apply(getMaxMinIcers, 2, version, 1, user_id),
+      maxIcersL3: async.apply(getMaxMinIcers, 3, version, -1, user_id),
+      minIcersL3: async.apply(getMaxMinIcers, 3, version, 1, user_id)
+    }, function(e, results) {
+      if (e) {
+        res.status(500).send(error);
+      } else {
+        console.log(results);
+        res.render('index', {
+          welcome: 'Welcome ' + req.session.email, 
+          title: 'PavoTD',
+          results: results
+        });
+      }
     });
   } else {
-    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', completedLevels: []});
+    console.log("no one logged in");
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', results: {}});
   }
 });
 
 router.get('/home', function(req, res, next) {
   if (req.session && req.session.email) {
-    var db = req.db;
-    var completedLevels = db.get('completedLevels');
-    completedLevels.find({"user_id": req.session.userId, "gameVersion": "0.2"}, function(e, docs) {
-      console.log(docs);
-      res.render('index', {
-        welcome: 'Welcome ' + req.session.email, 
-        title: 'PavoTD',
-        completedLevels: docs
-      });
+    var user_id = req.session.userId;
+    var version = "0.2"
+    async.parallel({
+      maxCreditsL1: async.apply(getMaxCredits, 1, version, user_id),
+      maxLivesL1: async.apply(getMaxLives, 1, version, user_id),
+      maxCreditsL2: async.apply(getMaxCredits, 2, version, user_id),
+      maxLivesL2: async.apply(getMaxLives, 2, version, user_id),
+      maxCreditsL3: async.apply(getMaxCredits, 3, version, user_id),
+      maxLivesL3: async.apply(getMaxLives, 3, version, user_id),
+      maxTurretsL1: async.apply(getMaxMinTurrets, 1, version, -1, user_id),
+      minTurretsL1: async.apply(getMaxMinTurrets, 1, version, 1, user_id),
+      maxTurretsL2: async.apply(getMaxMinTurrets, 2, version, -1, user_id),
+      minTurretsL2: async.apply(getMaxMinTurrets, 2, version, 1, user_id),
+      maxTurretsL3: async.apply(getMaxMinTurrets, 3, version, -1, user_id),
+      minTurretsL3: async.apply(getMaxMinTurrets, 3, version, 1, user_id),
+      maxBombersL1: async.apply(getMaxMinBombers, 1, version, -1, user_id),
+      minBombersL1: async.apply(getMaxMinBombers, 1, version, 1, user_id),
+      maxBombersL2: async.apply(getMaxMinBombers, 2, version, -1, user_id),
+      minBombersL2: async.apply(getMaxMinBombers, 2, version, 1, user_id),
+      maxBombersL3: async.apply(getMaxMinBombers, 3, version, -1, user_id),
+      minBombersL3: async.apply(getMaxMinBombers, 3, version, 1, user_id),
+      maxIcersL1: async.apply(getMaxMinIcers, 1, version, -1, user_id),
+      minIcersL1: async.apply(getMaxMinIcers, 1, version, 1, user_id),
+      maxIcersL2: async.apply(getMaxMinIcers, 2, version, -1, user_id),
+      minIcersL2: async.apply(getMaxMinIcers, 2, version, 1, user_id),
+      maxIcersL3: async.apply(getMaxMinIcers, 3, version, -1, user_id),
+      minIcersL3: async.apply(getMaxMinIcers, 3, version, 1, user_id)
+    }, function(e, results) {
+      if (e) {
+        res.status(500).send(error);
+      } else {
+        console.log(results);
+        res.render('index', {
+          welcome: 'Welcome ' + req.session.email, 
+          title: 'PavoTD',
+          results: results
+        });
+      }
     });
   } else {
-    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', completedLevels: []});
+    console.log("no one logged in");
+    res.render('index', { welcome: 'Welcome Guest', title: 'PavoTD', results: {}});
   }
+});
+
+router.get('/leaderboards', function(req, res, next) {
+  var version = "0.2";
+  var user_id = {$ne: null};
+  //async calls to get all mongo best results from separate functions
+  async.parallel({
+    maxCreditsL1: async.apply(getMaxCredits, 1, version, user_id),
+    maxLivesL1: async.apply(getMaxLives, 1, version, user_id),
+    maxCreditsL2: async.apply(getMaxCredits, 2, version, user_id),
+    maxLivesL2: async.apply(getMaxLives, 2, version, user_id),
+    maxCreditsL3: async.apply(getMaxCredits, 3, version, user_id),
+    maxLivesL3: async.apply(getMaxLives, 3, version, user_id),
+    maxTurretsL1: async.apply(getMaxMinTurrets, 1, version, -1, user_id),
+    minTurretsL1: async.apply(getMaxMinTurrets, 1, version, 1, user_id),
+    maxTurretsL2: async.apply(getMaxMinTurrets, 2, version, -1, user_id),
+    minTurretsL2: async.apply(getMaxMinTurrets, 2, version, 1, user_id),
+    maxTurretsL3: async.apply(getMaxMinTurrets, 3, version, -1, user_id),
+    minTurretsL3: async.apply(getMaxMinTurrets, 3, version, 1, user_id),
+    maxBombersL1: async.apply(getMaxMinBombers, 1, version, -1, user_id),
+    minBombersL1: async.apply(getMaxMinBombers, 1, version, 1, user_id),
+    maxBombersL2: async.apply(getMaxMinBombers, 2, version, -1, user_id),
+    minBombersL2: async.apply(getMaxMinBombers, 2, version, 1, user_id),
+    maxBombersL3: async.apply(getMaxMinBombers, 3, version, -1, user_id),
+    minBombersL3: async.apply(getMaxMinBombers, 3, version, 1, user_id),
+    maxIcersL1: async.apply(getMaxMinIcers, 1, version, -1, user_id),
+    minIcersL1: async.apply(getMaxMinIcers, 1, version, 1, user_id),
+    maxIcersL2: async.apply(getMaxMinIcers, 2, version, -1, user_id),
+    minIcersL2: async.apply(getMaxMinIcers, 2, version, 1, user_id),
+    maxIcersL3: async.apply(getMaxMinIcers, 3, version, -1, user_id),
+    minIcersL3: async.apply(getMaxMinIcers, 3, version, 1, user_id)
+    //maxLives: getMaxLives
+  }, function(e, results) {
+    if (e) {
+      res.status(500).send(error);
+    } else {
+      console.log(results);
+      res.render('leaderboards', {
+        "results": results
+      });
+    }
+  });
 });
 
 router.get('/levelOne', function(req, res, next) {
@@ -73,6 +178,40 @@ router.get('/levelTwoGame', function(req, res, next) {
 router.get('/levelThreeGame', function(req, res, next) {
   res.render('levelThreeGame');
 });
+
+//functions to get leaderboard results
+function getMaxCredits(level, version, user_id, callback) {
+  //var db = req.db;
+  var completedLevels = db.get('completedLevels');
+  completedLevels.find({level: level, gameVersion: version, creditsRemaining: {$gte: 0}, user_id: user_id}, 
+    {limit: 1, sort: {creditsRemaining : -1}}, callback);
+}
+
+function getMaxLives(level, version, user_id, callback) {
+  var completedLevels = db.get('completedLevels');
+  completedLevels.find({level: level, gameVersion: version, livesRemaining: {$gte: 0}, user_id: user_id}, 
+    {limit: 1, sort: {livesRemaining : -1}}, callback);
+}
+
+//maxOrMin should be -1 to return max, 1 to return min
+function getMaxMinTurrets(level, version, maxOrMin, user_id, callback) {
+  //var db = req.db;
+  var completedLevels = db.get('completedLevels');
+  completedLevels.find({level: level, gameVersion: version, 'towers.turrets': {$gte: 0}, user_id: user_id}, 
+    {limit: 1, sort: {'towers.turrets' : maxOrMin}}, callback);
+}
+
+function getMaxMinIcers(level, version, maxOrMin, user_id, callback) {
+  var completedLevels = db.get('completedLevels');
+  completedLevels.find({level: level, gameVersion: version, 'towers.icers': {$gte: 0}, user_id: user_id}, 
+    {limit: 1, sort: {'towers.icers': maxOrMin}}, callback);
+}
+
+function getMaxMinBombers(level, version, maxOrMin, user_id, callback) {
+  var completedLevels = db.get('completedLevels');
+  completedLevels.find({level: level, gameVersion: version, 'towers.bombers': {$gte: 0}, user_id: user_id}, 
+    {limit: 1, sort: {'towers.bombers': maxOrMin}}, callback);
+}
 
 //load
 router.get('/createUser', function(req, res, next) {
