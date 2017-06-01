@@ -1273,7 +1273,7 @@ for (var i = 0; i < wallCount; i++)
 
 
 
-var game = new Phaser.Game(900, 1100, Phaser.AUTO, 'lvl2', { preload: preload, create: create, update: update, render: render });
+var game = new Phaser.Game(900, 900, Phaser.AUTO, 'lvl2', { preload: preload, create: create, update: update, render: render });
 
 function preload ()
 {
