@@ -19,87 +19,59 @@ var Ice = {
 
 Creep = function (index, game, player, projectile, type)
 {
-
-  //var currentTileX = 528;
-  //var currentTileY = 0;
-  //var nextTileX = 16.5;
-  //var nextTileY = 1;
-  //var rightTileX = 15.5;
-  //var rightTileY = 0;
-  //var leftTileX = 17.5;
-  //var leftTileY = 0;
-
-  //var move_speed = 2000;
-  //this.currentTile = {x: 16.5, y: 0};
-//  var nextTile = {x: 16.5, y: 1};
-  //var rightTile = {x: 15.5, y: 0};
-//  var leftTile = {x: 17.5, y: 0};
-  //var tempTile = [{x: 15, y: 1}, {x: 15, y: 1}];
-  //var nextTile = path[currentTile + 1] * 32;
-  //var lifeFlag = 1;
   var x = 16.5 * 32;
   var y = -64;
   var lastDown = 0;
   var lastUp = 0;
   var last = 0;
-//  this.direction = 2;
   var tier = 0;
-
 
   this.game = game;
   this.player = player;
   this.projectile = projectile;
-
-  /***********************
-  BB UPDATE
-  Updated alive from true to false
-  So creeps dont all start moving
-  automatically each wave
-  ***********************/
   this.alive = false;
   this.slowed = 0;
 
   if(type === 'sheep')
   {
-    //var speed = 32 + diff;
     this.type = 0;
     this.lifeCost = 1;
-    this.health = 24 * diff;
+    this.health = 7.5 * diff;
     this.maxHealth = 10 * diff;
     this.kill_reward = 5 + (diff/2);
-    this.speed = 200 + diff;  //32
+    this.speed = 75 + diff;  //32
     this.creep = game.add.sprite(x, y, 'sheep');
-
   }
+
   if(type === 'bruiser')
   {
-  //  var speed = 16 + diff;
     this.type = 1;
     this.lifeCost = 3;
-    this.health = 36 * diff;
-    this.maxHealth = 20 * diff;
-    this.kill_reward = 15 + (diff/2);
-    this.speed = 16 + diff;
+    this.health = 15 * diff;
+    this.maxHealth = 30 * diff;
+    this.kill_reward = 10 + (diff/2);
+    this.speed = 60 + diff;
     this.creep = game.add.sprite(x, y, 'bruiser');
   }
+
   if(type === 'scout')
   {
-  //  var speed = 48 + diff;
     this.type = 2;
     this.lifeCost = 1;
-    this.health = 12 * diff;
+    this.health = 5 * diff;
     this.maxHealth = 6 * diff;
     this.kill_reward = 10 + (diff/2);
-    this.speed = 48 + diff;
+    this.speed = 125 + diff;
     this.creep = game.add.sprite(x, y, 'scout');
   }
-  //this.creep = game.add.sprite(, , 'sheep');
+
   this.creep.anchor.set(0.5);
   this.creep.name = index.toString();
   game.physics.enable(this.creep, Phaser.Physics.ARCADE);
   this.creep.body.immovable = false;
-  //this.creep.body.collideWorldBounds = true;
-  this.barConfig = {
+
+  this.barConfig =
+{
     width: 18,
     height: 4,
     x: 0,
