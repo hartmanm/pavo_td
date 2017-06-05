@@ -226,7 +226,7 @@ Creep.prototype.update = function(iceTowers)
 // shortcut switch 1
 	for (var i = 0; i < wallCount; i++)
 	{
-	  if( (wall[i].x == 528 && wall[i].y == 208) )
+	  if( (wall[i].x == 528 && wall[i].y == 208) || (wall[i].x == 528 && wall[i].y == 240) || (wall[i].x == 496 && wall[i].y == 240)  || (wall[i].x == 464 && wall[i].y == 240)  || (wall[i].x == 432 && wall[i].y == 240)  || (wall[i].x == 400 && wall[i].y == 240)  || (wall[i].x == 368 && wall[i].y == 240)  || (wall[i].x == 336 && wall[i].y == 240)  || (wall[i].x == 304 && wall[i].y == 240)  || (wall[i].x == 272 && wall[i].y == 240)  || (wall[i].x == 240 && wall[i].y == 240) || (wall[i].x == 240 && wall[i].y == 272) || (wall[i].x == 240 && wall[i].y == 304) || (wall[i].x == 272 && wall[i].y == 304) || (wall[i].x == 304 && wall[i].y == 304) || (wall[i].x == 336 && wall[i].y == 304) || (wall[i].x == 368 && wall[i].y == 304) || (wall[i].x == 400 && wall[i].y == 304) || (wall[i].x == 432 && wall[i].y == 304) || (wall[i].x == 464 && wall[i].y == 304) || (wall[i].x == 496 && wall[i].y == 304) || (wall[i].x == 528 && wall[i].y == 304) || (wall[i].x == 560 && wall[i].y == 304) || (wall[i].x == 592 && wall[i].y == 304) || (wall[i].x == 624 && wall[i].y == 304) || (wall[i].x == 656 && wall[i].y == 304)  )
 		{
 	     shortcut1 = 1;
 	  }
