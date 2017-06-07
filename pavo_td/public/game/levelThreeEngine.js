@@ -36,7 +36,7 @@ Creep = function (index, game, player, projectile, type)
     this.health = 7.5 * diff;
     this.maxHealth = 10 * diff;
     this.kill_reward = 5 + (diff/2);
-    this.speed = 75 + diff;  //32
+    this.speed = 75 + diff;
     this.creep = game.add.sprite(x, y, 'sheep');
   }
 
