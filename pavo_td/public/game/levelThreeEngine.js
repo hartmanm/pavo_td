@@ -1326,6 +1326,11 @@ var TurretList = [];
 var BomberList = [];
 var IceList = [];
 var type;
+var difficulty = "normal";
+var gameOver = false;
+var turretBuildOk = true;
+var bomberBuildOk = true;
+var iceBuildOk = true;
 var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser'];
 
 function create ()
@@ -1340,6 +1345,11 @@ function create ()
 
   totalCreeps = 10;
   aliveCreeps = 10;
+
+  cameraSprite = game.add.sprite(0, 0, 'arrow');
+  cameraSprite.visible = false;
+  cameraSprite.alpha = 0;
+  game.camera.follow(cameraSprite);
 
   explosions = game.add.group();
   bombExplosions = game.add.group();
@@ -1386,8 +1396,7 @@ function create ()
 }
 
 function createBomber(bomber) {
-//  console.log('Attempting to create bomber');
-//  console.log(bomber);
+  bomberBuildOk = true;
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -1426,22 +1435,22 @@ function createBomber(bomber) {
 }
 
 function addBomber() {
-  if (credits >= Bomber.cost) {
+  if (credits >= Bomber.cost && bomberBuildOk) {
     var newBomber = new BomberClass(game, 'bomb_launcher', 'bomb', 0, 0);
     newBomber.events.onDragStop.add(createBomber, this);
     if (newBomber) {
-      newBomber.reset(game.input.x, game.input.y);
+      newBomber.reset(buyBombSprite.x + 80, buyBombSprite.y + 32)
+      bomberBuildOk = false;
       newBomber.bringToTop();
-      if (game.input.activePointer.isDown) {
+      /*if (game.input.activePointer.isDown) {
         newBomber.input.startDrag(game.input.activePointer);
-      }
+      }*/
     }
   }
 }
 
 function createTurret(turret) {
-//  console.log("Attempting to create turret")
-//  console.log(turret)
+  turretBuildOk = true;
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -1484,17 +1493,18 @@ function createTurret(turret) {
 }
 
 function addTurret() {
-  if (credits >= Turret.cost) {
+  if (credits >= Turret.cost && turretBuildOk) {
     var newTurret = new TurretClass(game, 'arrow', 'projectiles', 0, 0)
     newTurret.events.onDragStop.add(createTurret, this);
     if (newTurret) {
-      newTurret.reset(game.input.x, game.input.y);
+      newTurret.reset(buyTurretSprite.x + 80, buyTurretSprite.y + 32);
+      turretBuildOk = false;
       newTurret.bringToTop();
 
-      if(game.input.activePointer.isDown) {
+      /*if(game.input.activePointer.isDown) {
         newTurret.input.startDrag(game.input.activePointer)
       }
-      /*
+      
       newTurret.events.onInputOver.add(function(sprite, pointer){
         if(pointer.isDown){
              sprite.input.startDrag(pointer);
@@ -1507,8 +1517,7 @@ function addTurret() {
 }
 
 function createIce(ice) {
-//  console.log("Attempting to create turret")
-//  console.log(turret)
+  iceBuildOk = true;
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -1558,16 +1567,17 @@ console.log(wall[wallCount].y);
 }
 
 function addIce() {
-  if (credits >= Ice.cost) {
+  if (credits >= Ice.cost && iceBuildOk) {
     var newIce = new IceClass(game, 'icetower', 'freeze_small', 0, 0);
     newIce.events.onDragStop.add(createIce, this);
     if (newIce) {
-      newIce.reset(game.input.x, game.input.y);
+      newIce.reset(buyIceSprite.x + 80, buyIceSprite.y + 32);
+      iceBuildOk = false;
       newIce.bringToTop();
 
-      if (game.input.activePointer.isDown) {
+      /*if (game.input.activePointer.isDown) {
         newIce.input.startDrag(game.input.activePointer);
-      }
+      }*/
     }
   }
 }
@@ -1630,6 +1640,8 @@ function update ()
   } else {
     buyIceSprite.alpha = 0.2;
   }
+
+  cameraSprite.reset(game.input.activePointer.x, game.input.activePointer.y);
 
 /***********************
 BB UPDATE
@@ -1897,7 +1909,25 @@ function bombsHitEnemy (creep, bombs) {
 //  this.creep.slowed = 1;
 //}
 
-
+function levelComplete() {
+  completedLevel = JSON.stringify({
+    "level": 3,
+    "difficulty": difficulty,
+    "gameVersion": "0.2",
+    "livesRemaining": lives,
+    "towers": {
+      "turrets": TurretList.length,
+      "bombers": BomberList.length,
+      "icers": IceList.length,
+    },
+    "creditsRemaining": credits
+  });
+  console.log(completedLevel);
+  //relies on jQuery for ajax post
+  $.post("levelCompleted", {"data": completedLevel}, function(data) {
+    console.log(data);
+  }, "json");
+}
 
 function render ()
 {
@@ -1917,6 +1947,10 @@ function render ()
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
   {
     game.debug.text('LEVEL COMPLETE! ', 32, 32);
+    if (!gameOver) {
+      gameOver = true;
+      levelComplete();
+    }
   }
 
   if( (lives == 0) )

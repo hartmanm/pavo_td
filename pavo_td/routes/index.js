@@ -136,7 +136,7 @@ router.get('/leaderboards', function(req, res, next) {
     } else {
       console.log(results);
       res.render('leaderboards', {
-        "results": results
+        "results": results,
       });
     }
   });

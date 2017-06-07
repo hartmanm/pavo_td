@@ -629,6 +629,9 @@ var IceList = [];
 var type;
 var difficulty = "normal";
 var gameOver = false;
+var turretBuildOk = true;
+var bomberBuildOk = true;
+var iceBuildOk = true;
 //var ice2 = iceTowers;
 //var iceCount = 0;
 //var ice = [{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0},{x: 0, y: 0}]
@@ -704,8 +707,7 @@ function create ()
 }
 
 function createBomber(bomber) {
-//  console.log('Attempting to create bomber');
-//  console.log(bomber);
+  bomberBuildOk = true;
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -734,12 +736,13 @@ function createBomber(bomber) {
 }
 
 function addBomber() {
-  if (credits >= Bomber.cost) {
+  if (credits >= Bomber.cost && bomberBuildOk) {
     var newBomber = new BomberClass(game, 'bomb_launcher', 'bomb', 0, 0);
     newBomber.events.onDragStop.add(createBomber, this);
     if (newBomber) {
       //newBomber.reset(game.input.activePointer.x, game.input.activePointer.y);
       newBomber.reset(buyBombSprite.x + 80, buyBombSprite.y + 32)
+      bomberBuildOk = false;
       newBomber.bringToTop();
       /*if (game.input.activePointer.isDown) {
         newBomber.input.startDrag(game.input.activePointer);
@@ -749,8 +752,7 @@ function addBomber() {
 }
 
 function createTurret(turret) {
-//  console.log("Attempting to create turret")
-//  console.log(turret)
+  turretBuildOk = true;
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -786,12 +788,13 @@ function createTurret(turret) {
 }
 
 function addTurret() {
-  if (credits >= Turret.cost) {
+  if (credits >= Turret.cost && turretBuildOk) {
     var newTurret = new TurretClass(game, 'arrow', 'projectiles', 0, 0)
     newTurret.events.onDragStop.add(createTurret, this);
     if (newTurret) {
       //newTurret.reset(game.input.activePointer.x, game.input.activePointer.y);
       newTurret.reset(buyTurretSprite.x + 80, buyTurretSprite.y + 32);
+      turretBuildOk = false;
       newTurret.bringToTop();
 
       /*if(game.input.activePointer.isDown) {
@@ -810,8 +813,8 @@ function addTurret() {
 }
 
 function createIce(ice) {
-//  console.log("Attempting to create turret")
-//  console.log(turret)
+  iceBuildOk = true;
+
   kill = 0;
      for (var i = 0; i < wallCount; i++)
      {
@@ -850,12 +853,13 @@ function createIce(ice) {
 }
 
 function addIce() {
-  if (credits >= Ice.cost) {
+  if (credits >= Ice.cost && iceBuildOk) {
     var newIce = new IceClass(game, 'icetower', 'freeze_small', 0, 0);
     newIce.events.onDragStop.add(createIce, this);
     if (newIce) {
       //newIce.reset(game.input.activePointer.x, game.input.activePointer.y);
       newIce.reset(buyIceSprite.x + 80, buyIceSprite.y + 32);
+      iceBuildOk = false;
       newIce.bringToTop();
 
       /*if (game.input.activePointer.isDown) {
@@ -1185,13 +1189,7 @@ function bombsHitEnemy (creep, bombs) {
   explosionDamage(bombAnimation);
 }
 
-//function iceHitEnemy (creep, range) {
-  //console.log("bomb hit!")
-//  this.creep.slowed = 1;
-//}
-
 function levelComplete() {
-  console.log("credist: " + credits);
   completedLevel = JSON.stringify({
     "level": 1,
     "difficulty": difficulty,
