@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/scripts', express.static(__dirname + '/node_modules'))
 app.use('/images', express.static(__dirname + '/public/images'))
 app.use('/game', express.static(__dirname + '/public/game'))
+app.use('/stylesheets', express.static(__dirname + '/public/stylesheets'))
 app.use('/', index);
 
 // catch 404 and forward to error handler

@@ -1,8 +1,23 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
 a {
   color: #00B7FF;
+}
+
+p {
+  font-size:  18px;
+  font-weight:  bold;
+  text-align: center;
+}
+
+h2 {
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+img.img-circle {
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin: auto;
+  padding: 10px;
 }
