@@ -1372,7 +1372,7 @@ if( (currentWave == 0) && (start == 1) )
       theCreeps[8].creep.y = -350;
 			flag8++;
     }
-    if(theCreeps[1].creep.y > 450 && flag9 == 1)
+    if(theCreeps[1].creep.y > 50 && flag9 == 1)  // back to 450??
     {
     	theCreeps[9].alive = true;
       theCreeps[9].creep.y = -400;

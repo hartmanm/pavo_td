@@ -1001,6 +1001,7 @@ var turretBuildOk = true;
 var bomberBuildOk = true;
 var iceBuildOk = true;
 var waves = ['sheep', 'sheep', 'bruiser', 'scout', 'sheep', 'sheep', 'sheep', 'sheep', 'scout', 'bruiser'];
+var fail;
 
 function create ()
 {
@@ -1349,7 +1350,7 @@ if( (currentWave == 0) && (start == 1) )
       theCreeps[8].creep.y = -350;
 			flag8++;
     }
-    if(theCreeps[1].creep.y > 450 && flag9 == 1)
+    if(theCreeps[1].creep.y > 50 && flag9 == 1)  // back to 450??
     {
     	theCreeps[9].alive = true;
       theCreeps[9].creep.y = -400;
@@ -1477,7 +1478,7 @@ function render ()
     game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 45, 'magenta');
     game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 70, 'magenta');
     game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 95, 'magenta');
-    game.debug.text('Credits: ' + credits, 32, 130, 'magenta');
+    game.debug.text('Credits: ' + credits, 32, 120, 'magenta');
     game.debug.text('Lives: ' + lives, 32, 145, 'magenta');
 
   }
@@ -1494,8 +1495,8 @@ function render ()
 
   if( (lives == 0) )
   {
-    game.debug.text('FAILURE! ', 32, 32);
-    game.debug.text('Note: it is possible to win', 32, 250);
+    game.debug.text('FAILURE! ', 224, 346, 'magenta');
+    game.debug.text('Note: it is possible to win', 224, 378, 'magenta');
   }
 }
 
