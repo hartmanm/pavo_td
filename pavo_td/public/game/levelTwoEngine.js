@@ -627,7 +627,7 @@ if(this.creep.y > 812 && this.creep.x < 242 && wallCount > 0 && first_shortcut =
 
 
 
-if(this.creep.y > 876 && this.creep.x < 720 && wallCount > 0 && first_shortcut == 1)  //908
+if(this.creep.y > 876 && this.creep.x < 719 && wallCount > 0 && first_shortcut == 1)  //908
 {
 
 
@@ -678,28 +678,22 @@ for (var i = 0; i < wallCount; i++)
 }
 
 */
-    	if(this.type == 0)
-			{
+
 			    this.creep.body.velocity.x = this.speed;
 			    this.creep.body.velocity.y = 0;
 			    this.healthBar.setPercent(this.health/this.maxHealth*100);
 			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 1)
-			{
-			    this.creep.body.velocity.x = this.speed;
-			    this.creep.body.velocity.y = 0;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 2)
-			{
-			    this.creep.body.velocity.x = this.speed;
-			    this.creep.body.velocity.y = 0;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
+
 }
+
+if(this.creep.y > 872 && this.creep.x > 719 && wallCount > 0 && first_shortcut == 1)
+{
+			    this.creep.body.velocity.x = 0;
+			    this.creep.body.velocity.y = this.speed;
+			    this.healthBar.setPercent(this.health/this.maxHealth*100);
+			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
+}
+
 
 
 if(this.creep.y > 908 && this.creep.x > 720 && wallCount > 0)
@@ -1123,6 +1117,8 @@ function createIce(ice) {
   wall[wallCount].x = ice.x;
   wall[wallCount].y = ice.y;
   wallCount++;
+  console.log(ice.x);
+  console.log(ice.y);
 }
 
 function addIce() {
