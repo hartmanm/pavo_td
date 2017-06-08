@@ -297,8 +297,8 @@ function preload ()
   game.load.image('path', 'game/one/path.png');
   game.load.image('nonPath', 'game/one/nonPath.png');
   game.load.image('arrow', 'game/one/arrow3.png');
-  game.load.spritesheet('boom', 'game/one/explosion.png', 64, 64, 23);  //64,64,9 for explosion2
-  game.load.spritesheet('bomb_explode', 'game/one/explosion_transparent.png', 64, 64, 25);
+  game.load.spritesheet('boom', 'game/one/explosion_transparent.png', 64, 64, 23);
+  game.load.spritesheet('bomb_explode', 'game/one/explosion_transparent.png', 64, 64, 23);
   game.load.spritesheet('freeze', 'game/one/fx_4_ver2_strip40.png', 128, 128, 40);
   game.load.spritesheet('freeze_small', 'game/one/fx_4_ver2_strip40_small.png', 64, 64, 40);
   game.load.tilemap('lvlone', 'game/one/levelOne.json', null, Phaser.Tilemap.TILED_JSON);
@@ -768,7 +768,7 @@ function bombsHitEnemy (creep, bombs) {
   bombs.kill();
   var bombAnimation = bombExplosions.getFirstExists(false);
   bombAnimation.reset(creep.x, creep.y);
-  bombAnimation.play('bomb_explode', 25, false, true);
+  bombAnimation.play('bomb_explode', 100, false, true);
   explosionDamage(bombAnimation);
 }
 
