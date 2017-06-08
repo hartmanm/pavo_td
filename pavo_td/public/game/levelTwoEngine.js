@@ -1394,12 +1394,11 @@ function render ()
 {
   if( aliveCreeps > 0 && lives > 0)
   {
-    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 85, 'magenta');
-    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 110, 'magenta');
-    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 135, 'magenta');
-    game.debug.text('Credits: ' + credits, 32, 160, 'magenta');
-    game.debug.text('Lives: ' + lives, 32, 185, 'magenta');
-
+    game.debug.text(creepType[currentWave] + ': ' + aliveCreeps + ' / ' + totalCreeps, 32, 45, 'magenta');
+    game.debug.text('Next Wave: ' + creepType[currentWave + 1], 32, 70, 'magenta');
+    game.debug.text('Current Wave: ' + currentWave + ' / ' + totalWave, 32, 95, 'magenta');
+    game.debug.text('Credits: ' + credits, 32, 120, 'magenta');
+    game.debug.text('Lives: ' + lives, 32, 145, 'magenta');
   }
 
   if( (aliveCreeps == 0) && (currentWave == totalWave) )
