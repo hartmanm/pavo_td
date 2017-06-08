@@ -37,27 +37,30 @@ Creep = function (index, game, player, projectile, type)
   {
     this.type = 0;
     this.lifeCost = 1;
-    this.health = 10 * diff;
+    this.health = 7.5 * diff;
     this.maxHealth = 10 * diff;
     this.kill_reward = 5 + (diff/2);
+    this.speed = 75 + diff;
     this.creep = game.add.sprite(x, y, 'sheep');
   }
   if(type === 'bruiser')
   {
     this.type = 1;
     this.lifeCost = 3;
-    this.health = 20 * diff;
+    this.health = 15 * diff;
     this.maxHealth = 20 * diff;
-    this.kill_reward = 15 + (diff/2);
+    this.kill_reward = 10 + (diff/2);
+    this.speed = 60 + diff;
     this.creep = game.add.sprite(x, y, 'bruiser');
   }
   if(type === 'scout')
   {
     this.type = 2;
     this.lifeCost = 1;
-    this.health = 6 * diff;
+    this.health = 5 * diff;
     this.maxHealth = 6 * diff;
     this.kill_reward = 10 + (diff/2);
+    this.speed = 125 + diff;
     this.creep = game.add.sprite(x, y, 'scout');
   }
 
@@ -218,10 +221,6 @@ else {
 }
 
 
-
-
-
-
   }
 
 if(this.creep.y >= 1072)
@@ -255,48 +254,20 @@ Probably a way to refactor this
 Like store speed as a creep attribute
 and then if slow, set velocity to speed/2
 ***********************/
+
 if(this.slowed == 0)
 {
-if(this.type == 0)
-{
-    this.creep.body.velocity.y = 32;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 1)
-{
-    this.creep.body.velocity.y = 16;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 2)
-{
-    this.creep.body.velocity.y = 48;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
+  this.creep.body.velocity.x = this.speed;
+  this.healthBar.setPercent(this.health/this.maxHealth*100);
+  this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 
 if(this.slowed == 1)
 {
-if(this.type == 0)
-{
-    this.creep.body.velocity.y = 16;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 1)
-{
-    this.creep.body.velocity.y = 8;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-if(this.type == 2)
-{
-    this.creep.body.velocity.y = 32;
-    this.healthBar.setPercent(this.health/this.maxHealth*100);
-    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
+  this.creep.body.velocity.x = this.speed;
+  this.creep.body.velocity.x = this.creep.body.velocity.x * 0.5;
+  this.healthBar.setPercent(this.health/this.maxHealth*100);
+  this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 
 
