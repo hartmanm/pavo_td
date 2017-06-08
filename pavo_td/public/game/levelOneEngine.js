@@ -40,17 +40,17 @@ Creep = function (index, game, player, projectile, type)
     this.health = 7.5 * diff;
     this.maxHealth = 7.5 * diff;
     this.kill_reward = 5 + (diff/2);
-    this.speed = 75 + diff;
+    this.speed = 50 + diff;
     this.creep = game.add.sprite(x, y, 'sheep');
   }
   if(type === 'bruiser')
   {
     this.type = 1;
     this.lifeCost = 3;
-    this.health = 15 * diff;
-    this.maxHealth = 15 * diff;
+    this.health = 10 * diff;
+    this.maxHealth = 10 * diff;
     this.kill_reward = 10 + (diff/2);
-    this.speed = 60 + diff;
+    this.speed = 50 + diff;
     this.creep = game.add.sprite(x, y, 'bruiser');
   }
   if(type === 'scout')
@@ -60,7 +60,7 @@ Creep = function (index, game, player, projectile, type)
     this.health = 5 * diff;
     this.maxHealth = 5 * diff;
     this.kill_reward = 10 + (diff/2);
-    this.speed = 125 + diff;
+    this.speed = 100 + diff;
     this.creep = game.add.sprite(x, y, 'scout');
   }
 
@@ -257,15 +257,15 @@ and then if slow, set velocity to speed/2
 
 if(this.slowed == 0)
 {
-  this.creep.body.velocity.x = this.speed;
+  this.creep.body.velocity.y = this.speed;
   this.healthBar.setPercent(this.health/this.maxHealth*100);
   this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 
 if(this.slowed == 1)
 {
-  this.creep.body.velocity.x = this.speed;
-  this.creep.body.velocity.x = this.creep.body.velocity.x * 0.5;
+  this.creep.body.velocity.y = this.speed;
+  this.creep.body.velocity.y = this.creep.body.velocity.y * 0.5;
   this.healthBar.setPercent(this.health/this.maxHealth*100);
   this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
