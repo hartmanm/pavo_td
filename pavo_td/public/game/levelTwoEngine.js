@@ -50,8 +50,8 @@ Creep = function (index, game, player, projectile, type)
   {
     this.type = 1;
     this.lifeCost = 3;
-    this.health = 25 * diff;
-    this.maxHealth = 25 * diff;
+    this.health = 20 * diff;
+    this.maxHealth = 20 * diff;
     this.kill_reward = 10 + (diff/2);
     this.speed = 60 + diff;
     this.creep = game.add.sprite(x, y, 'bruiser');
