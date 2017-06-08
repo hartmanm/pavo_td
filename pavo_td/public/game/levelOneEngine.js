@@ -276,9 +276,6 @@ if(this.slowed == 1)
 
 };
 
-
-
-
 var game = new Phaser.Game(700, 600, Phaser.AUTO, 'lvl1', { preload: preload, create: create, update: update, render: render });
 
 function preload ()
