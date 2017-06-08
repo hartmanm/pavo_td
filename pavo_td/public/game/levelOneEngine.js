@@ -776,7 +776,7 @@ function levelComplete() {
   completedLevel = JSON.stringify({
     "level": 1,
     "difficulty": difficulty,
-    "gameVersion": "0.2",
+    "gameVersion": "1.0",
     "livesRemaining": lives,
     "towers": {
       "turrets": TurretList.length,

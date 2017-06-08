@@ -9,7 +9,7 @@ var db = monk('localhost:27017/pavo_td');
 router.get('/', function(req, res, next) {
 if (req.session && req.session.email) {
     var user_id = req.session.userId;
-    var version = "0.2"
+    var version = "1.0"
     async.parallel({
       maxCreditsL1: async.apply(getMaxCredits, 1, version, user_id),
       maxLivesL1: async.apply(getMaxLives, 1, version, user_id),
@@ -56,7 +56,7 @@ if (req.session && req.session.email) {
 router.get('/home', function(req, res, next) {
   if (req.session && req.session.email) {
     var user_id = req.session.userId;
-    var version = "0.2"
+    var version = "1.0"
     async.parallel({
       maxCreditsL1: async.apply(getMaxCredits, 1, version, user_id),
       maxLivesL1: async.apply(getMaxLives, 1, version, user_id),
@@ -101,7 +101,7 @@ router.get('/home', function(req, res, next) {
 });
 
 router.get('/leaderboards', function(req, res, next) {
-  var version = "0.2";
+  var version = "1.0";
   var user_id = {$ne: null};
   //async calls to get all mongo best results from separate functions
   async.parallel({

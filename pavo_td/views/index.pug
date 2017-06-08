@@ -50,7 +50,7 @@ block body
       if (results.hasOwnProperty('maxLivesL1'))
         .col-md-4
           h2 Level 1 Highscore
-          img.img-circle(src="images/level1.png", alt="Level One", style="width: 50%;height: 50%; display:block; margin:auto; padding: 10px")
+          img.img-circle(src="images/level1.png", alt="Level One")
           if results.maxLivesL1[0]
             p Max Lives:  #{results.maxLivesL1[0].livesRemaining}
             p Max Credits:  #{results.maxCreditsL1[0].creditsRemaining}
@@ -102,8 +102,11 @@ block body
       else
         .col-md-4
           h2 Level 1 Highscore
+          img.img-circle(src="images/level1.png", alt="Level One")
         .col-md-4
           h2 Level 2 Highscore
+          img.img-circle(src="images/level2.png", alt="Level Two")
         .col-md-4
           h2 Level 3 Highscore
+          img.img-circle(src="images/level3.png", alt="Level Three")
 
