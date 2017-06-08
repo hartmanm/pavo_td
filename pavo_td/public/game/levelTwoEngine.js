@@ -626,11 +626,13 @@ if(this.creep.y > 812 && this.creep.x < 242 && wallCount > 0 && first_shortcut =
 }
 
 
-/*
+
 if(this.creep.y > 876 && this.creep.x < 720 && wallCount > 0 && first_shortcut == 1)  //908
 {
-this.creep.tier = 7;
 
+
+this.creep.tier = 7;
+  /*
 for (var i = 0; i < wallCount; i++)
 {
 	if( ( wall[i].y < this.creep.y + 8 || wall[i].y > this.creep.y - 8 ) && wall[i].x > this.creep.x && wall[i].y < 920 && wall[i].y > 860)
@@ -674,8 +676,8 @@ for (var i = 0; i < wallCount; i++)
 	}
 
 }
-*/
 
+*/
     	if(this.type == 0)
 			{
 			    this.creep.body.velocity.x = this.speed;
