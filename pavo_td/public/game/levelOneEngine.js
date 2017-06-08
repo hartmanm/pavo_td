@@ -415,7 +415,7 @@ function create ()
     bombExplosionAnimation.physicsBodyType = Phaser.Physics.ARCADE;
   }
 
-  logo = game.add.sprite(100, 155, 'logo');
+  logo = game.add.sprite(50, 155, 'logo');
   logo.fixedToCamera = true;
   game.input.onDown.add(removeLogo, this);
   game.camera.focusOnXY(0, 0);
