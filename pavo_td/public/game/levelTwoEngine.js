@@ -46,7 +46,7 @@ Creep = function (index, game, player, projectile, type)
     this.health = 20 * diff;
     this.maxHealth = 20 * diff;
     this.kill_reward = 10 + (diff/2);
-    this.speed = 60 + diff;
+    this.speed = 35 + diff;
     this.creep = game.add.sprite(x, y, 'bruiser');
   }
   if(type === 'scout')
