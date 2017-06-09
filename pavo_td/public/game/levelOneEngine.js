@@ -1,5 +1,6 @@
 
-window.onload = function(){
+window.onload = function()
+{
 
 var Bomber = {
   cost: 55
@@ -15,7 +16,6 @@ var Ice = {
 
 Creep = function (index, game, player, projectile, type)
 {
-
   var x = 16.5 * 32;
   var y = -64;
   var last = 0;
@@ -23,13 +23,6 @@ Creep = function (index, game, player, projectile, type)
   this.game = game;
   this.player = player;
   this.projectile = projectile;
-
-  /***********************
-  BB UPDATE
-  Updated alive from true to false
-  So creeps dont all start moving
-  automatically each wave
-  ***********************/
   this.alive = false;
   this.slowed = 0;
 
@@ -244,16 +237,6 @@ this.slowed = 0;
       }
     }
   }
-
-
-/***********************
-BB UPDATE
-Commented out the y increment
-Replaced with velocity
-Probably a way to refactor this
-Like store speed as a creep attribute
-and then if slow, set velocity to speed/2
-***********************/
 
 if(this.slowed == 0)
 {
@@ -582,15 +565,6 @@ function update ()
 
 cameraSprite.reset(game.input.activePointer.x, game.input.activePointer.y);
 
-/***********************
-BB UPDATE
-Since creeps.alive is now set to false
-in constructor function - have to set to
-true when each creep starts moving
-set creep[0] to alive on create,
-set others to alive in the flag and y
-position check
-************************/
 if( (currentWave == 0) && (start == 1) )
 {
   theCreeps = [];
@@ -674,7 +648,7 @@ if( (currentWave == 0) && (start == 1) )
       theCreeps[8].creep.y = -350;
 			flag8++;
     }
-    if(theCreeps[1].creep.y > 50 && flag9 == 1)  // back to 450??
+    if(theCreeps[1].creep.y > 50 && flag9 == 1)
     {
     	theCreeps[9].alive = true;
       theCreeps[9].creep.y = -400;

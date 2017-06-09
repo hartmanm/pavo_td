@@ -205,9 +205,6 @@ Creep.prototype.moveup = function()
 
 */
 
-
-
-
 Creep.prototype.update = function(iceTowers)
 {
 
