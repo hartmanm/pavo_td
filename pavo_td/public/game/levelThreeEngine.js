@@ -237,619 +237,207 @@ Creep.prototype.update = function(iceTowers)
 
 if(this.creep.x > 848 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y < 236 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 1 && shortcut1 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y < 176 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 0 && shortcut1 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y < 176 && wallCount > 0 && shortcut1 == 1)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y < 176 && wallCount > 0 && shortcut0 == 0 && shortcut2 == 0 && shortcut1 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 848 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 1 && shortcut1 == 1)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = this.speed;
 		this.creep.body.velocity.y = 0;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 848 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 0 && shortcut1 == 1)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = -this.speed;
 		this.creep.body.velocity.y = 0;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = -this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = -this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 848 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 0 && shortcut1 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = -this.speed;
 		this.creep.body.velocity.y = 0;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = -this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = -this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 176 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 0 && shortcut1 == 1)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 176 && wallCount > 0 && shortcut0 == 1 && shortcut2 == 0 && shortcut1 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = 0;
 		this.creep.body.velocity.y = this.speed;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = 0;
-		this.creep.body.velocity.y = this.speed;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 176 && this.creep.x < 848 && wallCount > 0 && shortcut0 == 0)
 {
-	if(this.type == 0)
-	{
 		this.creep.body.velocity.x = this.speed;
 		this.creep.body.velocity.y = 0;
 		this.healthBar.setPercent(this.health/this.maxHealth*100);
 		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-		this.creep.body.velocity.x = this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-		this.creep.body.velocity.x = this.speed;
-		this.creep.body.velocity.y = 0;
-		this.healthBar.setPercent(this.health/this.maxHealth*100);
-		this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 if(this.creep.y > 236 && this.creep.x > 242  && this.creep.x > 176 && this.creep.x < 816 && wallCount > 0 && shortcut0 == 1)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = -this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 236 && this.creep.x < 242 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = 0;
 	    this.creep.body.velocity.y = this.speed;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 
 this.creep.lastUp = 0;
 }
 
 if(this.creep.y > 300 && this.creep.x < 656 && this.creep.x > 176 && wallCount > 0)
 {
-
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-}
-
-
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 300 && this.creep.x > 656 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = 0;
 	    this.creep.body.velocity.y = this.speed;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 428 && this.creep.x > 242 && this.creep.x > 176 && this.creep.x < 816 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = -this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 428 && this.creep.x < 242 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = 0;
 	    this.creep.body.velocity.y = this.speed;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 492 && this.creep.x < 656 && this.creep.x > 176 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 492 && this.creep.x > 656 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = 0;
 	    this.creep.body.velocity.y = this.speed;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 620 && this.creep.x > 242 && this.creep.x > 176 && this.creep.x < 816 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = -this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = -this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 620 && this.creep.x < 242 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = 0;
 	    this.creep.body.velocity.y = this.speed;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = 0;
-	    this.creep.body.velocity.y = this.speed;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 684 && this.creep.x < 710 && this.creep.x > 176 && wallCount > 0)
 {
-	if(this.type == 0)
-	{
 	    this.creep.body.velocity.x = this.speed;
 	    this.creep.body.velocity.y = 0;
 	    this.healthBar.setPercent(this.health/this.maxHealth*100);
 	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 1)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
-	if(this.type == 2)
-	{
-	    this.creep.body.velocity.x = this.speed;
-	    this.creep.body.velocity.y = 0;
-	    this.healthBar.setPercent(this.health/this.maxHealth*100);
-	    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-	}
 }
 
 
 if(this.creep.y > 684 && this.creep.x > 710 && this.creep.x < 816 && wallCount > 0 )
 {
-    	if(this.type == 0)
-			{
-			    this.creep.body.velocity.x = 0;
-			    this.creep.body.velocity.y = this.speed;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 1)
-			{
-			    this.creep.body.velocity.x = 0;
-			    this.creep.body.velocity.y = this.speed;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 2)
-			{
-			    this.creep.body.velocity.x = 0;
-			    this.creep.body.velocity.y = this.speed;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
+    this.creep.body.velocity.x = 0;
+    this.creep.body.velocity.y = this.speed;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
 
 if(this.creep.y > 804 &&  this.creep.x < 840 && wallCount > 0 )
 {
-    	if(this.type == 0)
-			{
-			    this.creep.body.velocity.x = this.speed;
-			    this.creep.body.velocity.y = 0;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 1)
-			{
-			    this.creep.body.velocity.x = this.speed;
-			    this.creep.body.velocity.y = 0;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
-			if(this.type == 2)
-			{
-			    this.creep.body.velocity.x = this.speed;
-			    this.creep.body.velocity.y = 0;
-			    this.healthBar.setPercent(this.health/this.maxHealth*100);
-			    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
-			}
+    this.creep.body.velocity.x = this.speed;
+    this.creep.body.velocity.y = 0;
+    this.healthBar.setPercent(this.health/this.maxHealth*100);
+    this.healthBar.setPosition(this.creep.x, this.creep.y - 20);
 }
-
 
 if(this.creep.y >= 1072)
 {
@@ -1255,15 +843,6 @@ function update ()
 
   cameraSprite.reset(game.input.activePointer.x, game.input.activePointer.y);
 
-/***********************
-BB UPDATE
-Since creeps.alive is now set to false
-in constructor function - have to set to
-true when each creep starts moving
-set creep[0] to alive on create,
-set others to alive in the flag and y
-position check
-************************/
 if( (currentWave == 0) && (start == 1) )
 {
   theCreeps = [];
@@ -1347,7 +926,7 @@ if( (currentWave == 0) && (start == 1) )
       theCreeps[8].creep.y = -350;
 			flag8++;
     }
-    if(theCreeps[1].creep.y > 50 && flag9 == 1)  // back to 450??
+    if(theCreeps[1].creep.y > 50 && flag9 == 1)
     {
     	theCreeps[9].alive = true;
       theCreeps[9].creep.y = -400;
